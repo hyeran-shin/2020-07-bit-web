@@ -1,0 +1,20 @@
+package com.bit.framework.annotation;
+
+/*
+ * Java Annotation
+ * 		일반적인 주석 : 특정 단어 및 문장(데이터)을 설명하기 위한 문장(데이터)
+ * 			-> 데이터에 대한 데이터, 메타 데이터
+ * 		자바 주석 : 소스 코드에 설정하는 메타 데이터
+ * 
+ * 		Built-in Annotation (내장, import 하지 않아도 사용)
+ * 		@Override 
+ * 			: 재정의 됐는지 검증
+ * 		@SuppressWarnings
+ * 			: 컴파일러의 경고를 무시
+*/
+
+
+// 사용자 정의 어노테이션 (Annotation)
+public @interface RequestMapping {
+
+}

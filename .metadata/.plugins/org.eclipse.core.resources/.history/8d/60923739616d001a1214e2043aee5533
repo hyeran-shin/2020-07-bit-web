@@ -1,0 +1,41 @@
+package com.bit.controller;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.bit.dao.MemberDAO;
+import com.bit.framework.ModelAndView;
+import com.bit.framework.annotation.Controller;
+import com.bit.framework.annotation.RequestMapping;
+import com.bit.vo.MemberVO;
+
+@Controller
+public class MyPageController {
+	@RequestMapping("/myPage.do")
+	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String id = request.getParameter("id");
+		System.out.println("id : " + id);
+		ServletContext sc = request.getServletContext();
+		MemberDAO dao = (MemberDAO) sc.getAttribute("memberDAO");
+		MemberVO member = dao.selectByID(id);
+
+		HttpSession session = request.getSession();
+		session.setAttribute("member", member);
+
+		ModelAndView mav = new ModelAndView();
+//		mav.setModel("member",member);
+		mav.setView("/WEB-INF/views/mypage/myPage.jsp");
+		return mav;
+	}
+
+	@RequestMapping("/myPageModifyForm.do")
+	public ModelAndView myPageModifyForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setView("/WEB-INF/views/myPageModifyForm.jsp");
+		return mav;
+	}
+}

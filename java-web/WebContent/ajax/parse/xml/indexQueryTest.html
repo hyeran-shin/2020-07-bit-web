@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+<script src="httpRequest.js"></script>
+<script>
+	function sendOnClick(){
+		sendRequest('sample.jsp',null, callback, 'POST');
+	}
+	function callback(){
+		var msg='';
+		if(httpRequest.readyState==4){
+			if(httpRequest.status ==200){
+				// Text -> XML Parsing
+				var xmlDoc = $.parseXML(httpRequest.responseText);
+			//	var xmlDoc = httpRequest.responseText;
+				
+				/*
+					find(tagName) : 해당 태그 이름(요소 이름)의 결과를 반환
+						-> getElementsByTagName(...)
+					find(tagName).length : 요소의 길이
+				*/
+				$(xmlDoc).find('member').each(function(idx){
+					msg+=$(this).find('id').text();
+					msg+='('+$(this).find('name').text()+')\n';
+				});
+			}
+		}
+		debugTrace(msg);
+	}
+
+	
+	function debugTrace(msg) {
+		var debug = document.getElementById('debug');
+		debug.value += msg;
+	}
+	
+	function clearOnClick() {
+		var debug = document.getElementById('debug');
+		debug.value = '';
+	}
+</script>
+</head>
+<body>
+	<h2>XML Data Parsing 2</h2>
+	<hr>
+	<form name="infoForm">
+		<textarea rows="15" cols="80" id="debug"></textarea>
+		<br>
+		<input type="button" value="서버에 자료 요청" onclick="sendOnClick()">
+		<input type="button" value="초기화" onclick="clearOnClick()">
+	</form>
+</body>
+</html>

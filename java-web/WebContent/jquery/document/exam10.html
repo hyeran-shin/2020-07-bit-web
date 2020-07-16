@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#btn_text').click(function(){
+			$('#text1').text('TEXT 변환 후');
+		});
+		$('#btn_html').click(function(){
+			$('#text2').html('<b>HTML 변환 후 </b>');
+		})
+		$('#btn_value').click(function(){
+			$('#text3').val('VALUE 변환 후 ');
+		});
+		$('#btn_update').click(function(){
+			// text		: 변환 후 text
+			// oriText	: 변환 전 text
+			// idx		: p 요소들에 대한 위치 정보(index)
+			var text = $('p').html(function(idx, oriText){
+				return oriText + ' || ' + 'index' + idx;
+				// 원본 데이터에 추가적으로 문자열을 붙여 반환
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<p id="text1">첫 번째 문단입니다.</p>
+	<p id="text2">두 번째 문단입니다.</p>
+	<input id="text3" type="text" value="default value">
+	<br><br>
+	<button id="btn_text">TEXT 변환</button>
+	<button id="btn_html">HTML 변환</button>
+	<button id="btn_value">VALUE 변환</button>
+	<button id="btn_update">변환</button>
+
+</body>
+</html>

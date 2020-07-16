@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(function() {
+		setTimeout(function() {
+			// write
+// 			$('#p1').html('<strong>Hello jQuery!!!</strong');
+			$('#p1').html('&lt;strong&gt;Hello jQuery!!!&lt;/strong&gt;');
+			// html 형식으로 문서에 써라.
+			// 단, html 특수문자 자체가 요소로 생성되지 않는다.
+			//		-> html 특수문자 기호로 표현된ㄷㅏ.
+			
+			// read
+			console.log($('#p2').html()); 
+			// $('#p3').text() 는 태그요소 제외 하고 내용만 추출, ex) Hello jQuery
+			// .html은 HTML 태그 내용까지 추출, ex) <strong>Hello jQuery!!!</strong>
+
+
+		}, 2000);
+	})
+</script>
+</head>
+<body>
+	<p id="p1">Paragraph</p>
+	<p id="p2"><strong>Hello</strong> jQuery</p>
+</body>
+</html>

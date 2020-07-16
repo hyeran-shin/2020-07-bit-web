@@ -1,0 +1,46 @@
+package com.bit.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bit.framework.ModelAndView;
+import com.bit.framework.annotation.Controller;
+import com.bit.framework.annotation.RequestMapping;
+
+@Controller
+public class MemberController {
+	@RequestMapping("/signUpForm.do")
+	public ModelAndView signUpForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.setView("redirect:/jblog-spring/jsp/member/signUpForm.jsp");
+		/*
+		 * DispatcherServlet (FrontController)에서 요청을 받아 처리하되,
+		 * sendRedirect 방식으로 이동시키겠다.
+		 * 		-> "redirect :" 이동 방식을 구분하기 위해 표시 용도
+		*/
+		
+		return mav;
+	}
+	
+	@RequestMapping("/signUp.do")
+	public ModelAndView signUp(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.setView("/jsp/member/signUp.jsp");
+		return mav;
+	}
+	
+	@RequsetMapping("")
+	public ModelAndView signUp(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.setView("/jsp/member/signUp.jsp");
+		return mav;
+		
+		MemberDAO dao = new MemberDAO();
+	 	List<MemberVO> list = dao.selectAllMember();
+	 	pageContext.setAttribute("list", list);
+	
+	
+	
+	}
+	
+}

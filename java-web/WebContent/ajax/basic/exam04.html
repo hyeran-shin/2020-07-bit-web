@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		$(':button').on('click',function(){
+			// jQuery ajax를 활용한 비동기 요청
+			$.ajax({
+				type : 'GET', // 전송 방식
+				url : 'sample.jsp', // 요청 경로
+				data : '' , // 전송 파라미터
+				success : function(resMsg){ // 성공상태
+					$('#msg-view').append(resMsg);
+				}
+			});
+		});
+	});
+		
+</script>
+</head>
+<body>
+	<h1>서버에서 받은 메시지</h1>
+	<div id="msg-view"></div>
+	<br>
+	<input type="button" value="서버에 자료 요청">
+</body>
+</html>

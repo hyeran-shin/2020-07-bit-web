@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Custom Filter (사용자 정의 필터 )</h1>
+		<ul class="list-group">
+			<li v-for="member in members" class="list-group-item">
+				{{ member | info}}
+			</li>
+		</ul>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">	
+	//커스텀 필터, member 정보를 받아와 filter function 수행
+	//커스텀 필터의 문법 :  | 이용함
+	/*
+		memeber : Json 형식 
+		JSON 형식을 filter를 거쳐 가공
+	*/ 
+	Vue.filter('info',function(member){
+		// JSON 내의 데이터 추출하여 원하는대로 가공 후 반환
+		return member.name + '는 '+ member.age +'살이며, ' + member.addr +'에 살아요.';
+	})
+	
+
+	new Vue({
+		el : '.container',
+		data : {
+			members : [
+				{ 
+					name : '카페',
+					age : 8,
+					addr : '천안시 서북구'
+				},
+				{ 
+					name : '라떼',
+					age : 7,
+					addr : '서울시 마포구'
+				},
+				{ 
+					name : '모카',
+					age : 5,
+					addr : '서울시 노원구'
+				},
+			]
+		}
+	})
+
+</script>
+</html>
+
+
+
+
+

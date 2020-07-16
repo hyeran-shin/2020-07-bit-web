@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>spring-log</groupId>
+  <artifactId>spring-log</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <properties>
+  	<org.springframework-version>4.2.1.RELEASE</org.springframework-version>
+  	<jcloverslf4j.version>1.7.6</jcloverslf4j.version>
+  	<logback.version>1.1.1</logback.version>
+  </properties>
+  
+  <dependencies>
+  	<!-- spring context -->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-context</artifactId>
+  		<version>${org.springframework-version}</version>
+  		
+  		<!--  
+  			Maven Dependency 중 원하지 않는 라이브러리는 제외
+  			JCL 제외(Jarkarta Commons Logging)
+  				*SLF4J 기반의 Logback 라이브러리를 사용
+  		 -->
+  		 <exclusions>
+  		 	<exclusion>
+  		 		<groupId>commons-logging</groupId>
+  		 		<artifactId>commons-logging</artifactId>
+  		 	</exclusion>
+  		 </exclusions>
+  	</dependency>
+  	
+  	<!-- spring mvc -->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-webmvc</artifactId>
+  		<version>${org.springframework-version}</version>
+  	</dependency>
+  	
+  	<!-- spring web -->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-web</artifactId>
+  		<version>${org.springframework-version}</version>
+  	</dependency>
+  	
+  	<!-- logback -->
+  	<!-- 
+  		기본으로 사용되는 JCL을 제외시켰기에, LOG를 사용할 수 없다.
+  		다음과 같이 로그를 남길 수 있는 라이브러리를 추가하겟따.
+  		*logger가 없다면, Controller의 Log 사용 불가
+  	 -->
+  	 
+  	 <!-- JCL-over-SLF4J 추가 -->
+  	 <dependency>
+  	 	<groupId>org.slf4j</groupId>
+  	 	<artifactId>jcl-over-slf4j</artifactId>
+  	 	<version>${jcloverslf4j.version}</version>
+  	 </dependency>
+  	 
+  	 <!-- SLF4J 구현체 Logback 추가 -->
+  	 <dependency>
+  	 	<groupId>ch.qos.logback</groupId>
+  	 	<artifactId>logback-classic</artifactId>
+  	 	<version>${logback.version}</version>
+  	 </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+        <configuration>
+          <warSourceDirectory>webapp</warSourceDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

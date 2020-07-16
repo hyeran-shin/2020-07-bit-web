@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	">
+	
+	<context:annotation-config />
+	<context:component-scan base-package="com.bit.mysite.controller" />
+	
+	<!-- 
+		웹 환경과 직접적인 관계가 있는 @Controller 등록!
+		
+		비즈니스 로직 등 웹 환경과 관련이 없는
+		@Service, @Repositry(DAO에 붙음),@Component는
+		applicationContext.xml에 등록!
+	 -->
+	 
+	 <!--  interceptors -->
+	 <mvc:interceptors>
+	 	<mvc:interceptor>
+	 		<mvc:mapping path="/user/login" />
+	 		<bean class="com.bit.security.AuthLoginInterceptor" />
+	 	</mvc:interceptor>
+	 	
+	 	<mvc:interceptor>
+	 		<mvc:mapping path="/user/logout" />
+	 		<bean class="com.bit.security.AuthLogoutInterceptor" />
+	 	</mvc:interceptor>
+	 	
+	 	<mvc:interceptor>
+	 		<!--  모든 요청을 AuthInterceptor를 거치도록 하되, -->
+	 		<mvc:mapping path="/**" />
+	 		<!-- 다음 요청을 (로그인, 로그아웃, 정적 파일)은 제외하겠다. -->
+	 		<mvc:exclude-mapping path="/user/login"/> 
+	 		<mvc:exclude-mapping path="/user/logout"/> 
+	 		<mvc:exclude-mapping path="/assets/**"/>
+	 		
+	 		<bean class="com.bit.security.AuthInterceptor"/>
+	 	</mvc:interceptor>
+	 </mvc:interceptors>
+	 
+	 
+	 <!-- validator, conversionService, messageConverter 자동 등록 -->
+	 <mvc:annotation-driven>
+	 	<!-- mysite.controller.api 의 UserController 에서 @ResponseBody 사용 json사용하기 위해? -->
+	 	
+	 	<!-- message converters -->
+	 	<mvc:message-converters>
+	 		<!--  // 문자열 관련 responseBody 하고싶을 때  -->
+	 		<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+	 			<!-- bean의 하위는 대부분 property 다 -->
+	 			<property name ="supportedMediaTypes">
+		 			<list>	
+						<value>text/html; charset=UTF-8</value>		 				
+		 			</list>
+		 		</property>
+	 		</bean>
+	 		<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	 			<property name="supportedMediaTypes">
+	 				<list>
+	 					<value>application/json; charset=UTF-8</value>
+	 				</list>
+	 			</property>
+	 		</bean>
+	 		
+	 	</mvc:message-converters>
+	 	
+	 	<!--  argument resolvers, authUser 파라미터 객체 리졸버 등록하기위해 사용? -->
+	 	<mvc:argument-resolvers>
+	 		<bean class="com.bit.security.AuthUserHandlerMethodArgumentResolver" />
+	 	</mvc:argument-resolvers>
+	 	
+	 </mvc:annotation-driven>
+
+	 <aop:aspectj-autoproxy />
+	 
+	 <!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 (index.jsp 에서 이미지, css파일 적용 안되서 함) -->
+	 <mvc:default-servlet-handler/>
+	 <!-- 
+	 	
+	 	HandlerMapping에서 정적 자원에 대한 URL을, 
+	 	DefaultServlet으로 위임하도록 설정!
+	 	
+	 	url요청을 디스패처가 받으면 컨트롤러가 있는지 없는지 판단 후 없으면 404에러를 내뱉음.
+	 	요청URL에 매핑되는 Controller가 없다면,
+	 	DefaultServlet이 해당 요청을 처리하도록 한다. 
+	 	
+	  -->
+	 
+	 <!-- 멀티파트 리졸버 -->
+	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	 	<!-- 최대 업로드 가능한 크기(byte), 50MB -->
+	 	<property name="maxUploadSize" value="52428800" />
+	 	
+	 	<!--  디스크에 임시 파일 생성 전, 메모리에 보관할 수 있는 최대 크기 -->
+	 	<property name="maxInMemorySize" value="52428800" />
+	 	
+	 	<!-- defaultEncoding (UTF-8)-->
+	 	<property name="defaultEncoding" value="utf-8" />
+	 </bean>
+	 
+	 
+	 <!-- 기본 뷰 리졸버 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<!-- 등록한 다수의 뷰 리졸버의 우선 순위를 설정, 아직은 없지만 메세지 할 때 더 붙여줄거임 ㅇㅇㅇ -->
+		<property name="order" value="1" />
+	</bean>
+		
+		
+	<!-- Message Source -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="basenames">
+			<list>
+				<value>messages/messages_ko</value>
+			</list>
+		</property>
+	</bean>
+</beans>

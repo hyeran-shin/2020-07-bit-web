@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+#slidebox{
+	position : relative;
+	top : 20%;
+	width : 1000px;
+	height: 600px;
+	overflow: hidden;
+}
+	
+#slidebox ul#slider {
+	list-style: none;	
+	margin: 0;
+	padding: 0;
+}
+
+#slidebox ul li {
+	position : absolute;
+	width: 1000px;
+	height: 500px;
+}
+	
+#slidebox ul li img { 
+	width: 100%;
+	height: 100%;
+	
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button id="btn_toggle">Toggle Button</button>
+	<div id="div_pending">Pending</div>
+
+	<script>
+		//(  function(){}()  ); 
+		(function() {
+			var pendingInterval = false;
+			btn = document.getElementById('btn_toggle');
+			div = document.getElementById('div_pending');
+			// HTML 로딩(렌더링) 후 IIFE로 초기화
+			//	 -> getElementById() 한번 수행
+			//   - 한번만 가져오는데, startPending()의 호출 시 div 접근이 왜 가능하느냐?
+					// -> 클로저의 형태, 스코프의 지속성!!!
+			
+			
+			//div.innerHTML div의 해당 내용을 가져올 수 있음.
+			// startPending 함수가 실행 될 때마다 동일한 div 를 참조
+			// 매번 div 요소를 가져오지 않아도 된다.
+			//   -> 스코프의 지속성, 클로저를 활용하여 스코프를 유지!
+			var startPending = function(){ // setInterval에 등록할 callback 함수
+				if(div.innerHTML.length > 11){ // div 요소의 내용 길이가 11보다 크다면,
+					div.innerHTML = 'Pending';  // div 요소의 내용을 'Pending' 바꿔라
+				}
+				div.innerHTML += '.' ; // 기존 요소 내용에 .을 추가하여 바꿔라
+			}
+			
+			btn.addEventListener('click',function(){
+				if(!pendingInterval){
+					pendingInterval = setInterval(startPending, 500) ; //setInterval 자바스크립스 함수
+					// setInterval(...) : 특정 시간마다 익명 함수 호출
+					// setTimeout(...)  : 특정 시간이 지나면 익명 함수 호출
+				}else{
+					clearInterval(pendingInterval);
+					// 등록한 setInterval(...)을 삭제해라
+					pendingInterval = false;
+				}
+			});
+		}());
+	</script>
+</body>
+</html>

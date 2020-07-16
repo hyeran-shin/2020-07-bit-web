@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	var httpRequest = null;
+	
+	function getXMLHttpRequest(){
+		if(window.XMLHttpRequest){
+			return new XMLHttpRequest();
+		}else{
+			return null;
+		}
+	}
+	
+	function sendProcess(){
+		console.log('sendProcess');
+
+		httpRequest = getXMLHttpRequest();
+		console.log(httpRequest);
+		httpRequest.onreadystatechange = callback;
+		// HttpRequest의 상태가 변화될 때 마다 호출되는 이벤트 함수
+		
+		httpRequest.open('GET','sample.jsp',true);
+		httpRequest.send(null);
+	}
+	
+	function callback(){
+		console.log('callback');
+		/*
+			readyState
+			0 uninitialized : open 메소드 호출 전
+			1 loading		: open 메소드 호출, send 메소드 호출 전
+			2 loaded		: send 메소드 호출, 서버 응답 전
+			3 interactive	: client가 응답 서버의 header를 취득한상태, body 취득 전
+			4 complete		: body까지 취득 완료 (응답 완료)
+				[비동기 요청 시 주의사항]		
+				 - 서버 처리 실패 시 응답은 수행! (complete 출력)
+				 - 다만, 해당 기능에 대한 비즈니스 로직 수행은 보장받을 수 없다.
+				 - ex) 비동기 요청 후 서버에서 처리하는 시간이 너무 길 때
+		*/
+		var debug = document.getElementById('debug');
+		alert(debug + 'dddddd');
+		switch(httpRequest.readyState){
+		case 1 :
+			debug.value += 'Loading... \n';
+			break;
+		case 2 :
+			debug.value += 'Loaded... \n';
+			break;
+		case 3 :
+			debug.value += 'Interactive... \n';
+			break;
+		case 4 :
+			debug.value += 'Complete... \n';
+			break;
+		}
+	}
+	
+	function clearOnClick(){
+		var debug = document.getElementById('debug');
+		debug.value = '';
+	}
+</script>
+</head>
+<body>
+	<textarea rows="10" cols="80" id="debug"></textarea>
+	<br>
+	<input type="button" value="초기화" onclick="clearOnClick()">
+	<input type="button" value="서버 호출" onclick="sendProcess()">
+</body>
+</html>
+
+
+
+
+
+

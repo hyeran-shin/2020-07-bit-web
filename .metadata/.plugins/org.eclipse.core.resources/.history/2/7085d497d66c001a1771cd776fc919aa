@@ -1,0 +1,102 @@
+package com.bit.framework;
+
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class DispatcherServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 3719201454070450384L;
+
+	private HandlerMapping mappings;
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		String urlCtrlName = config.getInitParameter("controllers");
+		// 컨트롤러의 이름 (경로)
+		// -> com.bit.controller.BoardController
+		try {
+			mappings = new HandlerMapping(urlCtrlName);
+
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
+	}
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		System.out.println("DispatcherServlet Service Called...");
+		String uri = request.getRequestURI();// /jblog-spring/list.do
+		String contextPath = request.getContextPath();// /jblog-spring
+		uri = uri.substring(contextPath.length());
+
+		CtrlAndMethod control = mappings.getCtrlAndMethod(uri);
+		String view = ""; // 페이지 경로
+		try {
+			// 404 not found
+			if (control == null) {
+				throw new Exception("요청하신 URI가 존재하지 않습니다.");
+			}
+			Object target = control.getTarget();
+			Method method = control.getMethod();
+
+			System.out.println("target : " + target);
+			System.out.println("method : " + method);
+
+			ModelAndView mav = (ModelAndView) method.invoke(target, request, response); //동적 생성된 결과를 return? 
+			// method를 실행시키고 있는 target에게 실행권ㄹ한을 주겠다?
+			Map<String, Object> model = mav.getModel();
+			Set<String> keys = model.keySet();
+			
+			System.out.println("model : " + model);
+			System.out.println("keys : " + keys );
+			
+			// \by zero
+//			System.out.println(7/0);
+			
+			
+			for (String key : keys) {
+				request.setAttribute(key, model.get(key));
+			}
+			view = mav.getView();
+			System.out.println("Target Page : " + view);
+		} catch (Exception e) {
+//			e.printStackTrace();
+			request.setAttribute("exception", e); // request영역에 페이지mapping시 나는 오류 등록
+			view = "/ErrorServlet";
+		}
+
+		// 페이지 이동
+		// sendRedirect 할 경우를 알려주는 표시 용도
+		// view 정보(RUI)가 "redirect:"로 시작한다면,
+		if (view.startsWith("redirect:")) { // 리다이렉트 방식
+			view = view.substring("redirect:".length());
+			/*
+			 * view.substring("redirect: ".length());
+			 * 		-> 문자를 문자열의 길이가 혹시나 공백까지 포함된다면,
+			 * 		-> 다음과 같이 view 값이 가공된다.
+			 * 		jblog-spring/jsp/member/signUpForm.jsp
+			 * 			-*자바 프로그램에서의 상대 경로 표현법! (프로젝트 경로 포함)
+			 * 		실제 동작 시
+			 * 		/jblog-spring/jblog-spring/jsp/member/signUpForm.jsp
+			*/
+			response.sendRedirect(view);
+		} else { // 포워드 방식
+			RequestDispatcher rd = request.getRequestDispatcher(view);
+			rd.forward(request, response);
+			// 포워드를 하지 않았을 경우, 모든 코드는 정상적으로 동작하되, 화면에 데이터가 없다.
+		}
+
+	}
+
+}

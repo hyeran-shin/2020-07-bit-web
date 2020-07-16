@@ -1,0 +1,10 @@
+package com.bit.controller;
+
+import com.bit.framework.ModelAndView;
+
+public class LoginController {
+@RequesttMapping("/login.do")
+public ModelAndView login() {
+	
+}
+}

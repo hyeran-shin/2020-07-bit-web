@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var httpRequest = null;
+	
+	// sample.jsp 호출 (요청 -> 응답)
+	function requestMsg() {
+		// 사용하는 브라우저의 종류에 따라 XMLHTTP 생성!
+		if(window.XMLHttpRequest){
+			httpRequest = new XMLHttpRequest();
+			// 사파리, 파이어폭스, ...
+		} else if(window.ActiveXObject){
+			httpRequest = new ActiveXObject('Microsoft.XMLHTTP');
+			// 익스플로러 (IE6 version)
+		} else{
+			httpRequest = null;
+		}
+		httpRequest.onreadystatechange = responseMsg;
+		
+		// httpRequest의 상태가 변화 되었을 때 호출되는 이벤트 함수!
+		
+		httpRequest.open('GET','sample.jsp',true)
+		// httpRequest.open([전송 방식], [주소(URL)], [비동기 여부]) 
+		// true 	-> 비동기정
+		// false 	-> 동기적, response가 올 때 까지 브라우저는 대기 상태!
+		
+		httpRequest.send(null);
+	}
+	
+	function responseMsg(){ // 변화되는 걸 체크하기 위해서, onreadystatechange에 원하는 function 넣음?
+		if(httpRequest.readyState == 4){
+			if(httpRequest.status == 200){
+				var msgView = document.getElementById('msg-view');
+				msgView.innerHTML = httpRequest.responseText;
+			}	
+		}
+	}
+</script>
+</head>
+<body>
+	<h1>서버에서 받은 메시지</h1>
+	<div id="msg-view"></div>
+	<br>
+	<input type="button" value="서버에 자료 요청" onclick="requestMsg()">
+</body>
+</html>

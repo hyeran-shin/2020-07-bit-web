@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product">
+	<insert id="uploadProduct" parameterType="productvo">
+		<![CDATA[
+			insert into 
+			product ( product_name, product_price, product_count, product_comment, reg_date)
+			values( #{productName}, #{productPrice}, #{productCount},#{productComment}, CURRENT_TIMESTAMP )
+		]]>
+	</insert>
+	
+	<select id="selectMax" resultType="int">
+		select max(product_no) from product
+	</select>
+	
+	<select id="selectNo" resultType="int">
+		select count(*) from product
+	</select>
+	
+	
+	<select id="selectAllList" resultType="productvo" parameterType="map">
+		 <![CDATA[
+				select  y.* 
+						from ( select 	x.product_no as productNo,
+										x.product_name as productName, 
+										x.product_price as productPrice,  
+										x.product_count as productCount,
+										x.product_comment as productComment,
+										x.reg_date as regDate,
+										(@rownum := @rownum + 1) as rn
+								from 	( select b.product_no, b.product_name, b.product_price, b.product_count, b.product_comment, b.reg_date
+							 				from product b 
+										    order by b.reg_date desc
+										) as x, 
+										( select @rownum := 0 ) as r 
+							   ) as y
+					where (#{page}-1) * #{size}+1 <= rn and rn <= #{page} * #{size}	
+					  
+					  					 
+		]]>
+	</select>
+	
+	<select id="selectOneNo" resultType="productvo" parameterType="int">
+		select 	x.product_no as productNo,
+				x.product_name as productName,
+				x.product_price as productPrice,
+				x.product_count as productCount,
+				x.product_comment as productComment,
+				x.reg_date as regDate
+			from product x
+		where x.product_no = #{__parameter}
+	</select>
+	
+	<update id="update" parameterType="productvo">
+		<![CDATA[
+			update product
+				set product_name = #{productName},
+					product_price = #{productPrice},
+					product_count =#{productCount},
+					product_comment = #{productComment},
+					reg_date = CURRENT_TIMESTAMP
+			  where product_no = #{productNo} 
+		]]>
+	</update>
+</mapper>
+
+
+
+
+
+
+
+

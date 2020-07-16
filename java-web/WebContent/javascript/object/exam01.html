@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+		JSON (JavaScript Object Notation)
+			- 자바스크립트 객체 표기법
+			- attribute(속성)-value(값), key(키)-value(값)
+			   형식으로 이루어진 데이터 저장 방식
+	 */
+	 var Person = { }; // { }, object  
+	 
+	 // 객체에 변수 선언과 동시에 초기화
+	 //  -> Person { } (object)변수에 참조를 시킨다?
+	 //  -> 객체 Object 를 만들어 Person에 참조 시킨 후,
+	 //		내가 원하는 속성을 설정할 수 있다. -> Property
+	 
+	 Person['name'] = '라떼';
+	 Person['age'] = 7;
+	 Person.gender = 'female';
+	 
+	 // Person 객체에 메소드 추가
+	 Person.foo = function(a,b){
+		 console.log('야옹~');
+		 return a+b;
+	 }
+	 
+	 // 멤버 연산자 접근 방법
+	 console.log('이름 : %s' , Person.name);
+	 console.log('나이 : %d' , Person.age);
+	 console.log('성별 : %s' , Person.gender);
+	 
+
+	 // 인덱스 연산자 접근 방법 (인덱스 : 데이터를 색인하기 위한 값, key값, attribute 속성 이른)
+	 console.log('이름 : %s' , Person['name']);
+	 console.log('나이 : %d' , Person['age']);
+	 console.log('성별 : %s' , Person['gender']);
+	 
+	 console.log('Person.foo method called : %d', Person.foo(1,2));
+	 console.log('Person.foo method called : %d', Person['foo'](1,2));
+	 
+	 
+	 console.log(Person); // 객체 정보 출력
+	 // {name : '라떼', age:7, gender:'female'} 
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
+
+

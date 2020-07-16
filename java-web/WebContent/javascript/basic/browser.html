@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="assets/browser-detect.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		BrowserDetect.init();
+		
+		console.log(
+			BrowserDetect.browser + " : " + 
+			BrowserDetect.version + " : " +
+			BrowserDetect.Os
+		);
+		
+		console.log(
+			navigator.userAgent + " : " +
+			navigator.vendor + " : " +
+			navigator.platform 
+		);
+	}
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

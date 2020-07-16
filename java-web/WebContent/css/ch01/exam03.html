@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*
+		자손 선택자
+			#header p
+				: #header 하위의 모든 사직 요소 선택(탐색)
+		자식 선택자
+			#header>p
+				: #header의 바로 아래 수준의 요소 선택(탐색)
+	*/
+
+/* id가 header인 자식 요소 중 h1 태그에 스타일 적용*/
+/* 하위 요소는 기준으로부터 공백 활용 */
+#header h1 {
+	color: red;
+}
+
+/* id가 header인 자식 요소 중 h1과 h2 태그에 스타일 적용 */
+/* 같은 스타일을 여러 요소에 적용 시 구분자 사용*/
+#header h1, h2 {
+	color: blue;
+}
+/* id가 header인 자식 요소 중 h1, id가 header인 자식 요소 중 h2*/
+/* 	#header h1, #header h2 {color : green;} */
+
+/* id가 content인 요소의 바로 아래 자식 h1에 스타일 적용*/
+/* 	#content>h1{ color : pink;} */
+/* id가 content인 요소의 자손 중 h1에 스타일 적용(모든 자식들)*/
+#content h1 {
+	color: pink;
+}
+
+/* table의 자손 중 tr의 자손 중 th 요소에 적용*/
+/* 	table tr th {color : red;} */
+/* 	/* table의 자손 중 td 요소에 적용*/
+/* 	table td {color : blue;} */
+/* table>tr>th { */
+/* 	color: purple; 크롬 실제로는 <table> <tbody> 삽입됨 */
+/* } */
+/*
+	table>tr : table 요소의 바로 아래 수준의 tr을 선택
+	
+	HTML5이후 table 태그 사용 시 브라우저가 table 태그 내에 tbody 태그 자동 삽입!
+		-> 유저가 작성하지 않아도 결과 화면에는 tbody 태그가 존재
+	*Front-Framework 혹은 JavaScript(jQuery)를 통한 동적 요소 생성 시 CSS 선택도 주의
+*/
+table>tbody>tr>th {
+	color: purple;
+}
+
+/*
+	인접 선택자
+		- 동일 수준의 바로 다음 요소 탐색
+			h1 + h2 {...}
+ 	형제 선택자
+ 		- 동일 수준의 다음 중 모든 요소를 탐색
+ 			h1 ~ h2 {...}
+*/
+	/* h1 요소의 동일 수준 중 바로 다음 h2 요소 하나에 스타일 적용, 바로 다음! 바로바로*/
+ 	h1+h2{color :yellow;} 
+	/*h1 요소의 동일 수준 중 다음 h2 요소 모두에 스타일 적용*/
+/*   	h1~h2{color : skyblue;}   */
+
+</style>
+</head>
+<body>
+	<h1>Hello HTML5/CSS3</h1>
+	<div id="header">
+		<h1>Heading 1</h1>
+		<h2>Heading 2</h2>
+	</div>
+	<div id="section">
+		<h1>#section의 하위 태그</h1>
+		<div id="nav">
+			<h2>#nav 의 하위 태그</h2>
+		</div>
+	</div>
+	<div id="content">
+		<h1>#content의 하위 태그</h1>
+		<div id="board">
+			<h1>#board의 하위 태그</h1>
+		</div>
+	</div>
+	<div id="footer">
+		<h1>#footer의 하위 태그</h1>
+	</div>
+
+	<table>
+		<tr>
+			<th>Head</th>
+			<th>Head</th>
+		</tr>
+		<tr>
+			<td>Element</td>
+			<td>Element</td>
+		</tr>
+	</table>
+
+	<!-- 인접, 형제 선택자  -->
+	<h1>Heading 1 </h1>
+<!-- 	<h3>Heading 3</h3> -->
+	<h2>Heading 2 </h2>
+	<h2>Heading 2 </h2>
+	<h2>Heading 2 </h2>
+</body>
+</html>

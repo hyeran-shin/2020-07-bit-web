@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper  namespace="board">
+	<update id="increaseOrderNo" parameterType="map">
+		<![CDATA[
+			update board
+				set order_no = order_no+1
+			  where group_no = #{groupNo}
+				and order_no > #{orderNo}
+		]]>
+	</update>
+	
+	<insert id="insert" parameterType="boardvo">
+		<choose>
+			<when test="groupNo == null ">
+				<![CDATA[
+					insert into
+					board (
+							title, content, reg_date, hit, 
+							group_no, 
+							order_no, depth, users_no
+						    )
+					values (
+							 #{title}, #{content}, CURRENT_TIMESTAMP, 0, 
+							 ifnull( (select max(b.group_no) from board b) , 0) + 1,
+						 	 1, 0, #{usersNo}
+					 	 	)
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+					insert into
+					board (
+							title, content, reg_date, hit, 
+							group_no, order_no, depth, users_no
+							)
+					values (
+							#{title}, #{content}, CURRENT_TIMESTAMP, 0, 
+							#{groupNo}, #{orderNo}, #{depth} ,#{usersNo}
+							)
+				]]>
+			</otherwise>
+		</choose>
+	</insert>
+	
+	<select id="getTotalCount" parameterType="string" resultType="int">
+		<![CDATA[
+			select count(*)	from board
+		]]>
+		<if test="_parameter != null and _parameter != '' ">
+			<![CDATA[
+				where title like '%${_parameter}%'
+					or content like '%${_parameter}%'
+			]]>
+		</if>
+		
+		<!-- 
+		_ 전달되는 파라미터를 언더바로 구분함?
+			처음 게시판에 들어가면 검색 키워드가 defaultValue="" 형태 이므로, 모두 조회
+			검색 키워드 전달 시 조건을 수행하여 해당 개수만 조회하겠다.
+			
+			#{...}	-> getter 호출을 이용한 매핑 및 컬럼명처럼 표현
+			${...}	-> parameter 매핑, 데이터 자체 표현
+			
+			#{email} -> getEmail 형식으로 're@naver.com' 들어감?
+			${_parameter} -> keyword -> '%keyword%' 형식
+			
+		 -->
+		 
+	</select>
+	
+	<select id="getList" parameterType="map" resultType="boardvo">
+		<choose>
+			<!-- map에서 넘어오는 값의 이름으로도 사용 가능, keyword가 null이 아닌경우 + 비어있는게 아닌경우 -->
+			<when test="keyword != null and keyword != '' ">
+				<![CDATA[
+					select y.* 
+						from ( select 	x.no, x.title, x.hit, 
+										x.reg_date as regDate, 
+										x.depth , 
+										x.name as userName, 
+										x.users_no as usersNo,
+										(@rownum := @rownum + 1) as rn
+								from 	( select b.no, b.title, b.hit, b.reg_date, b.depth, u.name, b.users_no
+											from board b, users u
+										   where b.users_no = u.no
+										   	and ( b.title like '%${keyword}%' 
+										   			or
+										   		  b.content like '%${keyword}%'
+										   		 )
+										    order by group_no desc, order_no asc
+										) as x,
+										( select @rownum := 0 ) as r 
+							   ) as y
+					  where (#{page}-1) * #{size}+1 <= rn and rn <= #{page} * #{size}							 
+				]]>
+			
+			</when>
+			<otherwise>
+				<![CDATA[
+					select y.* 
+						from ( select 	x.no, x.title, x.hit, 
+										x.reg_date as regDate, 
+										x.depth , 
+										x.name as userName, 
+										x.users_no as usersNo,
+										(@rownum := @rownum + 1) as rn
+								from 	( select b.no, b.title, b.hit, b.reg_date, b.depth, u.name, b.users_no
+											from board b, users u
+										   where b.users_no = u.no
+										    order by group_no desc, order_no asc
+										) as x,
+										( select @rownum := 0 ) as r 
+							   ) as y
+					  where (#{page}-1) * #{size}+1 <= rn and rn <= #{page} * #{size}							 
+				]]>
+			</otherwise>
+			
+		</choose>
+	</select>
+	
+	
+	<select id="getByNo" parameterType="long" resultType="boardvo">
+		<![CDATA[
+			select no, title, content, group_no as groupNo, order_no as orderNo, depth, users_no as usersNo
+				from board
+			 where no = #{no}
+		]]>
+	</select>
+	
+	<update id="updateHit" parameterType="long" >
+		<![CDATA[
+			update board 
+				set hit = hit+1
+			 where no = #{no}
+		]]>
+	</update>
+	
+	<update id="update" parameterType="boardvo" >
+		<![CDATA[
+			update board 
+				set title=#{title}, content=#{content} 
+			 where no = #{no}
+			 	and users_no = #{usersNo}
+		]]>
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	/*
+		이벤트 핸들러(Event Handler)
+		 - Mouse
+		 	: click, dblclick, mouseenter, mouseleave, ...
+		 - keyboard
+		 	: keydown, keyup, keypress, ...
+		 - Form
+		 	: submit, focus, blur, change, ...
+		 - Document / Window
+		 	: load, resize, unload, scroll, ...
+	 */
+
+	$(function() {
+		$('#my-span').mousedown(function() {
+			console.log('마우스 클릭을 눌렀습니다.');
+		});
+		$('#my-span').mouseup(function() {
+			console.log('마우스 클릭을 떼었습니다.');
+		});
+		$('#my-span').mouseenter(function() {
+			console.log('마우스가 들어왔습니다.');
+		});
+		$('#my-span').mouseleave(function() {
+			console.log('마우스가 떠났습니다.');
+		});
+	});
+</script>
+</head>
+<body>
+	<span id="my-span">이 문장에 마우스 이벤트를 시험하세요.</span>
+</body>
+</html>

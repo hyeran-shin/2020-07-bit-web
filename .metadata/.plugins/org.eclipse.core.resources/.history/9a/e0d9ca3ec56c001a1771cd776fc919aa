@@ -1,0 +1,8 @@
+package com.bit.controller;
+
+import com.bit.framework.annotation.Controller;
+
+@Controller
+public class LoginController {
+
+}

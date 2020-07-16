@@ -1,0 +1,20 @@
+package com.bit.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bit.framework.ModelAndView;
+import com.bit.framework.annotation.RequestMapping;
+
+public class BoardController {
+	
+	@RequestMapping("/list.do")
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setView("/WEB-INF/views/board/list.jsp");
+		return mav;
+	}
+}

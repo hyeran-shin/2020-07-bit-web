@@ -1,0 +1,10 @@
+package com.bit.vo;
+
+public class BoardVO {
+	private int no;
+	private String title;
+	private String writer;
+	private String content;
+	private String reg_date;
+	private int view_cnt;
+}

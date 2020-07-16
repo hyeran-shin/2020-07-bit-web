@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!--  
+		Component Properties (컴포넌트 프로퍼티) -> 프로퍼티 : 변수, 데이터
+		 - props 특성을 활용하여 개별적인 컴포넌트에 전달할 수 있는 값을 설정해 줄 수 있는 작업
+		 - template을 활용해 사용자 정의 엘리먼트를 만들었다면,
+		      해당 엘리먼트에 props를 이용하여 "사용자 정의 프로퍼티"를 만들겠다.
+				-> data-* (HTML 사용자 정의 데이터 속성)와 유사!
+	-->
+	<div class="container">
+		<!-- 속성 이름 자체는 일반적으로 대소문자를 구분하지 않는다. writerName : 안됌 -->
+		<board TITLE="Java" writer-name="Cafe"></board>
+		<board title="JavaScript" writer-name="Latte"></board>
+		<board title="Vue"></board><!-- 하나만 사용 -->
+	</div>
+	<!-- 
+		Vue.component(...)에 calmelCase로 props를 등록했다면,
+		실제 템플릿의 속성명은 kebob-case로 작성!
+		
+		calmelCase : 의미가 바뀌는 곳을 대문자
+		kebob-case : 하이픈으로 단어를 연결(HTML 요소의 속성, ...)
+		
+		컴포넌트의 프로퍼티 이름이 kebob-case (writer-name)이고,
+		스크립트 코드상의 camelCase (writerName)인 경우 정상 동작!
+		단, 실제 프로퍼티 이름과 일치하는 것이 좋다!
+		
+		{{ writer-name }}
+			-> JS, JQuery에서도 보았듯이 소스 코드 형식에서의 '-' 기호는 뺄셈 연산자!
+			-> writer, name을 따로 인식하여 정의가 안되있는 에러가 발생하고,
+			      뺼셈 연산을 수행할 수 없는 것.
+		
+		컴포넌트 밑에서 <template~ 
+		 {{ writer-name }} X
+		 {{ writername }} X
+		 {{ writerName }} O 
+		 {{ witer_name }} O 
+	
+		
+		props : ['sumOfStudent'] 처럼 등록했다면,
+		<board sum-of-student="..."></board> 와 같이 사용
+			-> '_' 기호로 통일 시 동일하게 사용 가능하지만 지양 (웹 표준에 어긋남)	
+	 -->
+	
+	<!-- 컴포넌트 -->
+	<template id="board-template">
+		<h1>{{ title }} : {{ writerName }} </h1>
+	</template>
+	
+	
+	
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('board',{
+		// 두 네이밍 모두 가능하지만, camelCase권장
+		props : ['title','writerName'],
+// 		props : ['title','writer-name'],
+		template : '#board-template' //템플릿 가져오는거?
+	})
+	
+	/*
+		프로퍼티 네이밍 주의!
+		 writerName 	-> writer-name
+		 writername 	-> writername
+		 writer-name 	-> writer-name
+		 witer_name 	-> witer_name
+		단, 프로그래밍 언어에서의 프로퍼티(변수, 필드)들의 이름은 '-'이 불가능
+		
+		Quiz. 네이밍 변환
+			camelCase 형식의 문자열을 입력 받아,
+			kebob-case 형식으로 변환하세요
+	*/
+	new Vue({
+		el : '.container'
+	})
+</script>
+</html>
+
+
+
+
+

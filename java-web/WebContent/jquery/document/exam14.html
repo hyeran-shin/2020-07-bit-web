@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		setTimeout(function(){
+			// first() : 처음 요소
+			$('div p').first().css('background-color','pink');
+			// last() : 마지막 요소
+			$('div p').last().css('background-color','skyblue');
+			
+			// eq() : 0, 1, 2, ... 번째 p 요소 적용
+			$('p').eq(1).css('background-color','orange');
+			
+			// filter() : 선택된 요소 기준으로 적용
+			//  -> class 가 selected 인 요소
+			$('p').filter('.selected').css('color','red');
+			
+			// not() : 선택된 요소 제외하고 적용
+			$('p').not('.selected').css('color','blue');
+		}, 2000);
+	});
+</script>
+</head>
+<body>
+	<h2>한식</h2>
+
+	<div style="border:2px solid black;">
+		<p class="selected">김치찌개</p>
+		<p>된장찌개</p>
+		<p class="selected">떡갈비</p>
+		<p>불고기</p>
+		<p>김치전</p>
+		<p class="selected">설렁탕</p>
+		<p>곰탕</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+	div{
+		position: absolution;
+		background-color: #FF0000;
+		width: 150px;
+		height : 20px;
+		padding: 40px 40px  40px;
+		color: #FFFFFF;
+		text-align : center;
+		font-weight: bold;
+		cursor:pointer;
+	}
+	
+</style>
+<script>
+	window.onload = function(){
+		var elDiv = document.getElementById('my-box');
+		
+		elDiv.onmousedown = function(){
+			this.style.backgroundColor='pink';
+			this.innerHTML = ' 마우스좀뗴주세요';
+		}
+		elDiv.onmouseup = function(){
+			this.style.backgroundColor='#FF0000';
+			this.innerHTML = '나잡아ㅇ보세요';
+		}
+		elDiv.mouseover = function(event){
+			var randomX = Math.floor(Math.random() * 2) - 1 ;
+			var randomY = Math.floor(Math.random() * 2) - 1 ;
+			//event 는 function 안에 있는 기본적인 
+			moveX = randomX == 0? event.x - parseInt(this.style.left)
+								: randomX * 150;
+			moveY = randomX == 0? event.y - parseInt(this.style.top)
+					: randomX * 20;
+			
+			console.log(randomX + " : " + moveX + ", " + randomY + " : " + moveY);
+			
+			var left = parseInt(this.style.left) + moveX;
+			var top = parseInt(this.style.top) + moveY;
+			
+			this.style.left=left+"px";
+			this.style.top = top+"px";
+		}
+	}
+</script>
+
+</head>
+<body>
+	<div id="my-box" style="left : 300px; top: 300px">
+		나잡아ㅇ보세요
+	</div>
+</body>
+</html>
+
+
+

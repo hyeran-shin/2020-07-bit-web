@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 합쳐지고 최소화된 최신 CSS , 부트스트랩 검색 후 맨 위에 부트스트랩에서 다운로드, cdn 복사-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+
+	<!-- 
+		클래스 바인딩 (Class Binding)
+			- 2가지 바인딩 문법을 제공
+				-> 객체 문법 : 자바 스크립트 객체를 활용하여 클래스 적용
+				-> 배열 문법 : 2개 이상 또는 조건을 활용하여 클래스 적용
+							객체 문법이 표현된 스타일 객체를 배열로 2개 이상!
+			- v-bind:class 형태로 활용하되,
+			    조건에 따라 적용, 토글, 동시 적용 시킬 때 활용 
+			- v-bind:class 는 클래스의 객체와, 적용 시킬 조건 값(boolean)작성
+			
+		 스타일 바인딩 (Style Binding)
+			- 2가지 바인딩 문법을 제공
+				-> 객체 문법 : 자바 스크립트 객체를 활용하여 스타일 선언
+				-> 배열 문법 : 2개 이상의 스타일 객체를 동시에 적용 시킬 때
+							객체 문법이 표현된 스타일 객체를 배열로 2개 이상!
+			- v-bind:style 형태
+		*데이터 바인딩(Data Binding) 개념이 포함
+			-> 엘리먼트의 클래스와 스타일을 제어할 때 활용
+	 -->
+	 
+	 <div class="container text-center">
+	 	<h1> 클래스 바인딩 - 객체 문법 </h1>
+	 	<!--  color 필드의 조건 값에 따라 적용할 클래스를 각각 설정  -->
+	 	<div class="box" v-bind:class="{'red':color, 'orange':!color}"> </div>
+	 	<div class="box" v-bind:class="{'yellow':color, 'green':!color}"> </div>
+	 	<div class="box" v-bind:class="{'red':color, 'orange':!color}"> </div>
+	 	<div class="box" v-bind:class="{'yellow':color, 'green':!color}"> </div>
+	 	
+	 	<h1>클래스 바인딩 - 배열 문법</h1>
+	 	<div class="box" v-bind:class="[color ? 'yellow' : 'green']"> </div>
+	 	<div class="box" v-bind:class="[color ? 'red' : 'orange']"> </div>
+	 	<div class="box" v-bind:class="[color ? 'yellow' : 'green']"> </div>
+	 	<div class="box" v-bind:class="[color ? 'red' : 'orange']"> </div>
+	 	
+	 	<button v-on:click="filpColor" class="btn btn-block btn-success">
+	 		Flip!!!
+	 	</button>
+	 </div>
+</body>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '.container',
+		data : { 
+			color : true
+		},
+		methods  : { // Vue에서 사용할 메소드 정의 (function) 
+			filpColor : function(){ // toggle 
+				// this : 호출한 요소 자신
+				console.log(this.color); // Vue 데이터 필드(color)
+				this.color = !this.color;
+			}
+		}
+		
+	})
+</script>
+<style>
+	.red { background-color : red}
+	.orange { background-color: orange }
+	.yellow { background-color: yellow }
+	.green { background-color: green }
+	.box{
+		float : left;
+		width : 200px;
+		height: 200px;
+		margin : 40px;
+		border : 1px solid rgba(0,0,0,.2);
+	}
+</style>
+</html>

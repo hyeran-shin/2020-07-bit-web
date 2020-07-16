@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	
+	//window 객체의 멤버인 onload 변수에 익명함수를 담겠다.
+	window.onload = function(){ // 브라우저가 로드되었다면, 담은 함수를 실행
+		var list = '';
+		list += '<ul>';
+		list += '<li>Hello</li>';
+		list += '<li>JavaScript</li>';
+		list += '</ul>';
+		
+		//HTML 형식으로 문서의 바디에 넣어라.
+// 		document.body.innerHTML = list;
+		
+		//일반 Text 형식으로 문서의 바디에 넣어라.
+		document.body.innerText = list;
+		
+		// 기존 내용에 추가하겠다. (복합 대입)
+		document.body.innerHTML += ('<br>' + list);
+		
+	}
+	
+	var willEval = '';
+	willEval += 'var number = 10;';
+	willEval += 'console.log(number);';
+	willEval += 'var arr = ["Hello", "eval() function"];';
+	willEval += 'console.log(arr);';
+	eval(willEval); // 스크립트를 실행하는 함수
+	// eval() 함수에 에러 발생 시 실행할 코드 (string)를 확인
+	//  -> 수행하는 코드에 대한 에러가 나오지 않는다.
+	
+	// string에서 number 데이터 추출
+	var won = '2200원';
+	var dollar = '1.5$';
+	console.log(parseInt(won) + ', ' + parseInt(dollar) ); // 정수 추출
+	console.log(parseFloat(won) + ', ' + parseFloat(dollar) ); // 실수 추출
+	// 각 데이터를 추출하여 변환 수행
+	
+	var str = 'a12b';
+	console.log(parseInt(str)); // 첫 문자부터 판단하기에, 아니라면 NaN 반환
+	var str = '12ab34';
+	console.log(parseInt(str)); // 숫자 데이터를 추출하되, 문자를 만나면 반환
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

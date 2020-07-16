@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var members = [ {name : 'AAA' , age : 20},
+					{name : 'BBB' , age : 30},
+					{name : 'CCC' , age : 40},
+					];
+	members.push({name : 'DDD', age : 50});
+	
+	console.log('members array length : %d', members.length);
+	console.log('첫 번째 회원의 이름 : %s ', members[0].name);
+	// members[0] -> 배열에 저장된 첫 번째 객체
+	// members[0].name -> 첫 번째 객체의 name 필드에 접근 
+
+	// add 함수 선언 및 정의
+	var add = function(a, b){ // add 변수에 익명 함수가 할당되는 형태
+		return a + b;
+	}
+	
+	members.push(add); // members 배열에 add 함수 추가
+	console.log('add function called : %d', members[4](10, 20));
+	// members[4] 자체가 add 변수! (함수 이름)
+	// members[4](10,20) -> add(10, 20)
+	
+	
+	// for문을 이용한 순회
+	for(var i ; i< members.length ; i++){
+		console.log('string : %s, typeof : %s', members[i], typeof members[i]);
+	}
+	
+	// forEach를 이용한 순회
+	members.forEach(function(item, index){
+		console.log('index : %d, item : %s',  index);
+	})
+	
+	/*
+		Q. 사직 연산(add, sub, mul, div)의 함수 배열을 생성하여,
+		순회를 활용해 모든 결과 출력
+		[실행 결과] - 7과 3을 전달한다면,
+		10
+		4
+		21
+		2
+	*/
+	var arith = [ function add(a, b) {return a + b },
+		 		  function sub(a, b) {return a - b },
+		 		  function mul(a, b) {return a * b },
+		 		  function div(a, b) {return a / b },
+		]
+	arith.forEach(function(oper, index){
+		console.log('%d',oper(7,3))
+	});
+	
+	
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>
+

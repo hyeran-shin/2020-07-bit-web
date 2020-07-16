@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<board v-bind:my-board="{ title : 'Javaaaaaa', aaa1 : 'Cafe'}"></board>
+		<board :my-board="{ title :'javaSCript', aaa2 : 'Lsttte'}"></board>
+	</div>
+	
+	<template id="board-template">
+		<h1>{{ myBoard.title }} : {{myBoard.aaa1}}  :  {{myBoard.aaa2}} </h1>
+	</template>
+	
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('board',{
+		props : ['myBoard'],
+		template : '#board-template'
+	})
+	
+	new Vue({
+		el : '.container'
+	})
+</script>
+</html>
+
+
+
+
+

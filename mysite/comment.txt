@@ -1,0 +1,12 @@
+
+mysite
+ |---- mysite01 (Spring MVC, XML Config)
+ |---- mysite02 (Spring MVC, javaConfig 1), web.xml 
+ |---- mysite03 (Spring MVC , javaConfig 2), ServletContainerIntialzer
+ |---- mysite04 (spring boot, java Config)
+ 
+
+ 
+ mysite config
+ |-- Web Application Context  (dispatcher-servlet.xml -> WebConfig.java)
+ |-- Root Application Context (applicationContext.xml -> AppConfig.java)

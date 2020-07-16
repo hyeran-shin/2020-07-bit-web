@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="wizardPage">
+		<list key="groupId">
+			<item value="test"/>
+			<item value="spring-shr-chat"/>
+			<item value="spring-shr"/>
+			<item value="spring-SHR"/>
+			<item value="spring-mysite"/>
+			<item value="spring-aop"/>
+			<item value="spring-prob-0428"/>
+			<item value="spring-interceptor"/>
+			<item value="spring-log"/>
+			<item value="spring-api"/>
+			<item value="spring-mvc"/>
+			<item value="spring-hello"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="test"/>
+			<item value="spring-shr-chat"/>
+			<item value="spring-shr"/>
+			<item value="spring-SHR"/>
+			<item value="spring-mysite"/>
+			<item value="spring-aop"/>
+			<item value="spring-prob-0428"/>
+			<item value="spring-interceptor"/>
+			<item value="spring-log"/>
+			<item value="spring-api"/>
+			<item value="spring-mvc"/>
+			<item value="spring-hello"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+		</list>
+		<list key="issueManagementUrl">
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="MavenProjectWizardLocationPage">
+		<list key="location">
+			<item value="C:\Users\qweqwe\Desktop\web-workspace\spring-shr\src\main\java\com\bit\mysite\service\OrderService.java"/>
+			<item value="C:\Users\qweqwe\Desktop\web-workspace\spring-shr\src\main\java\com\bit\mysite\repository\OrderDao.java"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArchetypePage">
+		<item key="catalog" value="internal"/>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="Maven2ProjectWizardArchifactPage">
+		<list key="package">
+			<item value="com.bit"/>
+			<item value="com.bit.mysite04"/>
+			<item value="com.bit.springboot_hello"/>
+			<item value="com.bit.mysite"/>
+			<item value="org.mysite03"/>
+			<item value="org.mysite02"/>
+		</list>
+		<list key="groupId">
+			<item value="com.bit"/>
+		</list>
+		<list key="artifactId">
+			<item value="mysite04"/>
+			<item value="springboot-hello"/>
+			<item value="mysite03"/>
+			<item value="mysite02"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArtifactPage">
+		<list key="groupId">
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.ui.internal.wizards.CustomArchetypeDialog">
+	</section>
+	<section name="MavenModuleWizardParentPage">
+		<list key="moduleName">
+			<item value="mysite04"/>
+			<item value="mysite03"/>
+			<item value="mysite02"/>
+			<item value="mysite01"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+</section>

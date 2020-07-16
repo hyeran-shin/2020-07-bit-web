@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	* {
+		margin: 0;
+		padding: 0
+	}
+	
+	body {
+		font-family: "맑은 고딕", "돋움";
+		font-size: 0.75em;
+		color: #333
+	}
+	
+	.tab-view		{ margin: 20px auto; width: 520px }
+	.tab-view ul	{ height: 27px; list-style-type: none }
+	.tab-view ul li {
+		float: left;
+		width: 100px;
+		height: 22px;
+		border: 1px solid #999;
+		border-radius: 5px 5px 0 0;
+		background-color: #CCC;
+		margin-right: 2px;
+		text-align: center;
+		padding-top: 3px;
+		cursor: pointer
+	}
+	.tab-view div {
+		border: 1px solid #999;
+		margin-top: -1px;
+		text-align: center;
+  		line-height: 20px;
+		width: 516px;
+		height: 300px;
+	}
+	.tab-view ul li.selected { background-color: #C089DA }
+</style>
+</head>
+<body>
+	<!-- 리스트를 활용하여 탭뷰 만들기 -->
+	<div class="tab-view">
+		<ul>
+			<li>Menu 1</li>
+			<li>Menu 2</li>
+			<li>Menu 3</li>
+			<li class="selected">Menu 4</li>
+			<li>Menu 5</li>
+		</ul>
+		<div>
+			<p><a href="https://en.wikipedia.org/wiki/Apache_Spark">아파치 스파크(Apache Spark)</a>
+			는 매우 큰 데이터 집합을 대상으로 빠르게 처리 작업을 수행하는 한편,
+			단독으로 또는 다른 분산 컴퓨팅 툴과 조율해 여러 컴퓨터로
+			데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.</p>
+			<p>거대한 데이터 스토어를 탐색하면서 작업하기 위해 막대한 컴퓨팅 성능을 모아야 하는
+			빅데이터와 머신러닝 분야에서 이 2가지 특성은 문을 여는 열쇠라고 할 수 있다.
+			스파크는 또한 <a href="https://ko.wikipedia.org/wiki/%EB%B6%84%EC%82%B0_%EC%BB%B4%ED%93%A8%ED%8C%85">분산 컴퓨팅</a>
+			과 <a href="https://ko.wikipedia.org/wiki/%EB%B9%85_%EB%8D%B0%EC%9D%B4%ED%84%B0">빅데이터</a> 처리의 힘든 작업 대부분을 추상화하는,
+			사용하기 쉬운 API를 통해 개발자들이 짊어지는 부담을 일부 덜어주는 역할도 한다.</p>
+			<br><br><br><br>
+			탭뷰 연습 예제 입니다.	
+		</div>
+	</div>
+</body>
+</html>

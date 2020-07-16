@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var book = new Array( // Array() 내장 함수  호출
+		'JavaScript',
+		'JQuery',
+		'Ajax',
+		'Vue.js',
+		'Node.js'
+	);
+	
+	// 반복문
+	for( var i = 0 ; i <book.length ; i++){
+// 		console.log(i+1 +'번째 책 : ' + book[i]);
+	
+		//문서에 출력 (HTML 화면)
+		document.write(i+1 + '번째 책 : ' + book[i] +'<br>');
+	}
+	
+	// 리터럴 , 일반 상수라고 생각
+	// 배열 리터럴 방식
+	var nums = [12, 32, 7, 3, 24];
+	document.write('nums : ' + nums + '<br>');	
+
+// 	nums.sort();
+// 	document.write('문자 정렬 : ' + nums + '<br>');
+	
+	nums.sort(function(left, right){ // 익명 함수
+		return left - right;
+	});
+	document.write('오름차순 정렬 : ' + nums + '<br>');
+	
+	nums.sort(function(left, right){ 
+		return right - left;
+	});
+	document.write('내림차순 정렬 : ' + nums + '<br>');
+	/*
+		sort() 함수의 인자로 익명 함수를 전달
+			-> 자바에서의 compareTo() 메소드와 같은 역할
+	*/
+	
+</script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

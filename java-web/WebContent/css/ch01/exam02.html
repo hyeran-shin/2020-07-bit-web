@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	/*
+		속성 선택자
+			input[attribute=value]
+	*/
+	/*input 요소의 type 에 따른 스타일 적용 */
+	input[type=text]{background: pink}
+	input[type=password]{background:gray;}
+	/* name 속성 또한 속성 선택자를 활용하여 스타일 적용 가능*/
+	input[name=id]{background:purple;}
+	
+	/* img요소의 src 속성의 값이 gif, jpg, png 로 끝나는 것에 각각 적용*/
+	img[src$=gif] {border : 2px solid red; }
+	img[src$=jpg] {border : 2px solid green; }
+	img[src$=png] {border : 2px solid blue; }
+	/*
+		[attribute$=value]
+			: 속성 값 (attribute)이 지정된 값 (value)로 끝나는 요소를 선택
+	*/
+	
+	/* input 요소 중 type 속성이 password가 아닌 요소에 적용 */
+	input:not([type=password]){
+		background:yellow;
+	}
+	
+	
+</style>
+</head>
+<body>
+	<form>
+		<input type="text"> <br>
+		<input type="password"> <br>
+		<input type="text" name ="id"><br>
+	</form>
+	
+	<img src="../images/cat.gif" width="200" height="300">
+	<img src="../images/cat.jpg" width="200" height="300">
+	<img src="../images/cat.png" width="200" height="300">
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+

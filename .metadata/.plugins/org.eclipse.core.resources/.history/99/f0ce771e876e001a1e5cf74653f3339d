@@ -1,0 +1,14 @@
+package com.bit.framework;
+
+public class HandlerMapping {
+
+	public HandlerMapping(String urlCtrlName) throws Exception{
+
+		String[] controllers = urlCtrlName.split("\\|");
+
+		for (String controller : controllers) {
+			Class.forName(controller);
+
+		}
+	}
+}

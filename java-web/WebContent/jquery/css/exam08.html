@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	/*
+		인전 형제 선택자('+')를 활용하여,
+		네번째 리스트의 색상을 핑크로 변경
+	
+	*/
+
+	$(function(){
+		setTimeout(function(){
+			$('#second+li+li').css('color','pink');
+		},2000);
+	});
+</script>
+</head>
+<body>
+	<ul>
+		<li> 1 번째 리스트입니다.</li>
+		<li id="second"> 2 번째 리스트입니다.</li>
+		<li> 3 번째 리스트입니다.</li>
+		<li> 4 번째 리스트입니다.</li>
+	</ul>
+</body>
+</html>

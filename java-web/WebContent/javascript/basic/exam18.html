@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		동적 문서 객체 생성
+			creareElement(tagName)		: tagName의 요소 생성
+			createTextNode(test))		: 요소에 삽일되 text 생성
+			
+			appendChild(element) 		: 자식 요소로 연결(붙여라)
+	 
+			
+			2. 요소에 대한 직접 수god(속성)
+			3. 문서와 연결
+	 */
+
+	window.onload = function() {
+		var tag = document.createElement('h1');
+		// <h1></h1>
+		var textTag = document.createTextNode('Heading!!');
+		// 'Heading!!!'
+
+		//문서 객체 연결
+		tag.appendChild(textTag); //h1 요소에 text 요소를 자식으로 연결
+		// 		<h1>Heading!!!</h1>
+		// 		document.body.appendChild(tag); //body 요소에 tag를 자식으로 연결
+		// <body><h1>Heading</h1></body>
+
+		var imgTag = document.createElement('img');
+		//<img></img>
+		imgTag.setAttribute('src', 'http://www.inzent.com/img/header_logo.png');
+		// img 태그의 속성 부여
+		// <img src ="..." ></img>
+
+		document.body.appendChild(imgTag);
+		//<body><img src~~></></>
+
+		var aTag = document.createElement('a');
+		aTag.setAttribute('href', 'http://www.inzent.com');
+		// <a href="..."></a>
+		aTag.appendChild(imgTag); //a태그의 자식으로 img 태그 연결
+		// <a href="..." > <img src ="..."></></>
+		document.body.appendChild(aTag);
+
+		/*
+			Q. 3x3 크기의 테이블을 생성하세요.
+		 */
+
+		var tTag = document.createElement('table');
+		tTag.setAttribute('border', '1');
+
+		// 		var trTag = document.createElement('tr');
+		// 		var tdTag = document.createElement('td');
+		// 		var textTag = document.createTextNode('Element');
+
+		// 		tTag.appendChild(trTag).appendChild(tdTag).appendChild(textTag);
+
+		// 		tdTag.appendChild(textTag);
+		// 		tTag.appendChild(trTag);
+		// 		trTag.appendChild(tdTag);
+
+		var Tag = function() {
+			var trTag = document.createElement('tr');
+			var tdTag = document.createElement('td');
+			var textTag = document.createTextNode('Element');
+
+			tTag.appendChild(trTag).appendChild(tdTag).appendChild(textTag);
+		}
+
+		for (var i = 0; i < 3; i++) {
+// 			for (var j = 0; j < 3; j++) {
+// 				Tag();
+// 			}
+			Tag();
+		}
+		document.body.appendChild(tTag);
+
+	}
+</script>
+</head>
+<body>
+</body>
+</html>
+
+
+

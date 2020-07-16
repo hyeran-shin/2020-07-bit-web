@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		setTimeout(function(){
+			// parent() : 상위 부모
+			$('span').parent().css({
+				'color' : 'red',
+				'border' : '2px solid red'
+			});
+			// parents() : 상위 조상(상위 부모 모두)
+			$('span').parents().css({
+				'color' : 'blue',
+				'border':'2px solid blue'
+			});
+			
+			// parents(...) : 상위 조상 중 선택된 요소
+			$('span').parents('div').css({
+				'color':'pink',
+				'border':'2px solid pink'
+			});
+			
+			// parentsUntil(...) : 상위 조상 중 선택된 요소 전까지 모든 요소 적용
+			// 	-> span~div 사이의 모든 요소
+			$('span').parentsUntil('div').css({
+				'color':'purple',
+				'border':'2px solid purple'
+			});
+			
+		}, 2000);
+	});
+</script>
+</head>
+<body>
+	<div class="ancestor">
+		<div style="width:500px;">div
+			<ul> ul_test
+				<li> li
+					<span>span</span>
+				</li>
+			</ul>
+		</div>
+		
+		<div style="width : 500px;"> div
+			<p> p
+				<span>span</span>
+			</p>
+		</div>
+	</div>
+</body>
+</html>

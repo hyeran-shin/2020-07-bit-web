@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<!-- 부모 컴포넌트 템플릿 -->
+	<div class="container text-center">
+		<p style="font-size : 80px;" > {{ votes }} </p>
+		<div class="row">
+			<!-- 사용자 정의 템플릿 사용 -->
+			<food @voted="countVote" name="부대찌개"></food>
+			<food @voted="countVote" name="김치찌개"></food>
+			<food @voted="countVote" name="된장찌개"></food>
+		</div>
+		<h2>투표 기록(로그, log)</h2>
+		<ul class="list-group">
+			<li class="list-group-item" v-for="vote in log"> {{ vote }} </li>
+		</ul>
+		<pre style="text-align:left"> {{$data}}</pre>
+	</div>
+	
+	<!--  자식 컴포넌트 템플릿 -->
+	<template id="food">
+		<div class="text-center col-lg-4">
+			<p style="font-size:40px;"> {{ foodVotes }} </p>
+			<button class="btn btn-default" @click="doVote"> {{ name }} </button>
+		</div>
+	</template>
+	
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+// 	var dataObj = { foodVotes : 0 }
+	
+	// 자식 컴포넌트
+	Vue.component('food',{
+		template : '#food',
+		props : ['name'],
+		
+		// 컴포넌트의 data 필드는 함수 반환 형식으로 정의!, 자체 컴포넌트 값을 갖기 위해?, 자체 스코프 값을 유지시키기 위해
+		// *개별적인 컴포넌트의 투표수 객체를 반환
+		// -> Vue 인스턴스마다 데이터를 별도로 유지하기 위해!
+		data : function() {
+			return { foodVotes : 0 } ;
+		},
+		
+		
+// 		최초 Vue 인스턴스 방법의 데이터 필드
+// 			-> new Vue({...}) : 모든 문서 요소를 읽어들인다.
+// 		data : {
+// 			foodVotes : 0 // 컴포넌트를 만들때마다 전체 속성에 대해서 data수행이 된다
+// 		},
+
+
+		// 외부에서 만든 객체 형식을 반환하는 형태
+		// 공유하게 된다. (X)
+		// 자체 Object를 선언하여 반환되는 것이 아니니
+		// 자체 데이터를 갖지 않는다.
+// 		data : function(){
+// 			return dataObj;
+// 		},
+		
+		methods : {
+			doVote : function(event){ // 이벤트 요소 (Button)
+				this.foodVotes++;
+				this.$emit('voted',event.srcElement.textContent);
+				// event.srcElement.textContent -> {{ name }}
+			}
+		}
+	})
+	
+	// 부모 컴포넌트 
+	new Vue({
+		el : '.container',
+		data : {
+			votes : 0, // 총 투표 수
+			log : []   // 투표 기록
+		},
+		methods : {
+			countVote : function(foodName){ // $emit(...)에서 전달
+				this.votes++;
+			 	this.log.push(foodName);
+			}
+		}
+	})
+</script>
+</html>
+
+
+
+
+
+
+				

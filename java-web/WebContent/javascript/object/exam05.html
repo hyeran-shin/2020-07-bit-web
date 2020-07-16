@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	// 함수 객체 생성 1 (비추천)
+	var foo = new Function("a", "b", "var result=a+b; return result"); // 매개변수1,2, 함수 내용
+	console.log(foo(10,20));
+	
+	// 함수 객체 생성 2 (완전 비추천)
+	function goo(a, b){
+		var result = a+b;
+		return result;
+	}
+	console.log(goo(10,20));
+	
+	// 함수 객체 생성 3 (추천)
+	var hoo = function(a,b){
+		var result = a+b;
+		return result;
+	}
+	console.log(hoo(10,20));
+</script>
+</head>
+<body>
+
+</body>
+</html>

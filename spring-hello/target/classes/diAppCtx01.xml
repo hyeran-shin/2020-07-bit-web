@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 
+		Bean : 객체화 및 의존성 주입 등 관리를 위한 정보를 담는다.
+		
+		[형태]
+		<bean
+			id			: 식별자
+			name		: 이름
+			class		: 클래스 설정
+			factory-bean, factory-method
+						: 객체화를 위한 정보 설정
+			scope		: scope 설정
+			autowire	: bean을 자동으로 연결하기 위한 정보 설정
+			...>
+		</bean>
+		
+		<constructor-arg/> , <propery/>
+			: 의존성 주입을 위한 정보 설정
+		<lookup-method/>, <replaced-method/>
+			: 메소드 삽입을 위한 정보 설정
+		<qualifier/>
+			: 어노테이션 설정 기반으로 bean을 찾기 위한 정보 설정
+		
+	 -->	
+	 
+	 <!-- Calculator calculator = new CalculatorEN() -->
+	<bean id="calculator" class="DI.CalculatorEN"/>
+	
+	<!-- MyCalculator my= new MyCalculator(calculator) -->
+	<bean id="myCalculator" class="DI.MyCalculator">
+		<constructor-arg ref="calculator"/> <!-- MyCalculator(calculator) 이 부분임 -->
+		<!-- 아래와 같이 사용 가능, 같은 말임 
+		<constructor-arg>
+	 		<ref bean="calculator"/>
+	 	</constructor-arg>
+	 	 -->
+	</bean>
+</beans>
+		

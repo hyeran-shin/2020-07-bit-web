@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<!-- 
+		Vue의 인스턴스는 이벤트 인터페이스를 구현
+		Node.js의 EvenetEmiiter와 비슷한 역할 (이벤트 직접 작성하는 것과 유사?)
+		
+		사용자 정의 이벤트를 활용하기 위한, 
+		인스턴스 메소드 emit, on을 지원
+			$emit('name')	
+				-> 'name' 이벤트를 발생, name : 사용자 정의 이벤트
+			$on('name', function)
+				-> 'name' 이벤트 리스터를 function으로 설정 (등록)
+		
+		EventListener : 특정 이벤트가 발생함을 감시하는 옵저버(감시자) 역할
+			-> Observer Pattern (감시자 패턴)
+				: 특정 객체의 상태 변화에 따라 다른 객체들과 연결, 통신
+			
+	 -->
+
+	<div class="container text-center">
+		<p style="font-size: 80px;">{{ votes }}</p>
+		<button class="btn btn-primary" @click="voteFunction">Vote</button>
+		<br><br>
+		<pre style="text-align: left">{{$data}}</pre>
+	</div>
+	
+	<!-- 
+		[생명주기 훅]
+			: Vue 인스턴스가 만들어지기 시작하여 소멸될 때 까지의 주기
+			
+		beforeCreate 	: 인스턴스가 초기화 된 후 데이터 감시 및 이벤트/감시자(watch)를 설정하기 전 상태
+		created			: 인스턴스가 생성된 후 데이터에 대한 관찰 기능(data),
+						    계산형 속성(computed), 메소드(methods), 감시자(watch) 
+						    설정이 완료된 후에 호출이 되는 놈?
+		beforeMount		: 마운트가 시작되기 전 (el을 활용해 DOM에 적용되기 전) 상태
+		mounted			: 가상 DOM이 렌더링, 패치되기 전 데이터가 변경될 때 호출
+						    주기적인 상태 변경 가능, 추가로 다시 화면(뷰) 렌더링은 하지 않음
+		updated			: 데이터의 변경으로 가상 DOM이 다시 렌더링되고, 패치된 후에 호출
+		activated		: keep-alive 상태의 컴포넌트가 활성될 때 (keep-alive 살아 있냐 확인해주는?, 객체가 소멸이 됐냐 안됐냐?)
+		deactivated		: keep-alive 상태의 컴포넌트가 비활성될 때	
+		beforeDestory	: Vue 인스턴스가 소멸 되기 전에 호출
+		destroyed		: Vue 인스턴스가 소멸 된 후 호출
+		
+	 -->
+	 
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : '.container',
+		data : {
+			votes : 0,
+		},
+		methods : {
+			voteFunction : function(){
+				// 함수 호출 시 마다 voted 이벤트 호출
+				this.$emit('voted');
+			}
+		},
+		// 인스턴스가 만들어진 후 호출되는 생명주기 함수
+		// 	-> vue 인스턴스가 만들어지면 이벤트 등록을 하겠다.
+		created(){
+			// $on을 이용해 voted라는 이벤트를 바인딩하고 해당 리스너 함수를 등록
+			this.$on('voted', function(){
+				this.votes++;
+			})
+		}
+		
+	})
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

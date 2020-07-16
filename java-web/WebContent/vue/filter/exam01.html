@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<!-- 
+		Filter(필터)
+			: 원본 데이터를 변경하지 않ㄱ 원하는 계산이나 조건으로 인한 필터링된 데이터 표현
+	 -->
+	 <div class="container">
+	 	<h1> 조건에 의한 필터링(고양이별) </h1>
+	 	
+	 	<h3> 카페의 요구</h3>
+	 	<ul class="list-group">
+	 		<li v-for="cat in catsBy('카페')" class="list-group-item">
+	 			{{ cat.name }} said "{{ cat.speech }}"
+	 		</li>
+	 	</ul>
+	 	
+	 	<h3> 라떼의 요구</h3>
+		<ul class="list-group">
+			<li v-for="cat in catsBy('라떼')" class="list-group-item">
+				{{ cat.name }} said "{{cat.speech}}"
+			</li>
+		</ul>
+		
+		<pre> {{$data}}</pre>
+	</div>
+	 
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '.container',
+		data : {
+			cats : [
+				{ speech : '산책 가자', name : '카페'},
+				{ speech : '집사야 밥 줘', name : '라떼'},
+				{ speech : '같이 놀자', name : '카페'},
+				{ speech : '물 없음', name : '라떼'},
+			]
+		},
+		// 이름(name)에 따라 필터링하는 함수 정의
+		methods : {
+			catsBy : function(name){
+				return this.cats.filter(function(cat){ // 배열 안 하나씩 순회, 순회한 것을 cat이라는 이름으로 받아옴 {speech:~, name:~} 하나 당 cat 임, return값은 cat{~} 하나.
+					// 내가 가진 cats 배열을 순회하며, 익명함수 호출
+					// 익명함수의 인자 cat이 각각의 데이터(객체)를 받는다.
+					// 전달된 인자와 데이터의 name이 일치하는 조건!
+					return cat.name === name;
+					// 원하는 조건을 부여하여 원본데이터는 유지하되,
+					// 원하는 결과만 추출할 수 있다.
+				});
+			}
+		}
+	})
+
+
+</script>
+</html>
+
+
+
+
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 1. tag 선택자를 이용한 스타일 적용 
+<style>
+	/* h1 태그에 글 색상을 red, 배경 색상을 blue로 설정 */
+	h1{
+		color : red;
+		background-color : blue;
+	}
+	
+	/* 모든 요소에 CSS 적용*/
+	* {
+		color : green;
+	}
+</style>-->
+
+
+<!-- 2. id 선택자를 이용한 스타일 적용 -->
+<style>
+	/* id 속성이 wrapper인 요소에 적용*/
+	#wrapper {
+		width : 800px;
+		margin : 0 auto;
+		overflow : hidden;
+	}
+	/* id 속성이 aside인 요소에 적용*/
+	#aside{
+		width : 100px;
+		float : left;
+		background : orange;
+	}
+	#content{
+		width : 600px;
+		float : left;
+		background: gray;
+	}
+</style>
+
+<!-- 3. class 선택자를 이용한 스타일 적용
+<style>
+	/* class 속성이 web인 요소에 적용*/
+	.web{
+		color : skyblue;
+	}
+	/*class 속성이 item인 요소에 적용*/
+	.item{
+		background-color : pink;
+	}
+</style> -->
+</head>
+
+<body>
+
+	<!-- 
+		CSS (Cascading Style Sheet)
+			- 계츨형 스타일(디자인) 적용을 위한 시트, 우선 순위 존재
+			
+		CSS 선택자 (요소 선택자)
+			: 특정 HTML 요소(태그명, 아이디, 클래스)에 스타일 적용
+				-> tagName, id, class
+			h1 {color : red; }
+			h1 		-> 선택자(태그명)
+			color 	-> 스타일 속성
+			red 	-> 속성 값
+			
+		HTML 요소 속성에 따른 역할
+			id		: 페이지 고유의 식별자
+			name	: 서버에 데이터 전송을 위한 식별자 (Parameter)
+			class	: CSS의 재활용을 위한 식별자
+			*id, class는 선택자를 활용하여 직접 적용이 가능
+			*name은 직접 적용은 불가능!
+			*단, name 속성을 추출하여 적용은 가능
+			
+		CSS 적용 방식
+		CSS Embedded 방식 (문서에 내장)
+		<style></style> 태그를 활용하여 HTML 문서에 삽입.
+		CSS Inline 방식 (요소에 작성)
+			<p style="color : red;"></p> 
+					
+		CSS 우선 순위
+			- 대표적으로 태그명, 아이디, 클래스로 CSS 적용
+			- 순서 : 아이디 > 클래스 > 태그명 (id가 우선순위가 높다.)
+			- Embedded방식과 Inline 방식 중 Inline 방식이 우선순위 높다.
+	 -->
+	 
+	 <h1>Hello CSS</h1>
+	 <p>HTML을 꾸며주는 CSS</p>
+	 
+	 <div id="header">
+	 	<h1>Header</h1>
+	 </div>
+	 <div id="wrapper"><!-- section -->
+	 	<div id="aside">
+	 		<h2>aside</h2>
+	 	</div>
+	 	<div id="content">
+	 		<h2>content</h2>
+	 	</div>
+	 </div>
+	 
+	 <ul>
+	 	<li class="web" >JavaScript</li>
+	 	<li>Java</li>
+	 	<li class="web"> PHP </li>
+	 	<li>Python</li>
+	 </ul>
+	 
+	 <!-- web과 item 클래스 모두 포함하는 형태! -->
+	 <h4 class="web item">2개 이상의 스타일 적용</h4>
+	 
+	 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

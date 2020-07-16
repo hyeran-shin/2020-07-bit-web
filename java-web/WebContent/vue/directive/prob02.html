@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		Prob 2
+		
+		[요구 사항]
+		이름, 나이, 키, 몸무게를 저장하는 객체와
+		이 객체를 저장하는 리스트를 만들어 출력하되,
+		v-for directive를 활용하세요.
+		
+		[실행 예시]
+		index. key : value 형태로 출력
+	 -->
+	 
+	 <div class="container" >
+		 이름 : <input type="text" v-model="name"><br>
+		 나이 : <input type="text" v-model="age"><br>
+		 키 : <input type="text" v-model="height"><br>
+		 
+		 <ul>
+		 	<li v-for = "(index, key, value) in members">
+		 	{{ index+1 }}. {{ key }} : {{ value }} 
+		 	</li>
+		 </ul>		 
+
+					 
+		 <pre>{{ $data }} </pre>
+	 </div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '.container',
+		data : {
+			members : {name :'', age : '', height : ''	}
+			}
+	});
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

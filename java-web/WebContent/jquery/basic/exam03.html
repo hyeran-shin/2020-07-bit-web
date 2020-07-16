@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+// 		$('ul li:first').hide();		// <li>볼링</li>
+// 		$('h1:first').hide();			// <h1>취미 종류</h1>
+		
+		// ul이 가진 li요소의 처음 것을 모두 hide()
+// 		$('ul li:first-child').hide();
+		$('ul li:first-child').fadeOut(5000); 
+		// fadeOut() : 5초동안 점점 사라져라.
+	});
+</script>
+</head>
+<body>
+	<h1>취미 종류</h1>
+	<ul>
+		<li>볼링</li>
+		<li>야구</li>
+		<li>축구</li>
+		<li>골프</li>
+	</ul>
+	
+	<h1>음식 종류</h1>
+	<ul>
+		<li>피자</li>
+		<li>치킨</li>
+		<li>순대국밥</li>
+		<li>햄버거</li>
+	</ul>
+		
+</body>
+</html>

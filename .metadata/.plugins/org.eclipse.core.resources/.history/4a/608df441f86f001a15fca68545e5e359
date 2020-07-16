@@ -1,0 +1,35 @@
+package com.bit.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bit.dao.MemberDAO;
+import com.bit.framework.ModelAndView;
+import com.bit.framework.annotation.RequestMapping;
+
+public class MyPageController {
+
+	@RequestMapping("/myPage.do")
+	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setView("/WEB-INF/views/mypage/myPage.jsp");
+		return mav;
+	}
+	
+	@RequestMapping("/myPageModifyForm.do")
+	public ModelAndView myPageModifyForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setView("/WEB-INF/views/mypage/myPageModifyForm.jsp");
+		return mav;
+	}
+	
+	@RequestMapping("/myPageModify.do")
+	public ModelAndView myPageModify(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//dao.update
+		MemberDAO dao = (MemberDAO)request.getServletContext();
+		dao.update();
+		ModelAndView mav = new ModelAndView();
+		mav.setView("/WEB-INF/views/mypage/myPageModify.jsp");
+		return mav;
+	}
+}

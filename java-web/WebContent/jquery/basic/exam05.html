@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+// 		$('button').hide();		// 순수 태그명, <button>만 적용 
+// 		$(':button').hide();	// button 요소라면 모두 적용
+
+		$(':button').click(function(){
+// 			$(this).hide(); // this : 자기 자신 요소를 선택
+							// 버튼 클릭 시 나 자신을 hide()
+			$('h1').hide();	//<h1> 요소 선택
+		});
+	});
+</script>
+</head>
+<body>
+	<h1>Button List</h1>
+	<button>Button 1</button>
+	<input type="button" value="Button 2">
+</body>
+</html>

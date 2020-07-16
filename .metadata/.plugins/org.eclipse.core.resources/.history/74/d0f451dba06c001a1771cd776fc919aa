@@ -1,0 +1,9 @@
+package com.bit.framework;
+
+/*
+ * Model 	: 유저에게 보여줄 Data (DB로부터 꺼내온 정보), 화면에 뿌려주겠다.
+ * View		: 
+*/
+public class ModelAndView {
+
+}

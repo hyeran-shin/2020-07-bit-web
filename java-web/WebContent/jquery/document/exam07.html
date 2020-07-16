@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+$(function(){
+	setTimeout(function(){
+		$('p').replaceWith('<h1> 변경 후 </h1>');
+// 		$('p').replaceWith('#h1');
+		// 모든 p 요소들은 해당 문자열(html)로 대체해라.
+		// 	-> replaceAll 과 다르게 문자열 요소로 활용
+		
+// 		$('#p1').replaceAll('#h1');
+		// #h1 요소를 #p1요소로 대체해라.
+		//	-> 기존 요소 삭제 후 #p1 요소를 출력
+		
+// 		$('p').replaceAll('#h1');
+		// #h1 요소를 모든 p 요소로 대체해라.
+		// 1. #h1 요소가 기존 p 요소들로 개체되고, (3개)
+		// 2. 처음 존재했던 p 요소는 사라진다.
+		// 3. 화면에는 대체된 p 요소들이 출력
+		
+// 		$('#h1').replaceAll('p');
+		// 모든 p 요소를 #h1 요소로 대체
+		// 1. 기존 p 요소들이 #h1요소로 대제
+		// 2. #h1 요소는 사라진다.
+		// 3. 총 3개의 p 요소가 대체되었으니, 화면에는 #h1 3개가 출력
+		
+	},2000);
+});
+</script>
+</head>
+<body>
+	<p id="p1"> Paragraph 1 : 변경 전</p>
+	<p>Paragraph 2 (변경 전)</p>
+	<p>Paragraph 3 (변경 전)</p>
+	
+	<h1 id="h1">Heading</h1>
+	
+</body>
+</html>

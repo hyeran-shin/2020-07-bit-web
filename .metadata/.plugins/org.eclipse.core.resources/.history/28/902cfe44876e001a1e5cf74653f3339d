@@ -1,0 +1,16 @@
+package com.bit.framework;
+
+public class HandlerMapping {
+
+	public HandlerMapping(String urlCtrlName) throws Exception{
+
+		String[] controllers = urlCtrlName.split("\\|");
+
+		for (String controller : controllers) {
+			controller = controller.trim();
+			Class<?> clz = Class.forName(controller);
+			Object target = clz.newInstance();
+
+		}
+	}
+}

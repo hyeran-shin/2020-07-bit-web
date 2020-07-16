@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 리스트가 아닌 객체 순회  (object)-->
+	<div class="container">
+		<h2>v-for directive 객체 순회</h2>
+		<!-- 1. 하나의 객체에서 value 추출 -->
+		<ul class="list-group">
+			<li v-for = "value in members" class="list-group-item">
+				{{ value }}
+			</li>
+		</ul>
+		
+		<!--  2. value, key, index 추출 -->
+		<ul class="list-group">
+			<li v-for = "(value, key, index) in members" class="list-group-item">
+				{{ index + 1}}. {{ key }} : {{ value }}
+			</li>
+		</ul>
+		<pre> {{$data}}</pre>
+	</div>
+
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '.container',
+		data : {  
+			members :  //object, [] 없음 
+				{ 
+					name : 'Latte',
+					age : 7,
+					addr : '천안시 서북구 두정동',
+					upvotes : 13
+				}
+				
+			
+		}
+	})
+</script>
+</html>

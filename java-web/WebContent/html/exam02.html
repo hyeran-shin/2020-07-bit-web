@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		테이블 태그
+		table	: 표
+		thead	: 표 머리
+		tbody	: 표 본문
+		tfoot	: 표 꼬리
+		tr		: 행
+		th		: 제목 요소
+		td		: 본문 요소
+ 	 -->
+	<table border="1">
+		<tr>
+			<th>Head 1</th>
+			<th>Head 2</th>
+		</tr>
+		<tr>
+			<td>Element 1</td>
+			<td>Element 2</td>
+		</tr>
+		<tr>
+			<td>Element 3</td>
+			<td>Element 4</td>
+		</tr>
+	</table> 	 
+ 	<br>
+ 	<table border="1">
+ 		<caption>Caption</caption><!-- 표 설명 -->
+ 		<colgroup> <!-- 컬럼 그룹 -->
+ 			<col span="2" style="background : skyblue;"/><!-- span : 해당 칸 수만큼 늘려라 -->
+ 			<col style="background:green"/>
+ 		</colgroup>
+ 			
+ 		<thead style="background:red;">
+ 			<tr>
+ 				<th>Head</th> <!-- 강조의 의미 -->
+ 				<th>Head</th>
+ 				<th>Head</th>
+ 		</thead>
+ 		<tbody>
+ 			<tr>
+ 				<td>Element</td>
+ 				<td>Element</td>
+ 				<td>Element</td>
+ 			</tr>
+ 		</tbody>
+ 		<!-- 기존 style을 적용한 뒤, 다시 style 적용 시 나중에 나온 style이 적용된다. -->
+ 		<tfoot style="background: yellow">
+ 			<tr>
+ 				<td>Element</td>
+ 				<td>Element</td>
+ 				<td>Element</td>
+ 			</tr>
+ 		</tfoot>
+ 	</table>
+ 	
+ 	<!-- 
+ 		colspan : 열(컬럼) 기준으로 표현할 칸 수 지정
+ 		rowspan : 행(로우) 기준으로 표현할 칸 수 지정
+ 	 -->
+ 	 <table border="1">
+ 	 	<tr>
+ 	 		<th colspan="3">Head</th>
+ 	 	</tr>
+ 	 	<tr>
+ 	 		<td>Element</td>
+ 	 		<td rowspan="2">Element</td>
+ 	 		<td>Element</td>
+ 	 	</tr>
+ 	 	<tr>
+ 	 		<td>Element</td>
+ 	 		<td>Element</td>
+ 	 	</tr>
+ 	 </table>
+ 	 <br>
+ 	 <!-- Practice -->
+ 	 <table border="1">
+ 	 	<tr>
+ 	 		<td rowspan="2">Element</td>
+ 	 		<td colspan="2">Element</td>
+ 	 	</tr>
+ 	 	<tr>
+ 	 		<td>Element</td>
+ 	 		<td rowspan="2">Element</td>
+ 	 	</tr>
+ 	 	<tr>
+ 	 		<td colspan="2">Element</td>
+ 	 	</tr>	
+ 	 </table>
+ 	 <!-- 연습 -->
+ 	 <table border="1">
+ 	 	<tr>
+ 	 		<td rowspan="2"> Element </td>
+ 	 		<td colspan="2"> Element </td>
+ 	 	</tr>
+ 	 	<tr> 	 	
+ 	 		<td>Element</td>
+ 	 		<td rowspan="2">Element</td>
+ 	 	</tr>
+ 	 	<tr>
+ 	 		<td colspan="2">Elemettnt</td>
+ 	 	</tr>
+ 	 </table>
+ 	 <br>
+ 	 
+ 	 <!-- 
+ 	 	이미지 태그
+ 	 	src		: 이미지 경로 (자원 위치)
+ 	 	alt		: 이미지가 없을 경우 표현할 데이터
+ 	 	width 	: 너비 지정 (가로)
+ 	 	height	: 높이 지정 (세로)
+ 	  -->
+	 <img  src="/java-web/html/images/cat.jpg" height="300" width ="300" alt="이미지 없음">
+	 <!-- 
+	 	서버 컴퓨터의 실제 파일의 경로(절대 경로)가 아니라, 현재 실행중인 웹 서버 기준!
+	 	서버를 구동하여 접근하는 것이 아닌, 일반 파일 열기로는 이미지를 못 찾는다.
+	 	/java-web  -> 현재 구동 중인 서버의 Context Path
+	  -->
+	<br>
+	<img src="../images/cat.jpg" alt="파일을 불러올 수 없습니다." width="300" height="300"/> 
+	<br>
+	<img src="./images/cat.jpg" alt="파일을 불러올 수 없습니다." width="300" height="300"/> 
+	<br>
+	<!-- 
+		상대 경로 접근 방법
+		../ : 상위 폴더로부터 기준
+		./  : 현재 폴더로부터 기준
+		[디렉토리 구조]
+		 - WebContent
+		 	- html
+		 		- images
+		 			-cat.jpg (./)
+		 		- exam02.html (*기준)
+		 	- images
+		 		-cat.jpg (../)
+	 -->
+ 	 
+ 	 <br>
+ 	 <!-- 다른 웹 서버의 이미지 파일 경로 활용! -->
+ 	 <img src="http://www.inzent.com/img/header_logo.png"/>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		setTimeout(function(){
+			$('li[id]').css('color','red');
+			$('li[class]').css('color','blue');
+			$('li[title]').css('fontWeight','bold');
+			$('li[class=second]').css('fontStyle','italic');
+			$('li[class!=second]').css('textDecoration','underline');
+			
+		}, 2000);
+	})
+</script>
+</head>
+<body>
+	<ul style="width: 200px; height: 100px; overflow-y: scroll">
+		<li title="안녕하세요" id="first"> text text text text </li> <!-- title 속성 : 마우스 올렸을 때 정보 나옴 -->
+		<li  class="second"> text text text text  </li>
+		<li  id="third"> text text text text  </li>
+		<li  id="fourth"> text text text text  </li>
+		
+		<li  id="first"> text text text text </li>
+		<li  id="second"> text text text text  </li>
+		<li  id="third"> text text text text  </li>
+		<li  id="fourth"> text text text text  </li>
+		
+		<li  id="first"> text text text text </li>
+		<li  id="second"> text text text text  </li>
+		<li  id="third"> text text text text  </li>
+		<li  id="fourth"> text text text text  </li>
+		
+		
+	</ul>
+</body>
+</html>

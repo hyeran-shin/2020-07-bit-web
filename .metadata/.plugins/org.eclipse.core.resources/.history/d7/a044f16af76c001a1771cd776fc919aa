@@ -1,0 +1,62 @@
+package com.bit.controller;
+
+import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bit.dao.BoardDAO;
+import com.bit.framework.ModelAndView;
+import com.bit.framework.annotation.Controller;
+import com.bit.framework.annotation.RequestMapping;
+import com.bit.vo.BoardVO;
+import com.bit.vo.FileVO;
+
+// SpringFramework @Controller
+//	-> 해당 어노테이션 사용 시 컨트롤러 역할의 객체 생성!, 스프링에서는 제공해주고 있음.
+@Controller
+public class BoardController {
+	/*
+	 * 모든 게시글 조회
+	 */
+	// ModelAndBiew : Model, View 정보를 기억하는 객체
+	// -> 하나로 묶어서 반환
+	@RequestMapping("/list.do")
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response) throws Exception { // HandleRequest의
+																											// 역할
+		System.out.println("@RequestMApping(/list.do) list(...)");
+
+		ServletContext sc = request.getServletContext();
+		BoardDAO dao = (BoardDAO) sc.getAttribute("boardDAO"); // new 생성하지 않고 attribute로 가져와서 null이 발생., 어디에다가 등록을 해줄거임
+																// , 이게 listener?
+		List<BoardVO> list = dao.selectAllBoard();
+
+		ModelAndView mav = new ModelAndView();
+		mav.setView("/WEB-INF/views/board/list.jsp");
+		mav.addAttribute("list", list);
+		return mav;
+	}
+
+	@RequestMapping("/detail.do")
+	public ModelAndView detail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int no = Integer.parseInt(request.getParameter("no"));
+		String type = request.getParameter("type");
+		ServletContext sc = request.getServletContext();
+		BoardDAO dao = (BoardDAO) sc.getAttribute("boardDAO");
+
+		if (type != null && type.equals("list")) {
+			dao.updateViewCnt(no);
+		}
+
+		BoardVO board = dao.selectByNo(no);
+		List<FileVO> fileList = dao.selectFileByBoardNo(no);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addAttribute("board", board);
+		mav.addAttribute("fileList", fileList);
+		mav.setView("/WEB-INF/views/board/detail.jsp");
+
+		return mav;
+	}
+}

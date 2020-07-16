@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		// each(...) : 요소들을 순회(반복)
+		// -> 요소를 순회하며, 익명함수를 호출
+		$('table tr').each(function(){
+			$(this).html('<td>' 
+						+ $('th',this).text()
+						+ '는(은)'
+						+ $('td',this).text() 
+						+ '</td>');
+			// $('th') -> th 태그 모든 요소 선택
+			// $('th',this) -> 현재  순회중인 tr 요소의 th 요소 자신) 선택
+			// 테이블 내 요소를 순회하여 수정하겠다.
+		});
+		
+	});
+</script>
+</head>
+<body>
+	<table>
+		<tr><th>text(...)</th><td> TEXT를 추출 및 변경한다.</td></tr>
+		<tr><th>html(...)</th><td> html를 추출 및 변경한다.</td></tr>
+		<tr><th>val(...)</th><td> val를 추출 및 변경한다.</td></tr>
+		<tr><th>prepend(...)</th><td> 태그 내부의 앞 부분에 HTML을 삽입한다.</td></tr>
+		<tr><th>append(...)</th><td> 태그 내부의 뒷 부분에 HTML을 삽입한다.</td></tr>
+		<tr><th>before(...)</th><td> 태그의 앞에 HTML을 삽입한다.</td></tr>
+		<tr><th>after(...)</th><td> 태그의 뒤에 HTML을 삽입한다.</td></tr>
+	</table>
+</body>
+</html>

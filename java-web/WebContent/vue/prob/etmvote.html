@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+	
+		<div class="app" >
+			<h1> [ 투표  ] - 총 투표 수 : {{ voteAll }} </h1>
+			<vote-component @voted="countVote" v-for="singer in singers" :singer="singer" :voteall="voteAll">
+			</vote-component>
+		</div>
+		<br>
+	
+		
+		<h1> [ 검색 ]</h1>
+		<div class="form-group">
+			<label for="query"> 이름 및 그룹명 검색 </label>
+			<input @input="query=$event.target.value" class="form-control">
+		</div>
+		<div v-if=" query != '' ">
+			<h3> 검색 결과  </h3>
+		 	<ul class="list-group">
+		 		<li v-for="singer in search" class="list-group-item">
+		 			[ {{ singer.name }} ] - {{singer.group}}({{singer.ent}})
+		 		</li>
+		 	</ul>
+		 	<ul v-if="search==''" class="list-group" > 
+				<li class="list-group-item" > 검색 결과 없음 </li> 
+			</ul>
+	 	</div>
+	 	
+	 	<br>
+	 	<h1> [1위 후보] </h1>
+		<div class="form-group">
+			<ranking-component :singers="singers" >	</ranking-component>
+		</div>
+	 	
+	 	<br>
+	 	<h1> [투표 현황] </h1>
+		<div class="form-group">
+			<votestatus-component :singers="singers"></votestatus-component>
+		</div>
+	 	
+	</div>
+	
+	<!-- 투표 버튼 -->
+	<template id="vote-template">
+		<div class="thumbnail" style="margin: 10px;">
+			<div class="caption">
+				<p>[ {{ singer.name }} ] - {{singer.group}}({{singer.ent}})</p>
+				<p> 현재 투표 수 : {{ singer.voteOne }} </p>
+				<p>
+					<button class="btn btn-primary" @click="doVote" :disabled="voteall >=100" > 투표 </button>
+				</p>
+			</div>
+		</div>
+	</template>
+	
+	<!-- 1위 후보(4개) -->
+	<template id="rank-template">
+		<div class="thumbnail">
+			<div class="caption">
+				<ul class="list-group">
+					<li class="list-group-item" v-for="(singer, index) in orderList" v-if="index < 4" >
+						<p>[ {{ singer.name }} ] - {{singer.group}}({{singer.ent}})</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</template>
+	
+	
+	<!-- 투표 현황 1위 -->
+	<template id="votestatus-template">
+		<div class="thumbnail">
+			<div class="caption">
+				<ul class="list-group">
+					<li class="list-group-item" v-for="(singer, index) in orderList" v-if="index < 1" >
+						<p>[ {{ singer.name }} ] - {{singer.group}}({{singer.ent}})</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</template>
+	
+</body>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	
+	Vue.component('votestatus-component', {
+		template : '#votestatus-template', 
+		props : ['singers'],
+		computed : {
+			orderList : function(){
+				return this.singers.slice(0).sort(function(a,b){
+					return (a.voteOne - b.voteOne) * -1;
+				});
+			}
+		}
+	});
+
+
+	Vue.component('ranking-component', {
+		template : '#rank-template', 
+		props : ['singers'],
+		computed : {
+			orderList : function(){
+				return this.singers.slice(0).sort(function(a,b){
+					return (a.voteOne - b.voteOne) * -1;
+				});
+			}
+		}
+	});
+	
+	
+	Vue.component('vote-component',{
+		template : '#vote-template',
+		props : ['singer','voteall'],
+		data : function(){
+			return { voteOne : 0 };
+		},
+		methods : {
+			doVote : function(){
+				this.singer.voteOne++;
+				this.$emit('voted');
+			}
+		},
+		
+		
+	});
+	
+	new Vue({
+		el : '.container',
+		data : {
+			singers : [
+				{ name : '박초롱' , group : '에이핑크' , ent : '플레이엠' , voteOne : 0},
+				{ name : '윤보미' , group : '에이핑크' , ent : '플레이엠' , voteOne : 0 },
+				{ name : '정은지' , group : '에이핑크' , ent : '플레이엠', voteOne : 0},
+				{ name : '예지' , group : 'ITZY' , ent : 'JYP', voteOne : 0},
+				{ name : '류진' , group : 'ITZY' , ent : 'JYP', voteOne : 0},
+				{ name : '채령' , group : 'ITZY' , ent : 'JYP', voteOne : 0},
+				{ name : '뷔' , group : 'BTS' , ent : '빅히트', voteOne : 0},
+				{ name : 'RM' , group : 'BTS' , ent : '빅히트', voteOne : 0}
+			],
+			voteAll : 0,
+			query : '',
+		},
+		methods : {
+			countVote : function(){
+				this.voteAll++;
+			},
+		},
+		computed : {
+			search : function(){
+				var query = this.query;
+				return this.singers.filter(function(singer){
+					return singer.name.includes(query) | singer.group.includes(query);
+				});	
+			},
+		},
+			
+	})
+</script>
+</html>
+
+
+
+
+

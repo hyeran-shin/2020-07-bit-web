@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function onLoad(){
+		var on = false; //flag, toggle
+		var elH1 = document.getElementById('my-h1'); // h1 요소를 가져와라.
+		setInterval(function(){
+			elH1.style.color = on ? '#FF0000' : '#000000';
+			// 삼항 연산자를 활용하여 toggle(ON/OFF) 처럼 활용
+			on = !on;; // boolean 기준을 반대로 적용 (호출 시 마다 반대로 )
+			// onLoad는 한번만 호출되는데 function에서  상위 스코프인 on 을 계속 쓰고 있음.
+			
+		}, 500);
+	}
+	var onH1Clicked = function (element){ // this 를 통해 넘어오는 것은 h1 요소 자체
+		element.innerHTML = 'Ooops !!!';
+		element.style.color = '#0000FF';
+		// 클릭 직후는 파랑색이지만, setInterval로 인해 익명함수가 계속 호출
+		// *요소의 내용을 다루는 2가지의 수행 흐름에 따른 동작 확인
+		alert("dd : " +element);
+		
+	}
+</script>
+</head>
+<body onload = "onLoad();">
+	<h1 id = "my-h1" onclick="onH1Clicked(this);">
+		Cilck on this Heading !!!
+	</h1>
+	
+	<!-- 대표 마우스 이벤트 속성 -->
+	<h1 onclick="console.log('click')"
+		onmousedown='console.log("mousedown")'
+		onmouseup='console.log("mouseup")'
+		onmouseover='console.log("mouseover")'
+		onmouseout='console.log("mouseout")'
+		ondblclick='console.log("dbclick")'>
+		Mouse Event Attribute Test...
+	</h1>	
+	
+</body>
+</html>
+
+

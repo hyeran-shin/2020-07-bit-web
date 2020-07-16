@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!--  Calculator calculator = new CalculatorEN() -->
+	<bean id="calculator" class="DI.CalculatorEN"/>
+	
+	<!--  MyCalculator my = new MyCalculator() -->
+	<bean id="myCalculator" class="DI.MyCalculator">
+		<!--  Spring DI(setter) setter를 활용한 Srping DI -->
+		
+		<!-- 
+			해당 이름의 setter가 존재하지 않는다면 예외 발생! (예제는 FirstNum, SecondNum 으로 함)
+				-> NotWritablePropertyException
+			이름과 setter 메소드는 규약처럼 정해진다 (주의)
+			firstNum	-> setFirstNum(), setfirstNum()
+			secondNum	-> setSecondNum(), setsecondNum()
+			calculator 	-> setCalculator()
+			
+			프로퍼티의 name은 해당 class의 필드의 이름과 같아야한다. 
+			property name="firstNum" 일때 setFirstNum을 찾아간다.
+			setfirstNum 도 찾아간다. setfirstnum은 찾아가지 못한다. 
+			firstNum, firstnum은 필드 이름자체가 다르다
+		 -->
+		
+		<!-- setCalculator(calculator) -->
+		<property name="calculator" ref="calculator"/>
+		<!--  setN1(7) -->
+		<property name="n1" value="7"/>
+		<!--  setN2(3) -->
+		<property name="n2">
+			<value>3</value>
+		</property>
+		
+	</bean>
+
+</beans>
+		
+		
+		
+		
+		
+		
+		
+		

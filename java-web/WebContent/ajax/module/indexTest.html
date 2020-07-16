@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="httpRequest.js"></script>
+<script>
+	function sendOnClick() {
+		var name = document.infoForm.name;
+		var age = document.infoForm.age;
+		var addr = document.infoForm.addr;
+		
+		// form에 입력된 데이터들을 가지는 객체
+		//	-> 데이터를 모아 객체형식으로 한번에 전달!
+		var params = {
+			name : name.value,
+			age : age.value,
+			addr : addr.value
+		};
+		
+		// JSP
+// 		sendRequest('sample.jsp', params, callback, 'GET');
+// 		sendRequest('sample.jsp', params, callback, 'POST');
+		
+		// Servlet
+// 		sendRequest('/java-web/Param03', params, callback, 'GET');
+		sendRequest('/java-web/Param03', params, callback, 'POST');
+	}
+	
+	function callback() {
+		var msg = '';
+		switch(httpRequest.readyState) {
+		case 1: msg += 'Loading...\n';			break;
+		case 2: msg += 'Loaded...\n';			break;
+		case 3: msg += 'Interactive...\n';		break;
+		case 4: msg += 'Complete...\n';
+			if(httpRequest.status == 200) {
+				msg += '웹 서버에서 정상적으로 수행...\n';
+				msg += '[결과]';
+				msg += httpRequest.responseText;
+				msg += '\n----------------------------------------\n';
+			} else {
+				msg += '웹 서버에서 오류 발생...\n';
+				msg += '오류 코드 : ' + httpRequest.status + '\n';
+			}
+			break;
+		}
+		debugTrace(msg);
+	}
+	
+	function debugTrace(msg) {
+		var debug = document.getElementById('debug');
+		debug.value += msg;
+	}
+	
+	function clearOnClick() {
+		var debug = document.getElementById('debug');
+		debug.value = '';
+	}
+</script>
+</head>
+<body>
+	<h2>XMLHttpRequest Module</h2>
+	<form name="infoForm">
+		<textarea rows="15" cols="80" id="debug"></textarea>
+		<br>
+		이름 : <input type="text" name="name" size="10"><br>
+		나이 : <input type="text" name="age" size="10"><br>
+		주소 : <input type="text" name="addr" size="10"><br>
+		<br>
+		<input type="button" value="서버에 자료 요청" onclick="sendOnClick()">
+		<input type="button" value="초기화" onclick="clearOnClick()">
+	</form>
+</body>
+</html>
+
+

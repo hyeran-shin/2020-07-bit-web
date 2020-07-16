@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#div1').fadeIn(3000); // 화면에 나타나라
+		$('#div2').fadeOut('slow'); // 화면에서 사라져라
+		
+		$('button').click(function(){
+			$('#div1').fadeToggle();
+			$('#div2').fadeToggle(2000);
+			/*
+				버튼 클릭 시 콜백 함수가 호출! -> 호출 등록
+				연속 클릭 시 fadeToggle(2000) 2초 마다 수행
+				클릭이 끝났더라도 대기 중인 콜백함수가 이어서 수행된다.
+				
+				(버튼 클릭 3번을 빠르게 하더라도, 호출 순서에 따라 수행된다.)
+			*/
+	
+			// 투명도 :0~1, 0이면 안보인다.
+			$('#div1').fadeTo('slow', 0.5);
+			$('#div2').fadeTo('slow', 0.2);
+			// fade 관련 함수 수행 시 수행 순서가 존재
+			//   -> 관련 기능 jQuery API
+			//   -> *fadeToggle() 수행 후 fadeTo 수행
+			$('#div1').hide();
+			$('#div2').hide();
+			// fade 관련 함수와 상관없이 바로 수행
+		});
+	});
+</script>
+</head>
+<body>
+	<button>Try it</button>
+	<div id="div1" style="width: 100px; height:100px; 
+		background-color: blue; display:none"></div>
+	<div id="div2" style="width: 100px; height:100px; 
+		background-color: red; display:none"></div>
+	
+</body>
+</html>

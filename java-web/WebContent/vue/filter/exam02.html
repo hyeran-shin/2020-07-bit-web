@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<!-- filter (computed) -->
+		<h1>의존 필드(Computed)를 활용한 조건 필터링</h1>
+		<h3>귀여운 요구(장면)</h3>
+		<ul class="list-group">
+			<li v-for="cat in cute" class="list-group-item">
+				{{ cat.name }} "{{ cat.speech }}" - (투표 수 : {{ cat.upvotes }})
+			</li>
+		</ul>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+
+	new Vue({
+		el : '.container',
+		data : {
+			cats : [
+				{ speech : '산책 가자', name : '카페', upvotes : 23},
+				{ speech : '집사야 밥 줘', name : '라떼', upvotes : 45},
+				{ speech : '같이 놀자', name : '카페', upvotes : 31},
+				{ speech : '물 없음', name : '라떼', upvotes : 17},
+			]
+		},
+		computed : { // 의존 필드
+			cute : function(){ // 필터링된 데이터를 cute 필드로 설정!
+				return this.cats.filter(function(item){
+					return item.upvotes >= 30 ; //30 이상
+					// item : cats 내부의 객체
+					// item.upvotes : cats 내부 객체의 필드
+					//	-> filter(...)는 각 데이터를 순회하여 조건을 비교 수행
+				});
+			}
+		}
+	})
+
+	
+</script>
+</html>
+
+
+
+
+
+
+
+
+

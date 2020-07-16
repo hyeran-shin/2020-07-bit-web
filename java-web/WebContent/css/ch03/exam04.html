@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	/* 수도 선택자(의사 선택자) */
+	/* 첫 글자에 스타일 적용*/
+	p::first-letter {font-size: 1.5em}
+	/* 첫 라인에 스타일 적용*/
+	p::first-line{ color : blue;}
+
+	/* p 요소에 정수형으로 증가하는 데이터 속성 설정 */
+	/* p 요소의 개수만큼 1부터 하나씩 증가, 번호 생성*/
+ 	p {counter-increment: int;} 
+	
+	/* p 요소의 내용 앞에 자식 내용 생성
+	   생성된 자식 요소의 내용(content)을 카운트 값과 "." 으로 표현 -> "1.~"로 출력*/
+	p::before { content : counter(int) "."; }
+	/* p 요소의 내용 뒤에 자식 내용 생성 
+		생성된 내용(content)을 " - 32 page: 처럼 표현"
+	*/
+	p::after { content : " - " attr(data-page) " page" }
+	
+	/* p 요소의 내용을 선택 시 (드래그)에 대해 스타일 적용*/
+	p::selection { background : skyblue; color: red;}
+	
+	/* 계층형, 계단식*/
+	a { text-decoration : none;}
+	a:visited { color : gray;}
+	a:link::after {content : " - " attr(href)}
+</style>
+</head>
+<body>
+	<!-- 
+		data-* 속성 활용
+		 - HTML5에서 데이터를 다루기 위한 확장된 속성!
+		 - data-[이름] 형태로 데이터를 저장할 수 있는 속성을 정의
+		 - data-page : 페이지 값을 저장하기 위해 활용
+	 -->
+	<h1>아파치 스파크</h1>
+	<p data-page="32">
+		<a href="#"> 아파치 스파크(Apache Spark)</a>는 매우 큰 데이터 집합을 
+		 대상으로 빠르게 처리 작업을 수행하는 한편, 
+		 단독으로 또는 다른 분산 컴퓨팅 툴과 조율해 여러 컴퓨터로 
+		 데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.
+	</p>
+		 
+	<p data-page="64">
+		 아파치 스파크(Apache Spark)는 매우 큰 데이터 집합을 
+		 대상으로 빠르게 처리 작업을 수행하는 한편, 
+		 단독으로 또는 다른 <a href="#">분산 컴퓨팅 </a>툴과 조율해 여러 컴퓨터로 
+		 데이터 처리 작업을 분산할 수 있는 데이터 처리 프레임워크다.
+	</p>
+	
+	<a href="http://www.itworld.co.kr">IT World</a><br>
+	<a href="http://www.inzent.com">INZENT</a><br>
+	
+</body>
+</html>

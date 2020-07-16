@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!--  
+		v-show 지시자는 단순히 엘리먼트를 생성해 놓고 display 상태만 변경
+			-> 화면의 변화가 많은 경우
+		v-if 지시자는 엘리먼트를 생성 및 삭제하는 동작
+			-> 화면이 자주 변경될 가능성이 낮은 경우
+			
+		v-show는 크롬에서 button 보인후에 style만 바뀜 (exam01.html)
+		v-if는 크롬에서 안보인다.
+		
+	 -->
+	 
+	<div id="app">
+		<!-- 
+			<template></template>
+				: 문서(페이지) 로드 시에는 렌더링이 되지 않지만,
+				  JS를 이용해 동적으로 요소들을 다룰 때 활용
+				  - 하나의 묶음이라고 생각
+			다음 코드에서, 
+				<h1>과 <p> 두개 이상의 요소를 한번에 묶어서 조건을 주고 싶은데,
+				감싸는 요소는 불필요하다. 단지 조건을 부여하기 위해 활용!
+					-> 만들어 놓은 문서 양식
+		 -->
+	
+		<template v-if="!message">
+			<h1>메시지가 없어요.</h1>
+			<p>내용을 입력하세요.</p>
+		</template>
+		<h2 v-else>{{message}}</h2>
+		<textarea v-model="message"></textarea>
+		<pre>{{$data}}</pre>
+		
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : '#app',
+		data : { message : 'Hello Vue' }
+	})
+</script>
+</html>
+
+

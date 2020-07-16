@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+body {
+	font-family: "맑은 고딕";
+	font-size: 0.75em;
+	color: #333;
+	line-height: 1.8em;
+}
+
+/*
+	가방 밖(.multi)에 있는 요소의  여백을 0으로 초기화
+	글머리 기호가 보여질 공간이 사라진다. (화면을 넘어간다.)
+*/
+ul.multi {
+	/* 마진과 패딩 초기화*/
+	margin: 0;
+	padding: 0;
+}
+
+ul.multi li {
+	margin: 0;
+	padding: 0 0 0 15px;
+	/* 
+		(상 우 하) 패딩은 설정하지 말고,
+		(좌) 패딩만 15px 설정. 
+	*/
+	list-style: none; /* 리스트 스타일을 주지 않겠다.*/
+	/* 배경 이미지 설정 */
+	background-image: url(../images/bullet3.jpg);
+	/* 배경 반복 속성 설정*/
+	background-repeat: no-repeat;
+	/* 배경 위치 설정*/
+	background-position: left center;
+	padding: 0 0 0 15px;
+	/* 
+		(상 우 하) 패딩은 설정하지 말고,
+		(좌) 패딩만 15px 설정. 
+	*/
+	list-style: none; /* 리스트 스타일을 주지 않겠다.*/
+	/* 배경 이미지 설정 */
+	background-image: url(../images/bullet3.jpg);
+	/* 배경 반복 속성 설정*/
+	background-repeat: no-repeat;
+}
+
+ul.multi ul li {
+	/* 리스트 스타일을 숫자로 설정*/
+	list-style: decimal;
+	/* 마진 값을 왼쪾으로 5px 지정 -> 오른쪾으로 5픽셀 이동(들여쓰기 효과)*/
+	margin: 0 0 0 5px;
+	/* 패딩 0 설정, 여백을 주지 않겠다.*/
+	padding: 0;
+	background-image: none;
+}
+
+ul.multi ul ul li {
+	margin: 0 0 0 -20px;
+	/* 마진을 좌측 기준 -20 픽셀 설정하여 앞으로 당겨라 */
+	padding: 0 0 0 15px;
+	/* 
+		 padding : 0 0 0 15;
+		 실행 시 padding 이 적용 안됨
+		 크기에 대한단위를 설정하지 않았을 시
+		 "Invalid Property Value" 경고 발생 및 적용되지 않는다.
+	 
+	 	 수치(숫자 데이터) 값의 설정이 없음을 의미하는 것은 0
+	 	 	-> 수치를 주지 않겠다. (margin, padding, font-size, ...)
+	 	 특정 키워드(문자 데이터) 값의 설정이 없음을 의미하는 것은 none
+	 	 	-> 스타일, 타입을 주지 않겠다. (list-style, border) 
+	 
+	*/
+	list-style: none;
+	
+	/* 바로 상위 속성이 none 이 상속되니, 새롭게 bullet 설정*/
+	background-image: url(../images/bullet3.jpg);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+</style>
+</head>
+<body>
+	<!-- 여러 깊이(depth)를 가진 리스트 -->
+	<ul class="multi">
+		<li>List Style</li>
+		<li>List Style</li>
+		<ul>
+			<li>List Style></li>
+			<li>List Style></li>
+			<ul>
+				<li>List Style></li>
+				<li>List Style></li>
+				<li>List Style></li>
+				<li>List Style></li>
+			</ul>
+			<li>List Style></li>
+			<li>List Style></li>
+		</ul>
+		<li>List Style</li>
+		<li>List Style</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- script 태그를 활용하여 외부 문서 삽입 -->
+<script type="text/javascript" src="assets/rectangle.js"></script>
+<!-- <script type="text/javascript" src="./assets/rectangle.js"></script> -->
+<!-- <script type="text/javascript" src="/java-web/javascript/basic/assets/rectangle.js"></script> -->
+<script>
+	var rect1 = new Rectangle(720, 120, 800, 400, '#FF0000');
+	var rect2 = new Rectangle(220, 100, 300, 300, '#00FF00');
+	var rect3 = new Rectangle(320, 320, 700, 700, '#0000FF');
+	var rect4 = new Rectangle(50, 50, 130, 130, '#ee22ff');
+	
+	// 기존 Rectangle 객체의 show 가 가지고 있던, 익명함수가 수행되지 않고\,
+	// 새로운익명함수를 수행(객체 자체의 프로터피)
+	rect1.show = function(){ // 프로토타입의 show가 아닌, rect1객체의 show가 수행됨
+		console.log('Rectangle Drawing...');
+	}
+	rect1.show()
+	
+	//프로퍼티를 새롭게 정의하여활용
+	rect2.borderColor = '#22FF99';
+	rect2.show()
+	// 다른 객체의 원형은 유지
+	rect3.show()
+	rect4.show()
+</script>
+	
+</head>
+<body>
+
+</body>
+</html>

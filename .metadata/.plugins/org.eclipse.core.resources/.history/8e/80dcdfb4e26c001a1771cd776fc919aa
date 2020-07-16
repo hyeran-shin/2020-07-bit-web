@@ -1,0 +1,36 @@
+package com.bit.controller;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bit.framework.ModelAndView;
+import com.bit.framework.annotation.Controller;
+import com.bit.framework.annotation.RequestMapping;
+
+@Controller
+public class LoginController {
+	@RequestMapping("/loginForm.do")
+	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setView("/WEB-INF/views/login/loginForm.jsp");
+		//redirect:/WEB-INF/~~ 하면 못 씀. web-inf는 외부에서 접근 불가.
+		return mav;
+	}
+	
+	
+	@RequestMapping("/login.do")
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ServletContext sc = request.getServletContext();
+		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		LoginDAO loginDAO = (LoginDAO) sc.getAttribute("LoginDAO");
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setView("/WEB-INF/views/login/login.jsp");
+		
+		return mav;
+	}
+}

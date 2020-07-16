@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/slide.css">
+</head>
+<body>
+	<div id="page-wrapper">
+		<div align="center">
+			<button onclick="moveTo('L')">이전</button>
+			<button onclick="moveTo('R')">다음</button>
+			<br><br>
+			<div id="slidebox">
+				<ul id="slider">
+					<li><img alt="이미지 없음" src="images/cat01.jpg"></li>
+					<li><img alt="이미지 없음" src="images/cat02.jpg"></li>
+					<li><img alt="이미지 없음" src="images/cat03.jpg"></li>
+					<li><img alt="이미지 없음" src="images/cat04.jpg"></li>
+				</ul>
+			</div>
+		</div>
+		<br>
+	</div>
+	<script>
+		// 이미지 슬라이드 예시 (오픈소스를 사용하세요)
+		var x = 1000;
+		var lider = document.getElementById('slider');
+		var slideArray = slider.getElementsByTagName('li'); //tagname들을 가져오는거라 elements
+		var slideMax = slideArray.length -1;
+		var curSlideNum = 0;
+		
+		// Initialize (초기 작업)
+		//	-> 이미지가 겹쳐있으니, 나열하겠다.
+		for(var i = 0 ; i<=slideMax ; i++){
+			if(i == curSlideNum){
+				slideArray[i].style.left = 0;
+			}else{
+				slideArray[i].style.left = x + 'px';
+			}
+		}
+		
+		// Slide Change (이미지 바꾸기)
+		var isSliding = false; // 운직이고 있는 상태 기억
+		var next = 0;
+		function moveTo(way){
+			switch(way){
+			case 'L' : changeSlideToFront();	break;
+			case 'R' : changeSlideToRear();		break;
+			}
+		}
+		
+		// To Front (앞 이미지로)
+		var changeSlideToFront = function(){
+			if(!isSliding && (next >0)){
+				isSliding = true;
+				next = curSlideNum -1;
+				frontSliding();
+			} 
+		}
+		
+		function frontSliding(){
+			var curX = parseInt(slideArray[curSlideNum].style.left, 10);
+			var nextX = parseInt(slideArray[next].style.left, 10);
+			var newCurX = curX + 30;
+			var newNextX = nextX + 30;
+			
+			if(newCurX => x){
+				// 목표 좌표에 도달했다면, 정해진 값으로 설정 후 종료
+				slideArray[curSlideNum].style.left = x + 'px';
+				slideArray[next].style.left = 0;
+				curSlideNum  = curSlideNum -1; // 현재 슬라이드 번호 감소
+				isSliding = false;
+				return;
+			}
+			
+			// 이미지 이동이 목표 좌표에 도달하지 않았다면, 30씩 변화
+			slideArray[curSlideNum].style.left = newCurX + 'px';
+			slideArray[next].style.left = newNextX + 'px';
+			setTimeout(function(){
+				frontSliding(); // 재귀 호출
+			}, 20)
+		}
+		
+		// To Read(뒤 이미지로)
+		var changeSlideToRear = function(){
+			if(!isSliding && (next >0)){
+				isSliding = true;
+				next = curSlideNum -1;
+				rearSliding();
+			} 
+		}
+		
+		function rearSliding(){
+			var curX = parseInt(slideArray[curSlideNum].style.left , 10);
+			var nextX = parseInt(slideArray[next].style.left, 10);
+			var newCurX = curX - 30;
+			var newNextX = nextX - 30;
+			
+			if(newCurX => -x){
+				slideArray[curSlideNum].style.left = -x + 'px';
+				slideArray[next].style.left = 0;
+				curSlideNum  = curSlideNum +1; 
+				isSliding = false;
+				return;
+			}
+			slideArray[curSlideNum].style.left = newCurX + 'px';
+			slideArray[next].style.left = newNextX + 'px';
+			setTimeout(function(){
+				rearSliding(); // 재귀 호출
+			}, 20)
+			
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

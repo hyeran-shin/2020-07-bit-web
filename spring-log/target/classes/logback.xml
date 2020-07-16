@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!--  console, file, socket, JDBC 종류의 appender 제공 -->
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<!-- character encoding -->
+			<charset>UTF-8</charset>
+			<!-- logger 출력 패턴 (표현식) -->
+			<Pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
+			</Pattern>
+			<!-- 
+				10:12:33.421 [http-nio-8080-exec-4] INFO  c.b.l.c.LogController01 - #ex01 - info log
+				10:12:33.421 [http-nio-8080-exec-4] WARN  c.b.l.c.LogController01 - #ex01 - warn log
+				10:12:33.421 [http-nio-8080-exec-4] ERROR c.b.l.c.LogController01 - #ex01 - error log
+			 -->
+		</encoder>
+	</appender>
+	
+	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>c:\MyLogExample\logex02.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
+			</Pattern>
+		</encoder>
+		<!--  윈도우 압축 클래스 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>c:\MyLogExample\logex02.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+			<!-- 
+				logex02.%i.log.zip 파일명 패턴의 %i 값의 최소 값과 최대 값 설정
+				하나씩 증가하여 대입된 후 압축 파일로 생성
+				첫 번째 압축 : logex02.1.log.zip
+				두 번째 압축 : logex02.2.log.zip
+				...
+				총 10개의 압축 파일 생성 후 계속 로그가 발생한다면,
+				logex2.log 파일의 용량이 초과 되었을 때,
+				새롭게 덮어 씌어지게 된다.
+			 -->
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>5KB</MaxFileSize>
+			<!--  용량 테스트 시 5KB 설정 후 실행 -->
+		</triggeringPolicy>
+	</appender>
+	
+	<!--  
+		com.bit.log2의 하위 패키지 로그들만,
+		c:\MyLogExample\logex02.log 파일에 출력하라
+			-> appender의 적용 기준과 레벨을 설정
+	 -->
+	 
+	 <!--  
+	 	additibity 속성 : 상위 Logger의 설정 정보의 적용 여부를 결정해 준다.
+	 	true : 위에 있는 상위 정보가 덮어씌여지게 된다.
+	 	보통 false로 한다. -> 단독적으로 로거를 사용하기 위해서
+	  -->
+	<logger name="com.bit.log2" level="info" additibity ="false">
+		<appender-ref ref="fileAppender"/>
+	</logger>
+	
+	<!--  루트 로거(글로벌) -->
+	<root level="info"> <!--  level을 info 로 해서 debug는 안나온다. level 하위에 있는 것만 출력됨 , 디버그레벨 : 실제 수행하는 것들 -->
+		 <appender-ref ref="consoleAppender"/> 
+	</root>
+	
+	<!-- 
+		Q. Console, File에 모두 로그를 남기는 실습 진행
+	 -->
+	
+</configuration>

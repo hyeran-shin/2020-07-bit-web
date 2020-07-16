@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		setTimeout(function(){
+				
+			/*
+				prependTo(selector) 	: 특정 요소의 앞으로 보내라.
+				appendTo(selector)		: 특정 요소의 뒤로 보내라.
+				요소의 안으로 들어ㄷ간다.
+			*/
+			$('#p2 strong').prependTo('#p1');
+			// '#p1'요소의 내부 중 가장 앞으로
+			$('#p4 strong').appendTo('#p3');
+			// '#p3'요소의 내부 중 가장 뒤로.
+			
+			/*
+				insertBefore(selector)	: 특정 요소를 기준의 앞에 삽입해라
+				insertAfter(selector)	: 특정 요소를 기준의 뒤에 삽입해라
+			*/
+			$('h2').insertBefore('h1'); //h2 만 깜빡임, 움직임, h1은 자동으로 밀ㄹ린것
+			$('h1').insertAfter('h2'); 
+			
+			
+		}, 2000);
+	});
+</script>
+</head>
+<body>
+	<p id="p1">HIJK ....</p>
+	<p id="p2"><strong>ABCDEFG</strong>hijk ...</p>
+	<p id="p3">ABCDEFG</p>
+	<p id="p4">abcdefg<strong>HIJK ...</strong></p>
+	
+	<h1>Heading 1</h1>
+	<h2>Heading 2</h2>
+	
+</body>
+</html>
+
+
+
+
+
+

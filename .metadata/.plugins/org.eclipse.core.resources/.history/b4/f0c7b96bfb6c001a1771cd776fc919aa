@@ -1,0 +1,18 @@
+package com.bit.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bit.framework.ModelAndView;
+import com.bit.framework.annotation.Controller;
+import com.bit.framework.annotation.RequestMapping;
+
+@Controller
+public class MyPageController {
+	@RequestMapping("/myPage.do")
+	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+}

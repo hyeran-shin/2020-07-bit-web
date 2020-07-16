@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	/*
+		[형태]
+	 	 - $(선택자).메소드(인자1, 인자2, ...)
+	 	 - 식별자는 특수문자 '&', ' ' 사용
+	 	 - 선택자를 제어하기 위해 태그 정보를 알아야한다.
+	 	 	(tagName, idName, className)
+	 	 	$('태그요소').메소드();
+	*/
+	$(function(){ // $(document).ready(function() { ... } ) 동일!
+				  // IIFE 처럼 보이지만, body 구성 후 수행!
+		// hide() : 요소를 숨겨라.
+		//  페이지 문서에는 코드가 남아있고,
+		//	단순히 CSS (style="idsplay : none;")이 적용된다.
+// 		$('h1').hide();			// tag
+// 		$('#id-1').hide();		// id
+// 		$('.my-class').hide(); 	// class
+
+// 		$('h2.my-class').hide();	// tag.class
+		$('*').hide();				// all
+	})
+</script>
+</head>
+<body>
+	<h1>Hello jQuery</h1>
+	<h2>Hello JavaScript</h2>
+	<h3>Hello Ajax</h3>
+	
+	<p id="id-1">Paragraph 1</p>
+	<p id="id-2">Paragraph 2</p>
+	
+	<h1 class="my-class">Heading 1</h1>
+	<h2 class="my-class">Heading 2</h2>
+	
+	
+</body>
+</html>

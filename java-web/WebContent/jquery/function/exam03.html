@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#slide, #panel{
+	padding: 5px;
+	background-color : #E5EECC;
+	border : 1px solid #333;
+}
+#panel{
+	padding : 50px;
+	display : none;
+	
+}
+</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#slide').click(function(){
+// 			$('#panel').slideUp('slow');
+// 			$('#panel').slideDown('slow');
+
+			$('#panel').slideToggle('slow');
+			
+		});
+	});
+</script>
+</head>
+<body>
+	<div id="slide">Try iy</div>
+	<div id="panel">jQuery</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('input').focus(function(){
+			$(this).css('background-color' , 'red');
+		});
+		$('input').blur(function(){
+			$(this).css('background-color' , 'pink');
+		});
+		$('button').click(function(){
+			console.log('Button Clicked!!');
+		});
+	});
+	
+</script>
+</head>
+<body>
+	<form>
+		이름 <input type="text" name="name"><br>
+		암호 <input type="text" name="pw"><br>
+		<button type="button">Button</button>
+		<!--
+			<button >Button</button>
+			 form 내의 button 태그의 타입이 정해지지 않은 경우 
+			 *submit으로 동작 -> 새로고침 처럼 보인다.
+			 *새로고침처럼 동작하는지 확인, URL을 화인해서 문제를 추적
+			 *새로고침 : 현재 페이지 재 접속
+		-->
+	</form>
+</body>
+</html>

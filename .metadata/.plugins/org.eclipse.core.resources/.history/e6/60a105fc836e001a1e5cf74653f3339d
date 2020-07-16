@@ -1,0 +1,7 @@
+package com.bit.filter;
+
+import javax.servlet.Filter;
+
+public class EncodingFilter implements Filter{
+
+}

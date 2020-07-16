@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var httpRequest = null;
+	function getXMLHttpRequest() {
+		if (window.XMLHttpRequest)
+			return new XMLHttpRequest();
+		else
+			return null;
+	}
+
+	function sendProcess(method, param, target) {
+		var msg = '';
+		msg = '-------------------------------\n';
+		msg += '전송 방식 : ' + method + '\n';
+		msg += '전송 방향 : ' + target + '\n';
+		
+		clearDebugBox(); 
+		debugTrace(msg);
+		
+		var jspURI = 'postParam.jsp';
+		var servletURI = '/java-web/Param02';
+		var args = 'name=' + encodeURIComponent(param);
+		
+		httpRequest = getXMLHttpRequest();
+		httpRequest.onreadystatechange = callback;
+		
+		// GET
+		if(method =='GET'){
+			if(target=='jsp') //get 방식 jsp 호출
+				httpRequest.open(method, jspURI + '?' + args, true);
+			if(target=='servlet')
+				httpRequest.open(method, servletURI + '?' + args, true);
+			httpRequest.send(null);
+		}
+		
+		// POST
+		if(method =='POST'){
+			if(target=='jsp') //get 방식 jsp 호출
+				httpRequest.open(method, jspURI , true);
+			if(target=='servlet')
+				httpRequest.open(method, servletURI , true);
+			// 전송 경로는 GET 파라미터 구분 '?' 앞 경로 기준
+			// POST 방식은 URI에 포함하여 전달하지 않는다.
+			
+			// POST 방식인 경우 요청 헤더 추가
+			httpRequest.setRequestHeader('Content-Type' , 'application/x-www-form-urlencoded');
+			
+			httpRequest.send(args);
+			//  GET -> send(null)
+			//  POST -> send(args(param value));
+		}
+
+		
+	}
+	
+	function callback(){
+		var msg = '';
+		switch(httpRequest.readyState){
+		case 1 : msg += 'Loading...\n';	  break;
+		case 2 : msg += 'Loaded...\n';	  break;
+		case 3 : msg += 'Interactive...\n';	  break;
+		case 4 : debug.value += 'Complete...\n';	  
+			if(httpRequest.status == 200){
+				msg += '웹 서버에서 정상적으로 수행...\n';
+				msg += '[결 과]';
+				msg += httpRequest.responseText;
+				msg += '\n---------------------------\n';
+			}else{
+				msg += '웹 서버에서 오류 발생...\n';
+				msg += '오류 코드 : ' + httpRequest.status + '\n';
+			}
+			break;
+		}
+		debugTrace(msg);
+	}
+	
+	function debugTrace(msg){
+		var debug = document.getElementById('debug');
+		debug.value += msg;
+	}
+	
+	function clearDebugBox(){
+		var debug = document.getElementById('debug');
+		debug.value = '';
+	}
+	
+</script>
+</head>
+<body>
+	<h2>인자 전달(GET, POST)</h2>
+	<textarea rows="15" cols="80" id="debug"></textarea>
+	<br>
+	<h3>JSP</h3>
+	<input type="button" value="GET 영문인자 호출" 
+			onclick="sendProcess('GET','ajax','jsp')"> 
+	<input type="button" value="GET 한글인자 호출" 
+			onclick="sendProcess('GET','에이젝스','jsp')">
+	<input type="button" value="POST 영문인자 호출" 
+			onclick="sendProcess('POST','ajax','jsp')">
+	<input type="button" value="POST 한글인자 호출" 
+			onclick="sendProcess('POST','에이젝스','jsp')">
+			 
+	<h3>Servlet</h3>
+	<input type="button" value="GET 영문인자 호출" 
+			onclick="sendProcess('GET','ajax','servlet')"> 
+	<input type="button" value="GET 한글인자 호출" 
+			onclick="sendProcess('GET','에이젝스','servlet')">
+	<input type="button" value="POST 영문인자 호출" 
+			onclick="sendProcess('POST','ajax','servlet')">
+	<input type="button" value="POST 한글인자 호출" 
+			onclick="sendProcess('POST','에이젝스','servlet')">
+		
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+		exam01.html 이해를 돕기 위한 예제
+			-> 실제 라이브러리는 훨씬 구조적이고, 여러 경우를 판단!
+		
+	 */
+
+	var myObj = function(element) { // element : HTMLElement
+		this.element = element; // HTMLElement 정보 기억
+		
+		// myObj에서 제공하는 함수(jQuery에서 제공하듯이)
+		//	-> 단, prototype 권장
+		this.value = function(str) {
+			this.element.setAttribute('value',str);
+		}
+		this.hide = function(){
+			this.element.setAttribute('style','display:none;');
+		}
+		this.css = function(attr, value){
+			this.element.setAttribute('style',attr+':'+value+';');
+		}
+	}
+
+	function $(selector) {//CSS Selector
+		var element = document.querySelector(selector);
+		return new myObj(element);
+	}
+	window.onload = function(){
+		$('#in').value('Input String');
+	//  $(selector) 이므로 myObj 반환
+// 		$('#in').hide();
+		$('#in').css('color','blue');
+		$('#in').css('background-color','pink');
+	}
+</script>
+</head>
+<body>
+	<input id="in">
+</body>
+</html>

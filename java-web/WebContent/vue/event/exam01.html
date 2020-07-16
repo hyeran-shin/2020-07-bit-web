@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		v-on을 활용한 이벤트 처리
+			: jQuery에서 on 메소드를 활용한 이벤트 처리를
+			  Vue.js에서 v-on 프로퍼티를 활용
+	 -->
+	 <div class="container">
+	 	<!--  update 프로퍼티 접근과 동시에 증가 연산 -->
+	 	<!--  버튼 클릭 이벤트 동작 시 update 변수의 값을 하나씩 증가 -->
+	 	<button v-on:click="update++">
+	 		Try it (Count : {{ update }})
+	 	</button>
+	 	<br>
+	 	<!-- Vue Method 호출 -->
+	 	<button v-on:click="upCount">
+	 		Try it (Count : {{ update }})
+	 	</button>
+	 	<br>
+	 	<!-- 축약형 이벤트 -->
+	 	<button @click="upCount">
+	 		Try it (Count : {{ update }})
+	 	</button>
+	 	<pre>{{$data}}</pre>
+	 	
+	 	<!-- 
+	 		v-on:click="upCount"
+	 		@click = "upCount"
+	 			-> 같은 동작!
+	 			
+	 		* 모든 버튼이 동일한 update 프로퍼티와 바인딩되었기에,
+	 		* 프로퍼티(변수)를 공유하는 형태
+	 	 -->
+	 	
+	 </div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '.container',
+		data : {
+			update : 0 ,
+		},
+		methods : {
+			upCount : function(){ //Vue에서 동작할 Method (function)
+				this.update++ // this : Vue 인스턴스
+			}
+		}
+	})
+</script>
+</html>

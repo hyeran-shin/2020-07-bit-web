@@ -1,0 +1,26 @@
+ 
+ [JSP 내장 영역(Scope)]
+ 	종류 : pageContext, request, session, application
+ 
+ 	pageContext
+ 		: 하나의 페이지에서 공유되는 영역
+ 		
+ 	request
+ 		: 하나의 요청에 대해 요청을 공유하는 페이지들이 대응된다.
+ 		  include와 forward를 통해 연결이 되는 request 공유 영역
+ 		    즉, JSP 내에서의 요청 파라미터 공유영역!
+ 		  *페이지 이동
+ 		  
+ [JSP 내장 객체 (Built-in)]
+ 	out		 	: JSP 내의 출력 스트림 객체
+ 	page	 	: JSP 내의 자바 클래스 객체
+ 	pageContext : JSP 페이지의 정보를 저장하는 객체
+ 	request 	: 요청 정보를 저장하는 객체
+ 	response	: 응답 정보를 저장하는 객체
+ 	session		: 웹 브라우저의 정보를 유지하기 위해 세션 정보를 저아하는 객체
+ 	application	: 웹 어플리케이션 영역 정보를 저장하는 객체
+ 	exception	: JSP 내의 예외가 발생하는 경우 사용하는 객체
+ 	config		: JSP의 설정 정보를 저장하는 객체
+ 	 	
+ 
+ 

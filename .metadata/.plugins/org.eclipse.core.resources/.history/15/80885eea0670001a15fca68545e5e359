@@ -1,0 +1,47 @@
+package com.bit.controller;
+
+import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bit.dao.BoardDAO;
+import com.bit.framework.ModelAndView;
+import com.bit.framework.annotation.RequestMapping;
+import com.bit.vo.BoardVO;
+
+public class BoardController {
+	
+	@RequestMapping("/list.do")
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 전체  list 조회
+		ServletContext sc = request.getServletContext();
+		BoardDAO dao = (BoardDAO)sc.getAttribute("boardDAO");
+		List<BoardVO> list = dao.selectAllBoard();
+				
+		ModelAndView mav = new ModelAndView();
+		mav.addAttribute("list", list);
+		mav.setView("/WEB-INF/views/board/list.jsp");
+		return mav;
+	}
+	
+	@RequestMapping("/list_detail.do")
+	public ModelAndView list_detail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String type = request.getParameter("type");
+		String boardNo = request.getParameter("no");
+		
+		
+		
+		ServletContext sc = request.getServletContext();
+		BoardDAO dao = (BoardDAO)sc.getAttribute("boardDAO");
+		List<BoardVO> list = dao.selectAllBoard();
+				
+		ModelAndView mav = new ModelAndView();
+		mav.addAttribute("list", list);
+		mav.setView("/WEB-INF/views/board/detail.jsp");
+		return mav;
+	}
+	
+	
+}

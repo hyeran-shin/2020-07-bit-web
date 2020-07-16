@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 
+	Custom Data Attributes (HTML5)
+		- data-* 형태로 사용하는 속성
+		- 원하는 속성과 값을 부여할 수 있다.
+ -->
+	<div id="wrapper">
+		<button data-cb="1"> Insert div</button>
+		<button data-cb="2"> Insert img</button>
+		<button data-cb="clear"> Clear</button>
+	</div>
+	<br>
+	<div id = "append_div">
+		
+		<script>
+			(function() {
+ 				//1. 각 함수들이 사용하는 appendDiv
+				var appendDiv = document.getElementById('append_div');
+				document.getElementById('wrapper')
+						.addEventListener('click', append);
+				
+				/*
+			 	 	var append = function(){ ... } 
+					function append(){...}
+						-> 동작 차이를 보인다.
+							수행 순서에 따른 변수 선언으로 담느냐
+							로딩 시 선언이 되느냐 
+				*/
+				
+// 				function append = function(elemtnt){ // 동작 X 
+				// 이벤트 등록 후 append 변수 선언 후 익명함수를 담는다면,
+				// 이벤트 등록 당시에는 append는 존재하지 않는다. (수행 흐름 차이)
+				// 밑의 선언 방식은 
+				// 스크립트 로딩시 선언부분은 메모리에 등록!
+				function append(element){ // 요소를 뒤에다 붙여라
+					var target = element.target 
+								|| element.srcElement
+								|| event.srcElement;
+					var insertFunc =callback[target.getAttribute('data-cb')];
+					appendDiv.appendChild(insertFunc());  // 자식으로붙여라
+				}
+				// 2. 자기 자신들의 IIFE를 활용한 callback
+				var callback = {
+						'1' : (function(){
+							var div = document.createElement('div'); // createElement() 동적으로 만들어라
+							div.innerHTML = 'new div...';
+							
+							return function(){
+								return div.cloneNode(true); // 반환?
+							};
+						}()),
+						'2' : (function() {
+							var img = document.createElement('img');
+							img.src='http://www.inzent.com/img/header_logo.png';
+							
+							return function(){
+								return img.cloneNode(true); // 복제해서 반환시켜라
+							};
+						}()),
+						// 최하위 스코프에서 최상위 스코프인 appendDiv를 사용
+						// 최하위 -> 최상위까지 탐색
+						// 즉, 탐색할 스코프의 범위가 늘어나면 늘어날 수록 퍼포먼스에 영향을 미친다.
+						// * 스코프 생성 이후 스코프 탐색에 의한 퍼포먼스 손해가 존재한다.
+						//		-> 클로저 활용 시 항상 주의
+						'clear' : function(){
+							appendDiv.innerHTML = '';
+							return document.createTextNode('Clear...');
+						}
+				}
+				
+			}());
+			
+			/*
+				클로저의 장점
+					- 퍼포먼스(프로그램 흐름)상 유리하게 동작
+					- 최초에 초기화된 고정적인 값이나 자주 이용하는 경우에, 
+					    클로즈를 통해 초기화 해두고 콜백 함수에서 지속적으로 참조 가능하다.
+					- 객체의 속성이 자유롭고 변화하기 쉬운 자바 스크립트에서 
+					    이러한 디자인 패턴이 효율적!
+					- DOM Element을 적극적으로 이용할 때 좋은 효율을 보여준다.
+					[대표적인 사용 예]
+						1. 반복적으로 같은 작업을 수행할 때
+						2. 같은 초기화 작업이 지속적으로 필요할 때
+						3. 콜백 함수에 동적인 데이터를 넘겨주고 싶을 때
+						4. static 변수를 이용하고 싶을 때
+						5. 최초 초기화 했던 값을 유지하고 싶을 때
+						6. 자바 스크립트 라이브러리나 모듈에서,
+						      내부 함수의 변수를 private 형태로 활용하고 싶을 때
+			 	클로저의 단점
+			 		- 클로저는 메모리를 소모한다. (스코프 지속)	
+			 		- 이벤트에 대한 콜백, setInterval 같은 메소드에 등록했던
+			 		    콜백 함수들이 메모리에 계속 남아있게되면 (활용 중 이면),
+			 		    해당 클로저도 메모리에 계속 남게된다.
+			 		- 반복문 (루프)을 이용한 클로저 생성은 최대한 자제해라. (지양)
+			 		
+			 	*자바스크립트기반의 라이브러리 활용 시 알게 모르게 클로저가 발생될 수 있다.
+			*/
+		</script>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

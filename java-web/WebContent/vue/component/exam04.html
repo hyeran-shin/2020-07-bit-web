@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!--  
+		v-bind (directive)
+			- 전달할 프로퍼티가 많은 경우, 객체를 곧바로 전달하고 싶을 때
+			- 하나 이상의 속성 또는 컴포넌트를 표현식에 동적으로 바인딩 할 때
+	 -->
+	<div class="container">
+		<!-- 컴포넌트에서 사용하는 프로퍼티 myBoard(my-board)에 객체 전달 -->
+		<!-- v-bind 사용 -->
+		<board v-bind:my-board="{ title : 'Java', writer:'Cafe' }"></board>
+		<!--  축약형 사용 -->
+		<board :my-board="{title : 'JavaScript' , writer:'Latte'}"></board>
+	</div>
+	<!-- 
+		[컴포넌트의 프로퍼티 myBoard 형태]
+		myBoard : {
+			title : 'Java',
+			writer : 'Latte'
+		}
+	 -->
+	
+	
+	<!-- Vue 컴포넌트 정의 -->
+	<template id="board-template">
+		<h1>{{ myBoard.title }} : {{ myBoard.writer }} </h1>
+	</template>
+</body>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	// 컴포넌트 등록
+	Vue.component('board',{
+		props : ['myBoard'],
+		template : '#board-template'
+	})
+	
+	new Vue({
+		el : '.container'
+	})
+</script>
+</html>

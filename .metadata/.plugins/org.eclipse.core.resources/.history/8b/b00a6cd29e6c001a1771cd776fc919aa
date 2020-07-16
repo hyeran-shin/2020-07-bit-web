@@ -1,0 +1,11 @@
+package com.bit.framework;
+
+public class CtrlAndMethod {
+	private Object target;
+	private Method method; // 리플렉션기법 으로 거울로 반사하는 형식, method와 class있음?
+	
+	public CtrlAndMethod(Object target, Method method) {
+		this.target=target;
+		this.method = method;
+	}
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	// 폼 유효성 체크(form validation)
+	/* 
+	[요구 사항]
+		1. form submit 시,
+			아이디가 비어 있다면, '아이디는 필수 입력 사항입니다.' 메시지 출력
+			비밀번호가 비어있다면, '비밀번호는 필수 입력 사항입니다.' 메시지 출력
+			후에 submit 중단 및 해당 요소에 포커스 (focus)
+		2. 아이디 입력 후 다른 곳으로 포커스가 넘어갔다면, (onchange)
+			모든 문자를 소문자로 (toLowerCase)
+		3. 로그인 경로 선택(onchange)시 콘솔에 로그 출력
+	 */
+	 
+	window.onload = function(){
+		document.getElementById('my-form').onsubmit = function(){
+			// 아이디
+			var elId = document.getElementById('id');
+			if(elId.value == ''){
+				alert('아이디는 필수 입력 사항입니다.');
+				elId.focus();
+				return false;
+			}
+			
+			
+			// 비밀 번호
+			var elPw = document.getElementById('pw');
+			if(elPw.value == ''){
+				alert('비밀번호는 필수 입력 사항입니다.');
+				elPw.focus();
+				return false;
+			}
+		
+
+		}
+		
+		// 소문자 변환
+		document.getElementById('id').onchange = function(){
+			var val = this.value;
+			this.value = val.toLowerCase();
+			
+		};
+		
+		//선택사항 로그
+		document.getElementById('type').onchange = function(){
+			console.log(this.value);
+		};
+	}
+	
+	
+</script>
+</head>
+<body>
+	<form id="my-form" action="" method="get">
+		아이디 : <input type="text" id="id" name="id"><br>
+		비밀번호 : <input type="password" id="pw" name="ps"><br>
+		로그인 방법 : 
+		<select id="type" name="type">
+			<option>일반 회원</option>
+			<option>기업 회원</option>
+		</select>
+		<br>
+		<input type="submit" value="로그인">
+	</form>
+</body>
+</html>

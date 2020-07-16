@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+
+/*
+ 	CSS 선택자를 통해 가져오는 것 -> HTML Element , 원래는 붙여서 나옴 HTMLElement
+ 	우리는 jquery 라이브러리를 활용!
+ 		-> CDN으로 가져온 jQuery 객체를 사용하겠다.
+ 		-> jQuery 객체는 여러 HTMLElement 요소에 대한 메소드를 제공.
+ 		-> HTMLElement를 전달받아 jQuery Object 형태로 변환 후
+ 			해당 요소에 맞는 메소드를 사용할 수 있게끔 한다.
+
+ 		jQuery API 중의 hide()를 예시로 본다면,
+ 		hide()는 jQuery Object로 전달되는 HTMLElement에
+ 		style="display:none" 을 추가하는 기능을 갖는다.
+ 		
+ 		이전에 img HTMLElement에 속성을 부여하는 방법인
+ 		imgTag.setAttribute(...) 와 같이!
+ */
+ 
+ 
+	$(function(){
+		setTimeout(function(){
+			// $기호를 사용하지 않아도 동일하게 동작!
+			//  -> 어차피 자바스크립트의 변수명
+			//  -> jQerry Object임을 표시하기 위해 관례적으로 표기
+			var $li = $('li'); 			// 해당 요소들을 담겠다.
+// 			$li.css('color','#FF0000');	// 담은 요소들에게 CSS 적용
+			// $() 는 jquery객체로 만들어 줌. 
+			// .css 는 jquery에서 제공하는 함수., $()로 바꿔줘야 jquery에서 제공하는 함수를 쓸 수 있음.
+			
+// 			$li[0].css('color','#0000FF'); //error
+			// HTML Element 이기 때문에, jQuery 메소드 not definde!!!
+			
+			// $ : jQuery Object (확장 객체)
+			// 길이 존재
+			console.log($li.length); // 길이를 가지고 있다.
+			// 하지만, Array는 아니다. 유사 배열, 배열처럼쓸순있지만 아니다.
+			console.log(typeof($li) + ":" + ($li instanceof Array));
+			// jQuery Object 내부의 element는 jQuery Object가 아니다.
+			
+			// jQuery API 호출이 불가능 ( $li[0].css(...))
+			console.log($li[0]); // index 접근
+			console.log($li.get(0)); //get()
+			// -> 둘 다 HTML Element 반환
+			
+			// HTMLElement 속성 접근(JavaScript)
+			$li[0].style.color = "#00FF00";
+			$li.get(1).style.color="#0000FF";
+			
+			// HTMLElement가 아닌 jQuery Object로 사용하고 시ㅠ다.
+			//    -> Wrap jQery Object(확장 객체 문법으로 감싸라.)
+			//    -> $()
+			$($li[0]).css('color','#00FF00');
+			$($li.get(1)).css('color','#0000FF');
+		},2000);
+	});
+ 		
+</script>
+</head>
+<body>
+	<ul>
+		<li>시험용 텍스트입니다.</li>
+		<li>시험용 텍스트입니다.</li>
+		<li>시험용 텍스트입니다.</li>
+		<li>시험용 텍스트입니다.</li>
+	</ul>
+</body>
+</html>

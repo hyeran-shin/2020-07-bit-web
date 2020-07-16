@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(function() {
+		$('button').click(function() {
+// 			$('div').animate({
+// 					left : '200px',
+// 					width : '50px',
+// 					height : '50px',
+// 					opacity : '0.5' // 투명도
+// 			});
+
+
+			$('div').animate({
+					width : '+=20px', // 점점 증가
+					height: '+=20px',
+					opacity : '-=0.1' // 점점 감소
+			});
+			
+			$('div').animate({
+					width : 'toggle',
+					height : 'toogle'
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<button>Try it</button>
+	<div style="width: 100px; height: 100px; 
+		background-color: skyblue; position: absolute"></div>
+</body>
+</html>

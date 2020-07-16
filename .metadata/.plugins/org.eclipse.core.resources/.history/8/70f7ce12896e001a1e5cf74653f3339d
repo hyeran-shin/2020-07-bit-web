@@ -1,0 +1,10 @@
+package com.bit.framework.annotation;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+@Target()
+@Retention
+public @interface RequsetMapping {
+	String 
+}

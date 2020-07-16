@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function outer() { // 외부 함수
+		var cnt = 0; //outer 함수의 local 변수, outer 내부에서만 접근 가능
+		var inner = function() { // 내부 함수
+			return ++cnt; // inner 변수에 outer의 local 변수인 cnt를 1 증가시키고,
+							// 리턴하는 익명 함수를 할당.
+		}
+		return inner; // 익명 함수가 할당된 inner 변수 리턴.
+		// function 내부에서 function을 선언하여 반환 -> 클로저의 형태
+	}
+	
+	//outer() 는 한번만 호출, var cnt = 0; 한번 수행
+	var increase = outer(); // increase 는 ineer, function이다. 
+							// outer 함수는 inner 함수를 리턴 함으로,
+							// outer함수를 호출했을 때, 
+							// inner 변수에 할당된 function을 리턴 받는다.
+							// increase 변수는 outer 함수의 리턴인 inner의
+							// 익명 함수가 할당
+	// increase()를 호출함으로 상위 스코프 outer의 local변수 cnt에 접근 가능
+	// cnt는 스코프의 지속성 특성에 따라 유지 된다. -> 클로저
+	console.log(increase); // f(){return ++cnt;}
+	console.log(increase()); // 1
+	console.log(increase()); // 2
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

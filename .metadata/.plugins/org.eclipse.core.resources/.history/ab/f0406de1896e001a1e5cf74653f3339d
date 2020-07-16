@@ -1,0 +1,6 @@
+package com.bit.framework;
+
+public class CtrlAndMethod {
+	private Object target;
+	private Method method;
+}

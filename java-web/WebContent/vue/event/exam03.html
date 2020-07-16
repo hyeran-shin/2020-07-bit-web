@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		Computed Properies (계산된 프로퍼티)
+			- Vue의 인라인 표현식도 좋지만, 로직이 복잡할 경우 계산된 프로퍼티 활용
+			- 계산된 프로퍼티는 함수처럼 동작
+			- methods 필드를 사용하는 것과 다르게,
+			  computed 필드는 의존하고 있는 요소가 변경 될 때마다 함수를 호출(실행)한다
+	 -->
+	 
+	 <div class="container">
+	 	a : {{ a }} , b : {{ b }} <br>
+	 	<input v-model.number="a">
+	 	<pre>{{$data}}</pre> <!-- JSON -->
+	 	<pre>{{$el}}</pre> <!-- HTML Element -->
+	 	<pre>{{$computed}}</pre>
+	 	<!-- 
+	 		$ : jQuery처럼 객체의 형태로 표현
+	 			-> $ 특수기호는 자바스크립트 객체 표현이 목적!
+	 		문서에 데이터를 표현 -> 화면에 보여주겠다.
+	 		직접 사용되는 data 필드는 JSON 형태로 출력
+	 		그 외의 화면 뒤에서 사용되는 다른 필드들이 출력되진 않는다.
+	 			-> 비즈니스 로직 및 함수 필드 (methods), 의존 필드(computed)
+	 			-> 렌더링 시키지 않는다.
+	 			
+	 		[Vue.js 대표적인 인스턴스 표현들]
+	 		$data, $el, $props, $parent, $children, $attrs,..
+	 		$on, $emit, ...
+	 		
+	 		jQery의 인스턴스 표현
+	 		$('.container')
+	 			-> 화면에 출력하는 결과와 콘솔에 출력하는 결과는 다르다.
+	 			화면 출력 : [object Object] 단순 문자열 출력
+	 				-> 일반 유저에게 보여지는 앞 (front)
+	 			콘솔 출력 : <div class="container">... 요소의 상세 정보 출력
+	 				-> 개발 유저에게 보여지는 뒤 (back)
+	 		* 일반 유저에게는 프로그램의 정보를 보여주지 않는다.
+	 		* 실제 프로그램 동작하는 것들은 외부 노출을 하지 않는다.
+	 	 -->
+	 	 <button @click="log">Try it</button>
+	 </div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : '.container',
+		data : {
+			a: 1
+		},
+		methods : {
+			log : function(){
+				console.log(this.$el) // HTML Element
+			}
+		},
+		computed : {
+			// 계산된 프로퍼티 (필드)
+			//  -> b는 a값에 따라 변화 (b = a*2)
+			//  -> b는 a에 의존한다.
+			//	-> b의 값은 a에 의해 결정된다.
+			b : function(){ // 계산된 프로퍼티, 내부에서 사용하는 a에 의존한다. a값이 변하면 변한다.
+				return this.a * 2 ;
+			}
+		}
+	})
+</script>
+</html>

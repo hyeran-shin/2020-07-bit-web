@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container text-center">
+		<p style="font-size:80px;"> </p>
+		<div class="row">
+			<food @voted="countVote" name="부대찌개개"></food>
+			<food @voted="countVote" name="김"></food>
+			<food @voted="countVote" name="된"></food>
+		</div>
+		
+		<h2> 투표 기록(로그)</h2>
+		<ul class="list-group">
+			<li v-for="vote in log" class="list-group-item" >
+				{{ vote }}
+			</li>
+		</ul>
+	</div>
+	
+	<template id="food">
+		<div class="text center col-lg-4">
+			<p style="font-size:40px;"> {{ foodVotes }} </p>
+			<button class="btn btn-default" @click="doVote"> {{ name }} </button>
+		</div>
+	</template>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+
+	Vue.component('food',{
+		template : '#food',
+		props : ['name'],
+		data : function(){
+			return { foodVotes : 0 };
+		},
+		methods : {
+			doVote : function(event){
+				this.foodVotes++;
+				this.$emit('voted',event.srcElement.textContent);
+			}
+		}
+	});
+	
+	
+	new Vue({
+		el : '.container',
+		data : {
+			votes : 0,
+			log : []
+		},
+		methods : {
+			countVote : function(foodName){
+				this.votes++;
+				this.log.push(foodName);
+			}
+		}
+	})
+</script>
+</html>
+
+
+
+
+

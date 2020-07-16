@@ -1,0 +1,23 @@
+package com.bit.util;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+
+public class ConnectionPool {
+	private static final int INIT_COUNT = 5;
+	private static final String URL 
+				="jdbc:mysql://127.0.0.1:3306/jblog?servetTimezone=UTC";
+	private static ArrayList<Connection> freeList = new ArrayList<>();
+	private static ArrayList<Connection> usedList = new ArrayList<>();
+	
+	static {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}
+		
+	}
+	
+	
+	
+}
+ 

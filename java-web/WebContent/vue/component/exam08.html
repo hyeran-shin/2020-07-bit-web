@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<!-- 
+		bus (버스)
+		 : 이벤트를 주고 받을 컴포넌트 사이에 bus를 두어 서로 간의 이벤트를 발생, 문법이 아니라 하나의 패턴이라고 생각
+			-> *bus : 데이터를 전달하는 개념, 데이터를 실어 나르겠다.
+			-> 서로 다른 컴포넌트 사이에서 데이터 전달 목적의 Vue 인스턴스.
+	 -->
+	 
+	 <!--  A 컴포넌트 (사용자 정의) -->
+	 <template id="food">
+	 	<div class="text-center col-lg-4">
+	 		<p style="font-size: 40px;"> {{ foodVotes }} </p>
+	 		<button class="btn btn-default" @click="doVote">{{ name }} </button>
+	 	</div>
+	</template>	 
+	
+	
+	<!--  B 컴포넌트  -->
+	<div class="container text-center">
+		<p style="font-size:80px;" > {{ }} </p>
+		<div class="tow">
+			<food name="부대찌개"></food> <!-- exam07의 @voted와 다른 방법 -->
+			<food name="김치찌개"></food>
+			<food name="된장찌개"></food>
+		</div>
+		<br>
+		<button class="btn btn-primary" @click="reset">초기화</button>
+		<h2>투표 기록(로그, log)</h2>
+		<ul class="list-group">
+			<li class="list-group-item" v-for="vote in votes.log"> {{ vote }} </li>
+		</ul>
+		<pre style="text-align : left"> {{$data}}</pre>
+	</div>		
+</body>
+	 
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+
+	// 서로 다른 컴포넌트 사이에 이벤트를 실어나를 bus 객체 생성
+	// [A Component] <-> [*Bus] <-> [B Component]
+	var bus = new Vue();
+	
+	// A Component
+	Vue.component('food',{
+		template : '#food',
+		props : ['name'],
+		data : function(){
+			return { foodVotes : 0 }
+		},
+		methods : {
+			doVote : function(event){
+				var foodName = event.srcElement.textContent;
+				this.foodVotes++;
+				bus.$emit('voted', foodName);
+			},
+			reset : function(){
+				this.foodVotes = 0;
+			}
+		},
+		// A Component 생성 후 bus 인스턴스에 reset 이벤트 바인딩
+		created(){
+			bus.$on('reset', this.reset);
+		}
+	})
+
+	
+	// B Component
+	new Vue({
+		el : '.container',
+		data : {
+			votes:{
+				count : 0,
+				log : []
+			}
+		},
+		methods : {
+			countVote : function(foodName){
+				this.votes.count++;
+				this.votes.log.push(foodName+' 투표!');
+			},
+			reset : function(){
+				this.votes = {
+						count : 0,
+						log : []
+				};
+				// $emit('reset') 함수 호출 시 bus에 등록된 reset 이벤트 실행
+				//	-> reset 함수는 B 컴포넌트의 함수
+				//  -> reset 이벤트는 A 컴포넌트에서 등록된 것
+				bus.$emit('reset');
+			}
+		},
+		// B Component가 생성 후 
+		created(){
+			bus.$on('voted', this.countVote);
+		}
+		
+		
+	})
+</script>
+</html>
+
+
+
+
+

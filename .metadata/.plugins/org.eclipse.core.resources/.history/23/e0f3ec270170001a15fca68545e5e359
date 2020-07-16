@@ -1,0 +1,43 @@
+package com.bit.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bit.util.ConnectionPool;
+import com.bit.vo.BoardVO;
+
+public class BoardDAO {
+	private Connection con = null;
+	private PreparedStatement pstmt = null;
+	private StringBuilder sql = new StringBuilder();
+
+	public List<BoardVO> selectAll() {
+		List<BoardVO> list = new ArrayList<>();
+		try {
+			sql.delete(0, sql.length());
+			con = ConnectionPool.getConnection();
+			sql.append("  SELECT * FROM board;  ");
+			pstmt = con.prepareStatement(sql.toString());
+			ResultSet rs = pstmt.executeQuery();
+			
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			ConnectionPool.close(con);
+		}
+
+		return list;
+	}
+}

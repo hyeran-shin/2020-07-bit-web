@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		confirm(msg)
+		 - 확인 메시지 창
+		 - 반환 타입 : boolean (true of false)
+		 
+		 prompt(msg, value)
+		  - 입력 메시지 창
+		  - 반환 타입 : string( 입력된 데이터 반환 )
+	*/
+	
+	var input = confirm('확인하시겠습니까?');
+ 	console.log(input);
+ 	
+ 	var name = prompt('이름을 입력하세요.' , '여기에 입력') // 기본 값
+ 	console.log(name); // 취소 누르면 null
+ 	
+ 	var age = prompt('나이를 입력하세요.', '여기에 입력')
+ 	console.log(age + 10); // prompt은 string,  
+ 	//string + number -> '25' + 10 -> '2510' 출력
+ 	
+ 	var age = Number(age); //string -> number 형 변환
+ 	console.log(age + 10); // number + number -> 25 + 10 -> 35
+ 	
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+

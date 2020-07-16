@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/*
+		반응 선택자
+			- 특정 이벤트(사건)에 따라 스타일 적용 여부를 결정
+				태그명 : 기능(추상클래스) -> 우선 순위는 클래스와 동일 수준!
+				
+	*/
+	p{color : red;}
+	.my-class {color : blue;}
+	#id {color : skyblue;}
+	/* id 보다 우선 순위가 낮다 -> 실행되지 않음.*/
+	p:hover {color: yellow;} 
+	/* 속성 값에 !important 부여 시 가장 높은 우선순위, 무조건 적용 */
+	p:active {color: green !important;}
+</style>
+</head>
+<body>
+	<p>Hello CSS3</p>
+	<p class="my-class" >Hello CSS3</p>
+	<p class="my-class" id="id">Hello CSS3</p>
+	<p class="my-class" id="id" style="color:purple">Hello CSS3</p>
+	
+</body>
+</html>

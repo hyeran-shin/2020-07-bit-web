@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+		객체 생성과 동시에 속성과 메소드 초기화
+ 	*/
+
+	var Person = {
+			name : '카페',
+			age : 8,
+			address : '천안시 서북구',
+			
+			//info 만나기 전까지 자기 자신을 호출해라?
+			info : function(){ 
+				var str = '';
+				// for ~ in 반복문(foreach), 모두 순회하되 속성 추출
+				for(var key in this){ // this는 Person , key 순회!, this : 나 자신 객체
+					if(key != 'info'){ // key 이름이 'info'가 아니라면,
+						str += key + ' : ' + this[key] + '\n';
+						// this[key] : 현재 자신 객체의 key 값을 전달
+						// -> Person['name']과 같이 value를 추출하겠다.
+					}
+				}
+				console.log(str);
+			}
+		}
+		
+	// 모든 속성 이름 순회
+ 	for(var key in Person){
+//  		console.log(key); // name, age, address 출력, 인덱스 값 = 키 값이라고 확장해서 생각.
+ 		console.log(Person[key]); // 값(데이터)
+ 		console.log(this[key]);
+ 		// this 식별을 할 수 없는 영역 -> undefined
+ 	}
+ 	
+	// info() 메소드 호출
+	Person.info();
+ 	
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+

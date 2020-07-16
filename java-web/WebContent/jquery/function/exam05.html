@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('button').click(function(){
+// 			$('div').animate({ height : '300px', opacity : '0.7'} , 'slow');
+// 			$('div').animate({ width : '300px', opacity : '0.2'} , 'fast');
+// 			$('div').animate({ height : '100px', opacity : '0.9'} , 1000);
+// 			$('div').animate({ width : '100px', opacity : '0.5'} , 500);
+			// 수행 순서 존재, animate 총 4번 활용
+			// (1 -> 2 -> 3 -> 4)
+			
+			$('div').animate({left : '200px'/* , fontSize : '30' */})
+			// 함께 적용 시 이동과 사이즈를 동시 수행
+			$('div').animate({ fontSize : '30' })
+			// 각각 적용 시 이동 후 사이즈 변경
+			
+		});
+		
+		
+	});
+</script> 
+
+</head>
+<body>
+	<button> Try it </button>
+	<div style="width : 100px; height : 100px;
+		background-color:skyblue; position:absolute">
+		Hello jQuery animate() function !!!	
+	</div>
+</body>
+</html>

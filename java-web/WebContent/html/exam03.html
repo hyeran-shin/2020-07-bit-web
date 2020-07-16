@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		입력 양식 태그 (form tag)
+		action : 전송 위치
+		method : 전송 방식(GET, POST)
+		
+		입력 태그 (input tag)
+			text			문자 입력
+			button			버튼
+			hidden			보이지 않지많 입력하고자 할 때 (전송 파라미터에 포함)
+				-> *페이지 요소에는 노출되기에, 보안에는 취약! (Cookie 처럼)
+				-> 화면에서만 숨길 뿐
+			submit			전송 버튼 (파라미터 전송, action 수행)
+		 	textarea		문자 영역 입력 (다중 행 입력)
+		 		cols		너비 (가로 문자)
+		 		rows		높이 (세로 문자)
+		 	image			이미지 형태
+		 	password		비밀번호 입력
+		 	checkbox		체크 박스
+		 	radio			라디오 버튼
+			reset			입력 데이터 초기화
+			file 			파일 입력
+			...
+		
+			select 			선택
+				option		옵션 생성
+				optgroup	옵션 그룹화
+			fieldset		입력 양식의 그룹화
+			legend			입력 양식 그룹의 이름 지정
+			label			해당 양식에 붙이는 이름
+			
+	 -->
+	 
+	 <form>
+	 	<input type="text">text<br>
+	 	<input type="button">button<br>
+	 	<input type="file">file<br>
+	 	<input type="hidden">hidden<br>
+	 	<input type="image">image<br>
+	 	<input type="password">pw<br>
+	 	<input type="checkbox">checkbox<br>
+	 	<input type="radio">radio<br>
+	 	<input type="submit">submit<br> <!-- 데이터 전송, 페이지 이동 효과 -->
+	 	<input type="reset">reset<br>
+	 	
+	 	<hr>
+	 	<input type="color">color<br>
+	 	<input type="date">date<br>
+	 	<input type="datetime"><br>
+	 	<input type="datetime-local"><br>
+	 	<input type="time"><br>
+	 	<input type="week"><br>
+	 	<input type="month"><br>
+	 	<input type="number"><br>
+	 	<input type="range"><br>
+	 	<input type="search"><br>
+	 	<input type="email"><br>
+	 	<input type="tel"><br>
+	 	<input type="url"><br>
+	 </form>
+	 
+	 <hr>
+	 
+	 <!-- 
+	 	label : 양식에 이름을 붙이는 요소, 클릭 시 해당 요소에 포커스
+	 		for : 페이지 내의 식별자인 id, 어느 요소에 연결
+	 			  동일 id를 가진 요소가 있을 시 가장 먼저 나오는 요소와 연결
+	  -->
+	  <form>
+	  	<label for="name">이름(label)</label>
+	  	<input id="name" type="text"><br>
+	  	<label for="agree">동의</label>
+	  	<input id="agree" type="checkbox"/>
+	  	<input id="agree" type="checkbox"/>
+	  </form>
+	  
+	  <hr>
+	  
+	  <form>
+	  	<!-- 태그 내 자체를 문서 영역으로 인식!(개행, 들여쓰기, 공백 적용) -->
+	  	<textarea>
+	  		HELLO HTML5
+	  		HELLO CSS3
+	  		HELLO JAVASCRIPT
+	  	</textarea>	
+	  	<br>
+	  	<!-- 콤보 박스 선택 창 -->
+	  	<select>
+	  		<option>HTML5</option>
+	  		<option>CSS3</option>
+	  		<option>JavaScript</option>
+	  		<option>ECMAScript</option>
+	  	</select>
+	  	<br>
+	  	<!-- 옵션의 그룹화 -->
+	  	<select>
+	  		<optgroup label="Web">
+		  		<option>JavaScript</option>
+		  		<option>PHP</option>
+		  		<option>Ruby</option>
+	  		</optgroup>
+	  		<optgroup label="App">
+	  			<option>Java</option>
+	  			<option>C++</option>
+	  			<option>CS</option>
+	  		</optgroup>
+	  		
+	  	</select>
+	  </form>
+	  
+	  
+	  <hr>
+	  
+	  <form>
+	  	<fieldset> <!-- 내부 요소를 그룹화 -->
+	  		<legend>입력 양식</legend><!-- 그룹화된 양식 이름 -->
+	  		<table>
+	  			<tr>
+	  				<td><label for="id">아이디</label></td>
+	  				<td><input id="id" type="text"></td>
+	  			</tr>
+	  			<tr>
+	  				<td><label for="pw">비밀번호</label></td>
+	  				<td><input id="pw" type="password"></td>
+	  		</table>
+	  		<input type="submit">
+	  	</fieldset>
+	  </form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

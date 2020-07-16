@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+	var now = new Date(); 
+	document.write('Local Time : ' + now +'<br>')
+	
+	var hour = now.getHours();
+	var minute = now.getMinutes();
+	var second = now.getSeconds();
+	var year = now.getFullYear();
+	var month = now.getMonth() + 1;
+	var day = now.getDate();
+	
+	document.write('오늘은' + year + '-' + month + '-' + day + ' ');
+	document.write(hour + ":" + minute + ":" + second + '<br>');
+	
+	// 오늘이 무슨 요일인지 판단하는 함수
+	function getDayOfWeek() {
+		var day = this.getDay();
+		var week = [ '일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일' ];
+		return week[day];
+	}
+	//단독호출 시 this가 참조하는 객체가 없기에, error
+// 	console.log(getDayOfWeek());
+	
+	Date.prototype.toDay = getDayOfWeek;
+	// Date 객체의 프로토타입으로 참조시켜라.
+	// getDayOfWeek 내부의 this 는 Date 객체.
+	//		-> toDay 라는 이름으로 호출.
+	
+	document.write('오늘은' + now.toDay() + '입니다. <br>');
+	// 기존 자바스크립트 객체에 원하는 프로퍼티를 추가하여 활용
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<h1>조건에 의한 필터링(문자열 검색)</h1>
+		
+		<h3>카페의 요구</h3>
+		<ul class="list-group">
+			<li  v-for="cat in catsBy('카페')"  class="list-group-item">
+				{{ cat.name }} "{{cat.speech}}"
+			</li>
+		</ul>
+		
+		<h3>라떼의 요구</h3>
+		<ul class="list-group">
+			<li  v-for="cat in catsBy('라떼')"  class="list-group-item">
+				{{ cat.name }} "{{cat.speech}}"
+			</li>
+		</ul>
+		
+		<div class="form-group">
+			<label for="query"> 고양이의 말을 검색하세요. </label>
+			<input @input="query=$event.target.value" class="form-control">
+		</div>
+		<div v-if="query!='' ">
+			<h3>말 검색 결과입니다.</h3>
+			<ul class="list-group">
+				<li v-for="cat in search" class="list-group-item">
+					{{ cat.name }} "{{cat.speech}}"
+				</li>
+			</ul>
+			<ul v-if="search==''" class="list-group" > 
+				<li class="list-group-item" > 검색 결과 없음 </li> 
+			</ul>
+		</div>
+		
+		<div class="form-group">
+			<label for="queryName"> 고양이의 이름을 검색하세요.</label>
+			<input  v-on:input="typing" class="form-control">
+		</div>
+		<div v-if="queryName!=''">
+			<h3>이름 검색 결과입니다.</h3>
+			<ul class="list-group">
+				<li v-for="cat in searchName" class="list-group-item">
+					{{ cat.name }} "{{cat.speech}}"
+				</li>
+			</ul>
+			<ul v-if="searchName==''" class="list-group" > 
+				<li class="list-group-item" > 검색 결과 없음 </li> 
+			</ul>
+		</div>
+		
+		<!-- 
+			input v-model 바인딩 시 Cursor가 이동되야만, 바인딩 완료
+			v-on:input="..." -> 키보드 입력 시 수행하는 디렉티브 (이벤트)
+			*키보드 입력 시 마다 바로바로 처리를 해주겠다.
+			*문자 조합의 언어(한글)에서 "가" 입력 시 이어서 받침도 존재한다.
+				-> 알파벳(영어)처럼 바로바로 커서가 이동되지 않는다.
+		 -->
+		 
+<!-- 		<label for="queryName"> 고양이의 이름을 검색하세요.(한글 바인딩)</label> -->
+			<!-- typing 함수 정의 후 호출하는 방식 -->
+<!-- 		<input v-on:input="typing" class="form-control"> -->
+			<!-- 직접 로직을 삽입하는 방식(v-on: == @ 와 같다)-->
+<!-- 			<input v-on:input="query=$event.target.value" class="form-control"> -->
+		<!--  입력 시 마다 typing 함수 호출  -->
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '.container',
+		data : {
+			cats : [
+				{ speech : '산책 가자', name : '카페'},
+				{ speech : '집사야 밥 줘', name : '라떼'},
+				{ speech : '같이 놀자', name : '카페'},
+				{ speech : '물 없음', name : '라떼'},
+				{ speech : '집사야 심심하다', name : '모카'},
+				{ speech : '츄르 달라', name : '라미'},
+			],
+			query : '', // 검색시 사용할 query 필드(변수)
+			queryName : '',
+		},
+		methods : {
+			catsBy : function(name){
+				return this.cats.filter(function(cat){
+					return cat.name === name ; 
+				});
+			},
+			typing : function(event){ //event 객체
+				this.queryName = event.target.value;
+				// 요소의 value를 가져와 직접 query 데이터에 대입
+				// 한글 입력에 문제가 있으니, v-model 바인딩을 하지말고,
+				// 직접 변화시키겠다. -> computed 발동
+				// v-model : 양방향 바인딩을 위한 디렉티브
+				// *단방향 바인딩만 활용하겠다. (브라우저 -> 화면 )
+				// *화면 -> 브라우저 작업을 직접 수행!
+			}
+		},
+		computed : {
+			search : function(){
+				var query = this.query;
+				return this.cats.filter(function(cat){
+					return cat.speech.includes(query);
+					// includes : 문자열에서의 query 포함 여부를 반환
+				});
+			},
+			searchName : function(){
+				var queryName = this.queryName;
+				return this.cats.filter(function(cat){
+					return cat.name.includes(queryName);
+				});
+			}
+		
+		}
+		
+	})
+</script>
+</html>
+
+
+
+
+

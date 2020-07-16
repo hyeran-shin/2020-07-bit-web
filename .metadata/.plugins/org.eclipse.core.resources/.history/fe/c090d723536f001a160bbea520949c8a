@@ -1,0 +1,23 @@
+package com.bit.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bit.framework.ModelAndView;
+import com.bit.framework.annotation.RequestMapping;
+
+public class LoginController {
+	@RequestMapping("/loginForm.do")
+	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setView("/WEB-INF/views/login/loginForm.jsp");
+		return mav;
+	}
+	
+	@RequestMapping("/login.do")
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//	String id = request.getParameter("id");
+//	String pw = request.getParameter("pw");
+	
+	
+}

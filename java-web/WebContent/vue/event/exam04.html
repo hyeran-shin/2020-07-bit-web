@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<!-- exam02.html Calculator (methods > computed) -->
+	<div class="container">
+		<h1>Computed Properties Calculator</h1>
+		<form class="form-inline">
+			<input v-model.number="a" class="form-control">
+			<select v-model="operator" class="form-control">
+				<option>+</option>
+				<option>-</option>
+				<option>*</option>
+				<option>/</option>
+			</select>
+			<input v-model.number="b" class="form-control">
+		</form>
+		<h2>결과 : {{ a }} {{ operator }} {{ b }} = {{ c }}</h2>
+		<pre>{{ $data }}</pre>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : '.container',
+		data : {
+			a : 1,
+			b : 2,
+			operator : '+'
+		},
+		computed : {
+			c : function() {
+				switch(this.operator) {
+				case '+': return this.a + this.b; break
+				case '-': return this.a - this.b; break
+				case '*': return this.a * this.b; break
+				case '/': return this.a / this.b; break
+				}
+			}
+		}
+	})		
+</script>
+</html>

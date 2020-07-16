@@ -1,0 +1,8 @@
+package com.bit.framework;
+
+import java.lang.reflect.Method;
+
+public class CtrlAndMethod {
+	private Object target;
+	private Method method;
+}

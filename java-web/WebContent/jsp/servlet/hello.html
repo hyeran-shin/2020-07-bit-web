@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		HTML(HyperText Mark-up Language)
+			- 웹 페이지의 구조를 담당하는 마크업 언어
+			- 태그 문법을 통해 문서 구조를 작성
+		
+		[특징]
+		 1. 태그의 대소문자 구분이 없음
+		 2. 확장자는 htm, html로 생성
+		 3. Enter, Space, Tab 등이 적용되지 않음
+		 
+		 [구성]
+		 	태그(Tag)
+		 	 - "<"와 ">"로 묶은 명령어
+		 	 - 형태 : <태그명> ... </태그명>
+		 	 
+		 	 요소(Element)
+		 	  <body>Hello</body>
+		 	  - <body>	: 시작 태그
+		 	  - </body> : 종료 태그
+		 	  - body 	: 요소 명 (태그 명)
+		 	  - Hello	: 요소 내용
+		 	  
+		 	  속성(Attribute)
+		 	  - 각각의 시작 태그는 필요에 따라 속성을 가질 수 있다.
+		 	  - 속성은 존재하지 않을 수 있고, 여러 개 설정도 가능하다.
+		 	  
+		 	  값(Value)
+		 	  - 속성에 대한 값
+	 -->
+	<!-- 
+		폼 태그(form tag, 입력 양식 태그)
+		[속성]
+			action : 전송 위치
+			method : 전송 방식 
+			
+		입력 태그(input tag)
+			- type 속성
+				text 	: 문자 입력
+				button	: 버튼
+				submit 	: 전송 버튼(데이터 전달)
+				hidden	: 입력은 하지 않지만 같이 전달하고 싶은 데이터(숨김)
+				...
+	 -->
+	<form action="/java-web/hello" method="get">
+		아이디 : <input type="text" size="10" name="id"/><br>
+		취미 선택 : <br>
+		게임 <input type="checkbox" name="hobby" value="game"/>
+		영화 <input type="checkbox" name="hobby" value="movie"/>
+		코딩 <input type="checkbox" name="hobby" value="coding"/>
+		<br>
+		<input type="submit" value="전송"/>
+	</form>
+</body>
+</html>
+
+
+
+
+
+
+

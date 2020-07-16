@@ -1,0 +1,50 @@
+package com.bit.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.bit.util.ConnectionPool;
+import com.bit.vo.LoginVO;
+
+public class LoginDAO {
+	private Connection con = null;
+	private PreparedStatement pstmt = null;
+	private StringBuilder sql = new StringBuilder();
+	
+	
+	public LoginVO login(LoginVO login) {
+		try {
+			con = ConnectionPool.getConnection();
+			sql.delete(0, sql.length());
+			sql.append("   SELECT * FROM member   ");
+			sql.append("   WHERE id = ? AND password = ?  ");
+			
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, login.getId());
+			pstmt.setString(2, login.getPassword());
+			ResultSet rs = pstmt.executeQuery();
+			
+			LoginVO loginVO = new LoginVO();
+			loginVO.setId(rs.getString("id"));
+			loginVO.setPassword(rs.getString("password"));
+			loginVO.setName(rs.getString("name"));
+			loginVO.setType(rs.getString("type"));
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			ConnectionPool.close(con);
+		}
+		
+		return loginVO;
+	}
+}

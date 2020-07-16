@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+	<!--  JS동작을 위한 template 활용 -->
+		<template>
+			<template v-for="member in members" >
+				<ul>
+					<!--  객체 순회 : 배열 순회로 추출한 member 내부의 프로퍼티 추출 -->
+					<li v-for="(key, value, index) in member">
+						{{ index+1 }}. {{ key }} : {{ value }} 
+					</li>
+				</ul>
+			</template>
+		</template>
+	</div>
+					
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '.container',
+		data : {
+			members :[
+				{name :'A', age : 10, height : 32, weight:2.9},
+				{name :'A', age : 10, height : 32, weight:2.9},
+				{name :'A', age : 10, height : 32, weight:2.9},
+				{name :'A', age : 10, height : 32, weight:2.9}
+				]
+			}
+	});
+</script>
+</html>
+
+	

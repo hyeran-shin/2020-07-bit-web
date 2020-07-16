@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	// 가입 버튼 수행 시 (submit)
+	// 비밀번호 요소와 비밀번호 확인 요소를 가져와, 
+	// 두 값이 일치한다면 성공 메시지 출력
+	// 일치하지 않으면 실패
+	// 메시지 출력 후 submit 수행하지 않도록
+	var submitCheck = function(){
+// 		var f = document.mForm; // name mForm의 요소
+// 		var pw = f.pw.value; // form의 name="pw"인 요소의 value
+// 		var pw_chk = f.pw_chk.value; //form의 name ="pw_chk"인 요소의 value
+// 		var pw_chk = f.pw-chk.value; // 오류남
+		/*
+			kebob-case
+			 - 요소의 속성 이름으로 활용
+			 - 요소의 속성 값으로 활용 시 스크립트 문법으로 직접 접근은 불가능
+			 	-> 속성 값을 문자열('')으로 전체를 가져올 때는 문제가 없다.
+			 	*결론 : 자바 스크립트 문법 상 '-' 뺄셈으로 인식
+			 		f.pwd-chk.value
+			 		f.pwd 빼기 chk.value로 인식
+			 	
+			[페이지 새로고침이나 이동 시 전 페이지의 에러 내용 주의]
+			- 전 페이지에서 에러가 발생하더라도,
+			    새로고침이나 이동이 된다면 console창은 클리어 된다.
+		*/
+		if(document.getElementById('pw').value == document.getElementById('pw_chk').value){
+			alert('성공');
+		}else{
+			alert('실패');
+		}
+		return false;
+	}
+	
+	
+</script>
+</head>
+<body>
+	<form name="mForm" method="post" onsubmit="submitCheck()">
+		아이디 : <input type="text" id="id" name="id" size="20"><br>
+		비밀번호 : <input type="password" id="pw" name="pw" size="20"><br>
+		비밀번호 확인 : <input type="password" id="pw_chk" name="pw_chk" size="20"><br>
+		<input type="submit" value="가입" >
+	</form>
+</body>
+</html>

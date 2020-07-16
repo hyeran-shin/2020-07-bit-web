@@ -1,0 +1,7 @@
+package com.bit.util;
+
+public class ConnectionPool {
+	private static final int INIT_COUNT = 5;
+	private static final String URL 
+				="jdbc:mysql://127.0.0.1:3306/jblog";
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		공간 분할 태그
+		div		: 블록 레벨 (하나의 행 모두)
+		span	: 인라인 레벨 (요소 및 내용 만큼)
+		
+		블록 레벨의 요소
+			-> div, h1-h6, p, ol, ul, table, form, ...
+			<br>안해도 개행 되는 것들
+		인라인 레벨의 요소
+			-> span, a, input, 글자 태그 형식, ...
+			내용 만큼만 공간 분할
+	 -->
+	 <h4>Heading 1</h4>
+	 <h4>Heading 2</h4>
+	 <b>Bold 1</b>
+	 <b>Bold 2</b>
+	 
+	 <div style="background-color : skyblue" > HEllO DIV</div>
+	 <div>Hello div</div>
+	 <div>Hello div</div>
+	 <span style="background-color : pink">Hello span</span>
+	 <span>span</span>
+	 <span>span</span>
+	 
+
+	<!-- 
+	
+		시맨틱 검색 : 검색 로봇이 스스로 분석하고 결과를 도출하게 해주는 검색 방식
+			-> 시맨틱이란? 유저나 시스템이 분석하기에 참고하는 데이터
+			
+		시맨틱 태그 (Semantic)
+			header		: 헤더(상단)
+			nav			: 네비게이션 (메뉴)
+			aside		: 사이드의 위치 공간(메뉴, 부가적 요소)
+			section		: 여러 내용을 감싸는 공간(본문)
+			article		: 글자가 많이 사용되는 공간 (내용)
+			footer		: 푸터 (하단)
+			
+	
+		<div id="header"></div> 형식으로 분할한 방법을
+		<header></header> 형식으로 표현
+				
+	 -->	 
+	 <header>
+	 	<h1>Hello Semantic</h1>
+	 </header>
+	 <nav>
+	 	<ul>
+	 		<li><a href="#">Menu 1</a>
+	 		<li><a href="#">Menu 2</a>
+	 		<li><a href="#">Menu 3</a>
+	 	</ul>
+	 </nav>
+	 <section>
+	 	<article>
+	 		<h3>Hello HTML5/CSS3</h3>
+	 		<p>JavaScript, PHP, Ruby, Python</p>
+	 	</article>
+	 	<article>
+	 		<h3>Hello HTML5/CSS3</h3>
+	 		<p>JavaScript, PHP, Ruby, Python</p>
+	 	</article>
+	 </section>
+	 <footer>
+	 	<address>서울시 서초구</address>
+	 	<!-- 문서의 저자, 소유자 등의 정보를 기재 -->
+	 </footer>
+</body>
+</html>
+
+
+
+
+
+

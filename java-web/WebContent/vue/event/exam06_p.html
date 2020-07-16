@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '.container',
+		data : {
+			votes : 0
+		},
+		methods : {
+			voteFunction : function(){
+				this.$emit('voted');
+			}
+		},
+		created(){
+			this.$on('voted',function(){
+				this.votes++;
+			})
+		}
+	});
+</script>
+</html>
+
+
+
+
+

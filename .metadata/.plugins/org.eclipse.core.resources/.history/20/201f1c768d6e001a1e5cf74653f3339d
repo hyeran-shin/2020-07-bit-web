@@ -1,0 +1,55 @@
+package com.bit.framework;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class DispatcherServlet extends HttpServlet{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3719201454070450384L;
+
+	private HandlerMapping mappings;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		String ctrlsName = config.getInitParameter("controller");
+		try {
+			mappings = new HandlerMapping(ctrlsName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		String uri = request.getRequestURI(); 
+		String contextPath = request.getContextPath();
+		uri = uri.substring(contextPath.length());
+		
+		CtrlAndMethod cam = mappings.getCtrlAndMethod(uri);
+		Object target = cam.getTarget();
+		Method method = cam.getMethod();
+		
+		try {
+			method.invoke(method, request, response);
+		} catch (Exception e) {
+			// 에러 페이지 
+			e.printStackTrace();
+		}
+	}
+}
+
+
+
+
+
+

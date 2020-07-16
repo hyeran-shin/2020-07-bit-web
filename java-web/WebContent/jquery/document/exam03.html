@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	
+	$(function(){
+		setTimeout(function(){
+			/*
+				append() 	: 특정 요소의 뒤에 추가해라.
+				prepend()	: 특정 요소의 앞에 추가해라.
+			*/
+			
+			var html = " <strong> (append element) </strong> ";
+			$('#p1').append(html);
+			var html = " (prepend text) ";
+			$('#p2').prepend(html);
+			
+			var html = "<li>" + "추가된 리스트(뒤)" +"</li>";
+			$('#my-list').append(html);
+			var html = "<li>" + "추가된 리스트(앞)" +"</li>";
+			$('#my-list').prepend(html);
+		}, 2000);
+	});
+	
+</script>
+</head>
+<body>
+	<p id="p1">Paragraph</p>
+	<p id="p2"><strong>Hello</strong> jQuery</p>
+	
+	
+	<ul id="my-list">
+		<li>List 1</li>
+		<li>List 2</li>
+		<li>List 3</li>
+	</ul>
+	
+</body>
+</html>

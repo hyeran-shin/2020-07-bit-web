@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order">
+	<insert id="insertOrder" parameterType="map">
+		<![CDATA[
+			insert into 
+			order_status ( product_no, product_name, order_product_count, order_date, users_no, order_product_price)
+			 values (#{pNo}, #{pName}, #{pCount}, CURRENT_TIMESTAMP, #{usersNo}, #{price})
+		]]>
+	</insert>
+	
+	
+	<select id="selectCount" resultType="int" parameterType="string" >
+		<choose>
+			<when test="_parameter != null and _parameter != ''" >
+				select count(*) from order_status 
+					where users_no = ${_parameter}
+			</when>
+			<otherwise>
+				select count(*) from order_status
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<select id="selectOrderList" resultType="ordervo" parameterType="map">
+		<choose>
+			<when test="no != null and no != ''">
+					<![CDATA[
+					select y.* 
+						from ( select 	x.no, x.product_no, x.product_name, x.order_product_count,
+										x.order_product_price,
+										x.order_date, 
+										x.users_no , 
+										x.users_name, 
+										(@rownum := @rownum + 1) as rn
+								from 	( select b.no, b.product_no, b.product_name, b.order_product_count, b.order_date, b.users_no, b.order_product_price, 
+													u.users_name
+											from order_status b, users u
+										   where b.users_no = u.users_no 
+										   	and  b.users_no = #{no}			   	
+										    order by b.order_date desc
+										) as x,
+										( select @rownum := 0 ) as r 
+							   ) as y
+					  where (#{page}-1) * #{size}+1 <= rn and rn <= #{page} * #{size}							 
+				]]>
+			</when>
+			
+			<when test="keyword != null and keyword != '' ">
+				 <![CDATA[
+					select y.* 
+						from ( select 	x.no, x.product_no, x.product_name, x.order_product_count,
+										x.order_product_price,
+										x.order_date, 
+										x.users_no , 
+										x.users_name,
+										(@rownum := @rownum + 1) as rn
+								from 	( select b.no, b.product_no, b.product_name, b.order_product_count, b.order_date, b.users_no, u.users_name, b.order_product_price
+											from order_status b, users u
+										   where b.users_no = u.users_no
+										    and ( b.product_name like '%${keyword}%' 
+										   			or
+										   		  u.users_name like '%${keyword}%'
+										   		 )
+										    order by b.order_date desc
+										) as x,
+										( select @rownum := 0 ) as r 
+							   ) as y
+					  where (#{page}-1) * #{size}+1 <= rn and rn <= #{page} * #{size}				
+				]]>
+			</when>
+			
+			<otherwise>
+				 <![CDATA[
+					select y.* 
+						from ( select 	x.no, x.product_no, x.product_name, x.order_product_count,
+										x.order_product_price,
+										x.order_date, 
+										x.users_no , 
+										x.users_name,
+										(@rownum := @rownum + 1) as rn
+								from 	( select b.no, b.product_no, b.product_name, b.order_product_count, b.order_date, b.users_no, u.users_name, b.order_product_price
+											from order_status b, users u
+										   where b.users_no = u.users_no
+										    order by b.order_date desc
+										) as x,
+										( select @rownum := 0 ) as r 
+							   ) as y
+					  where (#{page}-1) * #{size}+1 <= rn and rn <= #{page} * #{size}				
+				]]>
+			</otherwise>
+		</choose>
+		
+	</select>
+	
+	<delete id="delete" parameterType="map">
+		delete from order_status
+			where product_no=#{pNo} and no=#{no}
+	</delete>
+	
+	<select id="total" resultType="map" parameterType="map" > 
+		select o.* , u.*
+			from order_status o , users u
+		where  o.users_no= #{uno}
+		 and  o.users_no = u.users_no
+		  and o.no= #{ono}
+	</select>
+	
+	
+
+	
+</mapper>
+
+
+
+
+
+
+
+

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gallery">
+
+
+	<insert id="uploadGallery" parameterType="galleryvo">
+		
+				<![CDATA[
+					insert into
+					 gallery ( org_file_name, save_file_name, file_ext_name, file_size, reg_date, product_no )
+					  values ( #{orgFileName}, #{saveFileName},  #{fileExtName}, #{fileSize}, CURRENT_TIMESTAMP, 
+					  #{productNo} 
+					  )
+				]]>
+	</insert>
+	
+			
+	<select id="getList" resultType="galleryvo" parameterType="map">
+		<choose>
+			<when test="number != null and number != ''">
+				<![CDATA[
+				select no, 
+					org_file_name as orgFileName,
+					save_file_name as saveFileName,
+					reg_date as regDate,
+					product_no as productNo
+				 from gallery
+				where product_no = #{number}
+					order by reg_date desc
+				]]>		
+			</when>
+			<otherwise>
+				select no,
+					org_file_name as orgFileName,
+					save_file_name as saveFileName,
+					reg_date as regDate,
+					product_no as productNo
+			 	 from gallery
+					order by reg_date desc
+			</otherwise>
+		</choose>
+
+	</select>
+	
+	<select id="getOne" resultType="galleryvo" parameterType="map">
+		<![CDATA[
+				select no, 
+					org_file_name as orgFileName,
+					save_file_name as saveFileName,
+					reg_date as regDate,
+					product_no as productNo
+				 from gallery
+				where product_no = #{number}
+					order by reg_date desc
+					limit 1
+			]]>		
+	</select>
+	
+	<insert id="insert" parameterType="galleryvo">
+		<![CDATA[
+			insert into
+			 gallery ( org_file_name, save_file_name, comments, file_ext_name, file_size, reg_date, users_no )
+			  values ( #{orgFileName}, #{saveFileName}, #{comments}, #{fileExtName}, #{fileSize}, CURRENT_TIMESTAMP, #{usersNo} )
+		
+		]]>
+	</insert>
+	
+	<delete id="delete" parameterType="galleryvo">
+		delete from gallery
+			where no = #{no} and users_no =#{usersNo}
+	</delete>
+	
+	<delete id="deleteFile" parameterType="map" >
+		delete from gallery
+			where product_no = #{pNo} and 
+		<foreach collection="dFileName" item="filename" separator="and">
+            save_file_name = #{filename, jdbcType=VARCHAR}
+        </foreach>
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

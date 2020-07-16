@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	/*
+		상태 선택자
+			- 입력 양식의 상태에 따라 CSS 적용
+		enabled		: 사용 가능한 입력 요소 (활성화)
+		disabled	: 사용 불가능한 입력 요소 (비활성화)
+		focus		: 초점이 맞추어진 입력 요소
+		checked		: 체크 상태에 따른 입력 요소
+	*/
+	/* 입력 요소가 사용 가능한 상태라면 적용 */
+	input:enabled { background-color : skyblue;}
+	/* 입력 요소가 사용 불가능한 상태라면 적용*/
+	input:disabled {background-color : pink;}
+	/* 입력 요소에 초점이 주어진다면 적용*/
+	input:focus {background-color : yellow;}
+	/* 체크박스 타입의 상태가 체크된 상태라면, 바로 다음 나오는 div 요소에 적용*/
+	input[type=checkbox]:checked + div {
+		height: 0px;
+	}
+	div{
+		/* 크기가 넘어섰다면, 숨겨라 */
+		overflow: hidden;
+		width: 400px;
+		height: 200px;
+		
+		/* 변환 효과 적용 */
+		-ms-transition-duration : 1s;
+		-webkit-transition-duration : 1s;
+		-mox-transition-duration: 1s;
+		-o-transition-duration: 1s;
+		transition-duration: 1s;
+	}
+
+</style>
+</head>
+<body>
+	<input value="enabled"> <!-- 활성화 -->
+	<input value="disabled" disabled="disabled"> <!-- 비활성화 -->
+	<br>
+	<input type="checkbox">
+	<div>
+		<p><a href="#"> 아파치 스파크(Apache Spark)</a>는 매우 큰 데이터 집합을 
+		 대상으로 빠르게 처리 작업을 수행하는 한편, 
+		 단독으로 또는 다른 분산 컴퓨팅 툴과 조율해 여러 컴퓨터로 
+		 데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.
+		 </p>
+	</div>
+</body>
+</html>

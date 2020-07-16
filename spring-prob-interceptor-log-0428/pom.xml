@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>spring-prob-0428</groupId>
+  <artifactId>spring-prob-0428</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <properties>
+  	<org.springframework-version>4.2.1.RELEASE</org.springframework-version>
+  	<jcloverslf4j.version>1.7.6</jcloverslf4j.version>
+  	<logback.version>1.1.1</logback.version>
+  </properties>
+  
+  <!-- spring library dependency -->
+  <dependencies>
+  	<!-- spring context -->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-context</artifactId>
+  		<version>${org.springframework-version}</version>
+  		<exclusions>
+  		 	<exclusion>
+  		 		<groupId>commons-logging</groupId>
+  		 		<artifactId>commons-logging</artifactId>
+  		 	</exclusion>
+  		</exclusions>
+  	</dependency>
+  	
+  	
+  	<!-- spring web -->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-web</artifactId>
+  		<version>${org.springframework-version}</version>
+  	</dependency>
+  	
+  	<!-- spring mvc -->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-webmvc</artifactId>
+  		<version>${org.springframework-version}</version>
+  	</dependency>
+  	
+  	<!-- JCL-over-SLF4J 추가 -->
+  	<dependency>
+  	 	<groupId>org.slf4j</groupId>
+  	 	<artifactId>jcl-over-slf4j</artifactId>
+  	 	<version>${jcloverslf4j.version}</version>
+  	</dependency>
+  	 
+  	<!-- SLF4J 구현체 Logback 추가 -->
+  	<dependency>
+  	 	<groupId>ch.qos.logback</groupId>
+  	 	<artifactId>logback-classic</artifactId>
+  	 	<version>${logback.version}</version>
+  	</dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+        <configuration>
+          <warSourceDirectory>webapp</warSourceDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

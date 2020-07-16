@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+	<insert id="insert" parameterType="uservo">
+		<![CDATA[
+			insert into users(users_name, email, password, gender, users_type, reg_date)
+			values( #{usersName}, #{email}, #{password}, #{gender} , 'user' , CURRENT_TIMESTAMP )
+		]]>
+	</insert>
+	
+	<select id="getByEmail" parameterType="string" resultType="uservo">
+		<![CDATA[
+			select users_no, email, users_name
+			from users
+			where email = #{email}
+		]]>
+	</select>
+	
+	<select id="getByEmailAndPw" parameterType="map" resultType="uservo">
+		<![CDATA[
+			select users_no as usersNo, users_name as usersName, users_type as usersType
+				from users
+			 where email = #{email} and password = #{password}
+		]]>
+	</select>
+	
+	<select id="getByNo" parameterType="int" resultType="uservo">
+		<![CDATA[
+			select users_no as usersNo, users_name as usersName, users_type as usersType,
+				 email, gender
+			from users
+			where users_no = #{no}
+		]]>
+	</select>
+	
+	<update id="update" parameterType="uservo">
+		<![CDATA[
+			update users
+			set users_name = #{usersName}, password = #{password}, gender = #{gender}
+			where users_no = #{usersNo}
+		]]> 
+	</update>
+	
+	<delete id="delete" parameterType="uservo">
+		<![CDATA[
+			delete from users
+			where users_no = #{usersNo}
+		]]> 
+	</delete>
+	
+</mapper>

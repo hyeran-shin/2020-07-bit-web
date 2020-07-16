@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#slide, #panel{
+	padding: 5px;
+	background-color : #E5EECC;
+	border : 1px solid #333;
+}
+#panel{
+	padding : 150px;
+	display : none;
+}
+</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		/*
+			panel은 적용된 padding의 크기까지 증가하지만,
+			stop 후 slidDown 수행 시 3초 설정이 호출!
+				-> 속도가 점점 느려지게 보인다.
+			slideDown 시 주어진 3초는 기존 크기를 기준으로 수행!
+			(slideDown() 다음 호출 시 3000인자가 재설정)
+			처음값인 0 -> 200 크기로의 3초 시간 적용과
+			이후값인 100 -> 200 크기로의 3초 시간 적용이 동일!
+			0~200크기를 3초동안 늘려라 != 100~200 크기를 3초동안 늘려라는 속도차이 존재
+		*/
+		$('#slide').on({
+			click : function(){
+				$('#panel').slideDown(3000);
+			}
+		});
+		
+		
+		$('button').click(function(){
+			$('#panel').stop();
+		});
+		
+		
+		$('#panel').dblclick(function(){
+			$(this).stop();
+		});
+		
+	});
+</script>
+</head>
+<body>
+	<button>Slide Stop</button>
+	<div id="slide">Slide Down</div>
+	<div id="panel">jQuery ... </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:annotation-config/>
+	
+	<!--
+	  	@Autowired 만을 사용하는 경우, 동일 Type이 둘 이상 존재할 때
+	  	의존 주입 할 클래스 식별이 모호하다. (No Unique) 
+	  
+	  	연결될 대상의 한정자를 활용
+	  	@Qualifier 를 활용하여 Bean의 대상을 지정. (집합을 축소해라)
+	  		-> 단순 클래스로 대상 집합을 가지는 것이 아니라,
+	  		       한정적으로 대상 집합을 가지겠다. (집합 = 타켓 이라고 생각)
+	-->
+	<bean id="calculator01" class="anno.type01.Calculator">
+		<qualifier value = "type01"/>
+		<!-- @Qualifier("type01") 식별 -->
+	</bean>
+
+	<bean id="calculator02" class="anno.type01.Calculator">
+		<qualifier value="type02"/>
+	</bean>
+	
+	<bean id="myCalculator" class="anno.type01.MyCalculator02"/><!--  의존 주입 대상  -->
+	
+</beans>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<h1>인기순 정렬(투표 수)</h1>
+		<ul class="list-group">
+			<li v-for="cat in orderedCats" class="list-group-item">
+				{{cat.name}} : "{{cat.speech}}" - (투표 수 : <strong>[{{cat.upvotes}}]</strong>)
+			</li>
+			<li class="list-group-item">
+				<!-- 클릭 시 마다 toggle 처럼 활용 -->
+				<button @click="order = order*-1" class="btn btn-primary"> <!-- 로직은 그냥 써줘도 된다. 함수만드렁도됨 -->
+					<span v-if="order > 0 "> 내림차순 정렬 </span>
+					<span v-else > 오름차순 정렬 </span>
+				</button>
+			</li>
+		</ul>
+	</div>
+</body>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+
+	new Vue({
+		el : '.container',
+		data : {
+			cats : [
+				{ speech : '산책 가자', name : '카페', upvotes : 23},
+				{ speech : '집사야 밥 줘', name : '라떼', upvotes : 45},
+				{ speech : '같이 놀자', name : '카페', upvotes : 31},
+				{ speech : '물 없음', name : '라떼', upvotes : 17},
+			],
+			order : -1 // 정렬 기준을 위한 필드(오름, 내림)
+		},
+		computed : {
+			orderedCats : function(){
+				var order = this.order;
+				return this.cats.sort(function(a,b){
+					return (a.upvotes - b.upvotes) * order;
+					//정렬 기준을 order의 변화에 따라 다르게 주겠다.
+					//order : -1 (오름), 1(내림)
+					//	-> 의존 필드를 활용하기 위해 order 활용
+				})
+			}
+		}
+		
+	})
+
+	
+</script>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<!-- oriStyle 자체가 객체 데이터를 의미하니, 직접 사용도 가능! -->
+		<div v-bind:style="oriStyle">객체 문법 활용</div>
+		<!-- CSS 인라인 방식처럼 요소 내부에 직접 적용도 가능 -->
+		<div v-bind:style="{ color : 'pink' , fontSize:'32px' }">인라인 방법</div>
+		<div :style = "{ color : oriStyle.color, fontSize : oriStyle.fontSize }">
+			스타일 객체 내부에서 인라인 참조 방법
+		</div>
+	
+		<!--  2개 이상의 스타일 객체를 동시 적용 -->
+		<div :style="[oriStyle, subStyle]">배열 문법 활용 (2개 이상)</div>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '.container',
+		data : {
+			oriStyle : {
+				color : 'skyblue',
+				fontSize : '32px'
+				// camelCase -> 스크립트 코드
+				// kebob-case -> CSS 문서(속성)
+			},
+			subStyle : {
+				fontStyle: 'italic'
+			}
+		}
+	});
+</script>
+</html>

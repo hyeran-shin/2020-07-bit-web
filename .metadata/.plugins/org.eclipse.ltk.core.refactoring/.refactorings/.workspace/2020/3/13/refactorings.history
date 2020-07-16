@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;jblog-spring-0325&apos; to &apos;jblog-spring-pron&apos;" description="Rename resource &apos;jblog-spring-0325&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/jblog-spring-0325" name="jblog-spring-pron" stamp="1585220351011" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;jblog-spring-pron&apos; to &apos;jblog-spring-prob&apos;" description="Rename resource &apos;jblog-spring-pron&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/jblog-spring-pron" name="jblog-spring-prob" stamp="1585220355304" updateReferences="true"/>
+</session>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+		JSON.stringify()
+		 : 자바 스크립트 객체 데이터 -> JSON 형태의 문자열로 반환
+		JSON.parse()
+		 : JSON 형태의 문자열 데이터 - 자바 스크립트 객체 형식으로 반환
+	 */
+	var Person = {
+		name : '라떼',
+		age : 7,
+		weight : 2.14,
+
+		child : { // 객체 내에 객체를 가지고 있는 형태
+			name : '자식',
+			age : 2
+		}, // key : child, value : object type {...}	 
+
+		info : function() {
+			var str = '';
+			for ( var key in this) {
+				if (key != 'info') {
+					str += key + " : " + this[key] + '<br>';
+				}
+			}
+			document.write(str);
+		}
+
+	}
+	/*
+		기본 자료형
+			: boolean, string, number, null, object 은 변환 가능
+		단, function은 JSON 문자열(문서 타입)으로 변환 불가능, 쓸 수 없다.
+			-> function은 stringify() 할 때 인식이 불가능.
+	*/
+	
+	
+	// 문자열 데이터
+	var strData = JSON.stringify(Person);
+// 	document.write(strData + '<br>');	
+	console.log(strData);
+	console.log(typeof strData);
+	
+	// 객체 데이터
+	var objData = JSON.parse(strData);
+// 	document.write(objData + '<br>');
+	console.log(objData);
+	console.log(typeof objData);
+	
+	// 객체의 변환 여부를 확인하기 위해 속성 출력
+	document.write('name : ' + objData.name + ', age : ' + objData.age
+			 + ', weight : ' + objData.weight + ', child : ' + objData.child
+			 + '<br>');
+	// 속성이 존재하지 않을 때
+// 	document.write('info() : ' + objData.info() + '<br>');
+ // 함수 호출 방법 -> error (info is not a function)
+
+ 	document.write('info : ' + objData.info + '<br>');
+ // 속성 값을 접근한 방법 -> undefined
+</script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+</body>
+</html>

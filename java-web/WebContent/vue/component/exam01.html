@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!--  
+		컴포넌트(Component)
+			: 기존 HTML Element를 확장하여 재사용 가능한 형태
+			   사용자 정의 엘리먼트(vue.js의 컴파일러가 특정 동작을 추가)
+		컴포넌트의 이름 : 태그명
+		자바 스크립트 객체 : 생성자 (컴포넌트의 옵션)
+			-> Vue.component(componentName, Object)
+			
+		두 방법으로 컴포넌트 생성 제공
+			1. 인라인 방식
+			2. <template></template> 태그 방식
+	 -->
+	 
+	 <div class= "container">
+	 	<member></member>
+	 	<member></member>
+	 	<member></member>
+	 </div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	// Vue 컴포넌트 등록 - 인라인 방식
+	Vue.component('member',{
+		template : '<h1>Component Tamplate...</h1>'
+	})
+	
+	new Vue({
+		el : '.container'	
+	})
+</script>
+</html>
+
+
+
+
+

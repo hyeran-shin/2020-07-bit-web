@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		exam02.html의 global scope 문제 해결
+			-> function scope를 생성하는 방법
+	 -->
+	<div id="div1">Click div1</div>
+	<div id="div2">Click div2</div>
+	<div id="div3">Click div3</div>
+
+	<script>
+		var length = 4;
+		for (var i = 1; i < length; i++) {
+			setDivClickEvent(i);
+		}
+		
+		// 전달되는 인자 i 값을 index로 받아 새로운 function scope 설정
+		function setDivClickEvent(index){ // index : function scope
+			document.getElementById('div'+ index)
+					.addEventListener('click', function(){
+						console.log('Clicked div #' + index);
+					}, false);
+		}
+		
+		/*
+			스코프의 지속성
+			setDivClickEvent 함수는 호출되면 해당 함수의 스코프가 생성되고,
+			div1을 위한 click event가 등록(설정)! // i : 1 -> index : 1
+			
+			스코프를 생성하는 것은 일반 언어와 크게 다르지 않으나, 
+			스코프의 지속성이라는 특성은 자바스크립트의 강점
+			1. 새로운 스코프 생성 후 스코프 체인을 참조하는 함수를 변수에 넣을 수 있다.
+			2. 다른 함수의 인자로 전달할 수 있다.
+			3. 함수의 리턴 값으로 함수를 활용할 수 있다.
+				-> 함수도 데이터 타입, 변수 저장이 가능
+				
+			함수가 선언된 곳이 아닌 전혀 다른 곳에서 호출 될 경우가 있기에,
+			해당 함수가 참조하는 스코프를 지속해야 한다.
+		*/
+	</script>
+</body>
+</html>

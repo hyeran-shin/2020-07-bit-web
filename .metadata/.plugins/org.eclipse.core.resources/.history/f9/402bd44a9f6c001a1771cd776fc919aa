@@ -1,0 +1,20 @@
+package com.bit.framework;
+
+import java.util.HashMap;
+import java.util.Map;
+
+// 역할 : 요청한 URL에 대한 정보를 Controller 단으로 넘겨주는 역할
+public class HandlerMapping {
+
+	private Map<String, CtrlAndMethod> mappings;
+	
+	public HandlerMapping(String urlCtrlName) throws Exception{ 
+		mappings = new HashMap<>();
+		String[] ctrls = urlCtrlName.split("\\|"); //정규표현식으로 \\ 넣는다.
+		// | (파이프 라인) 기준으로 나누어 배열에 담아라.
+		
+		
+		
+		
+	}
+}

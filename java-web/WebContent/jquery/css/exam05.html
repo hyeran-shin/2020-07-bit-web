@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	/*
+		1. 모든 리스트의 색상을 핑크로 변경
+		2. 리스트의 자손 요소들은 모두 스카이블루로 변경
+	 */
+
+	$(function() {
+		setTimeout(function() {
+			$('li').css('color', 'pink');
+			$('li *').css('color', 'skyblue');
+			// -> list4는 일반텍스트이므로, 적용되지 않는다. (요소가 아니다.)
+
+		}, 2000);
+	});
+</script>
+</head>
+<body>
+	<ul> 
+		<li><strong>list 1</strong> text text text</li>
+		<li><em>list 2</em> text text text</li>
+		<li><span>list 3</span> text text text</li>
+		<li>list 4 text text text</li>
+	</ul>
+</body>
+</html>

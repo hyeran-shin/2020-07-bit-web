@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container text-center">
+		<p style="font-size:80px;">
+			{{ votes }}
+			<food @voted="countVote" name="계란말이"></food>
+		</p>
+	</div>
+	
+	<template id="food">
+		<button class="btn btn-default" @click="doVote" > {{ name }} </button>
+	</template>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('food',{
+		template : '#food',
+		props : ['name'],
+		methods :{
+			doVote : function(){
+				this.$emit('voted');
+			}
+		}
+	});
+
+	new Vue({
+		el : '.container',
+		data : {
+			votes : 0
+		},
+		methods : {
+			countVote : function(){
+				this.votes++;
+			}
+		}
+	});
+</script>
+</html>
+
+
+
+
+

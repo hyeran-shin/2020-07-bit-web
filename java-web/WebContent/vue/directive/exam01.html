@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		Vue Directive
+			- 라이브러리에서 DOM 요소가 무언가를 수행하도록 지시하는 속성
+			- 제어문(조건, 반복)같이 사용되며, 조건에 따라 DOM요소의 내용을 제어
+			
+		v-show 	: 조건에 따라 엘리먼트 표시
+		v-if	: v-show 대신 사용, v-else-if v-else 또한 제공
+		v-for 	: 반복문, 배열 내부에 있는 항목을 출력할 때 사용
+		 
+	 -->
+	 
+	 <div id = "app"> 
+	 	<textarea v-model = "message"></textarea>
+		<pre>{{$data}}</pre>
+		<!-- 
+			<pre></pre> 입력 내용을 그대로 표현하는 태그
+				- 공백, 개행, 탭 등을 그대로 표현
+				- 기존 HTML은 무조건 하나의 공백만 적용!
+				
+			{{ $data }} : JSON 형태로 data 속성을 표현
+		 --> 
+		 <button v-show = "message">
+		 	데이터가 입력 됐네! 
+		 </button>
+		 <!--  데이터 입력 시 버튼이 보인다. -->
+	 </div>
+</body>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '#app',
+		data : { message : '' }
+	})
+</script>
+</html>
+
+
+
+
+
+

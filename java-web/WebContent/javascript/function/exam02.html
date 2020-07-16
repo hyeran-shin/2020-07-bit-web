@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	// 함수 내부에서 함수를 선언하고, 호출하는 형태
+	function prnTotalSum(a, b){
+		function sum(a,b){
+			var s=0;
+			for(var i=a; i<=b ;i++){//a~b 합계
+				s +=i;
+			}
+			return s;
+		}
+		
+		console.log(a + '~' + b +'의 합계 ' + sum(a,b));
+	}
+	prnTotalSum(1,100);
+	
+	
+	
+	// 매개변수가 없는 함수
+	//  -> arguments 활용, 자바의 Ellipsis와 유사
+	function argsTest(){
+// 		var length = arguments.length;
+// 		for(var i = 0 ; i<length; i++){
+// 			console.log(i + " : " + arguments[i]);
+// 		}
+		//모두 순회 . forEach와 유사, for~in 반복문
+		for(var i in arguments){
+			console.log(i + " :: " + arguments[i]);
+		}
+	}
+	argsTest(10);
+	argsTest(10,20);
+	argsTest(10,20,30);
+	
+	// 함수의 인자로 function 타입 전달
+	var funcCall = function prnStr() { // 익명 함수로 활용! 
+		console.log('prnStr() function Called...');
+	}
+	function foo(funcArg){ // 함수 매개변수, 인자로 함수 타입을 받겠다.
+		funcArg(); // 전달된 함수를, 가지고 있는 매개변수 이름으로 호출, 실행
+	}
+	foo(funcCall);
+	
+	// 반환형이 따로 존재하지 않는다.
+	function returnTest1(arg){
+		console.log(arg); // 반환형이 없는 경우
+	}
+	function returnTest2(arg){
+		return arg; // 값을 반환하는 경우 (반환은 종료를 뜻한다). 종료로 이어진다.
+	}
+	function returnTest3(arg){
+		console.log('returnTest3() function called...')
+		return; // 값을 반환하지 않고 종료만 하는 경우
+	}
+	
+	returnTest1(10); //10
+	console.log(returnTest2(20));//20
+	returnTest3(20); // 출력 후 종료
+</script>
+</head>
+<body>
+
+</body>
+</html>
+

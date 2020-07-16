@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		/*
+			siblings() : 동일 수준을 찾아라
+			 - 전달되는 인자가 없다면 모든 요소
+			 - 선택자가 전달된다면 해당 요소
+		*/
+		
+		$('h2').siblings().css({ 
+			'color' : 'red',
+			'border':'2px solid red'
+		});
+		// 자기 자신을 제외한 동일 수준의 모든 요소에 적용
+		
+		$('h2').siblings('p').css({
+			'color' : 'blue',
+			'border' : '2px solid blue'
+		});
+		
+		/*
+			next()			: 다음 요소 중 동일 수준의 요소
+			nextAll()		: 다음 요소 중 동일 수준의 모든 요소 
+			nextUntil(...)	: 다음 동일 수준의 특정 요소 전까지 모든 요소
+		*/
+		$('span').next().css({
+			'color' : 'green',
+			'border' : '2px solid green'
+		});
+		$('span').nextAll().css({
+			'color' : 'pink',
+			'border' : '2px solid pink'
+		});
+		$('span').nextUntil('p').css({
+			'color' : 'yellow',
+			'border' : '2px solid yellow'
+		});
+			
+	});
+</script>
+</head>
+
+<body class="siblings"> 
+	<div> div
+		<p>p</p>
+		<span>span</span>
+		<h2>h2</h2>
+		<h3>h3</h3>
+		<p>p</p>
+	</div>
+	
+</body>
+</html>

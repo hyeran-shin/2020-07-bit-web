@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<board title = "Java" writer-name="Cafe"></board>
+		<board title = "JavaScript" writer-name="Latte"></board>
+		<board title = "Vue" ></board>
+	</div>	
+	<template id="board_template">
+		<h1>{{ title }} : {{ writerName}}</h1>
+	</template>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('board',{
+		props : ['title','writerName'],
+		template : '#board_template'
+	})
+
+	new Vue({
+		el : '.container'
+	})
+</script>
+</html>
+
+
+
+
+

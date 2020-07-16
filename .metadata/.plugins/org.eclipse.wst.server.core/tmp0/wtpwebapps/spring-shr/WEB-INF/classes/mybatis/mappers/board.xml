@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper  namespace="board">
+	<update id="increaseOrderNo" parameterType="map">
+		<![CDATA[
+			update board
+				set order_no = order_no+1
+			  where group_no = #{groupNo}
+				and order_no > #{orderNo}
+		]]>
+	</update>
+	
+	<insert id="insert" parameterType="boardvo">
+		<choose>
+			<when test="groupNo == null ">
+				<![CDATA[
+					insert into
+					board (
+							title, content, reg_date, hit, 
+							group_no, 
+							order_no, depth, users_no, 
+							board_public, users_type
+						    )
+					values (
+							 #{title}, #{content}, CURRENT_TIMESTAMP, 0, 
+							 ifnull( (select max(b.group_no) from board b) , 0) + 1,
+						 	 1, 0, #{usersNo},
+						 	 #{boardPublic} , #{usersType}
+					 	 	)
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+					insert into
+					board (
+							title, content, reg_date, hit, 
+							group_no, order_no, depth, users_no,
+							board_public, users_type
+							)
+					values (
+							#{title}, #{content}, CURRENT_TIMESTAMP, 0, 
+							#{groupNo}, #{orderNo}, #{depth} ,#{usersNo},
+							#{boardPublic} , #{usersType}
+							)
+				]]>
+			</otherwise>
+		</choose>
+	</insert>
+	
+	<select id="getTotalCount" parameterType="string" resultType="int">
+		<![CDATA[
+			select count(*)	from board
+		]]>
+		<if test="_parameter != null and _parameter != '' ">
+			<![CDATA[
+				where title like '%${_parameter}%'
+					or content like '%${_parameter}%'
+			]]>
+		</if>
+		
+	
+		 
+	</select>
+	
+	<select id="getList" parameterType="map" resultType="boardvo">
+		<choose>
+			<when test="keyword != null and keyword != '' ">
+				<![CDATA[
+					select y.* 
+						from ( select 	x.no, x.title, x.hit, 
+										x.reg_date as regDate, 
+										x.depth , 
+										x.users_name as userName, 
+										x.users_no as usersNo,
+										x.content,
+										x.group_no as groupNo,
+										x.order_no as orderNo,
+										x.board_public as boardPublic,
+										x.users_type as usersType,
+										(@rownum := @rownum + 1) as rn
+								from 	( select b.*, u.users_name
+											from board b, users u
+										   where b.users_no = u.users_no
+										   and b.board_public = 1
+										   	and ( b.title like '%${keyword}%' 
+										   			or
+										   		  b.content like '%${keyword}%'
+										   		 )
+										    order by group_no desc, order_no asc
+										) as x,
+										( select @rownum := 0 ) as r 
+							   ) as y
+					  where (#{page}-1) * #{size}+1 <= rn and rn <= #{page} * #{size}							 
+				]]>
+			
+			</when>
+			<otherwise>
+				<![CDATA[
+					select y.* 
+						from ( select 	x.no, x.title, x.hit, 
+										x.reg_date as regDate, 
+										x.depth , 
+										x.users_name as userName, 
+										x.users_no as usersNo,
+										x.content,
+										x.group_no as groupNo,
+										x.order_no as orderNo,
+										x.board_public as boardPublic,
+										x.users_type as usersType,
+										(@rownum := @rownum + 1) as rn
+								from 	( select b.*, u.users_name
+											from board b, users u
+										   where b.users_no = u.users_no
+										    order by group_no desc, order_no asc
+										) as x,
+										( select @rownum := 0 ) as r 
+							   ) as y
+					  where (#{page}-1) * #{size}+1 <= rn and rn <= #{page} * #{size}							 
+				]]>
+			</otherwise>
+			
+		</choose>
+	</select>
+	
+	
+	<select id="getByNo" parameterType="int" resultType="boardvo">
+		<![CDATA[
+			select b.no, b.title, b.content, 
+					b.group_no as groupNo, order_no as orderNo,
+			 		b.depth, 
+			 		b.users_no as usersNo,
+			 		b.board_public as boardPublic,
+			 		b.users_type as usersType,
+			 		u.users_name as userName
+				from board b , users u
+			 where b.no = #{no} 
+			 	and u.users_no = b.users_no
+		]]>
+	</select>
+	
+	<update id="updateHit" parameterType="int" >
+		<![CDATA[
+			update board 
+				set hit = hit+1
+			 where no = #{no}
+		]]>
+	</update>
+	
+	<update id="update" parameterType="boardvo" >
+		<![CDATA[
+			update board 
+				set title=#{title}, content=#{content} 
+			 where no = #{no}
+			 	and users_no = #{usersNo}
+		]]>
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

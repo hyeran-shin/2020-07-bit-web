@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "맑은 고딕";
+	font-size: 0.75em;
+	color: #333;
+}
+
+.tab-view {
+	margin: 20px auto;
+	width: 520px;
+}
+
+.tab-view ul {
+	height: 27px;
+	list-style-type: none;
+}
+
+.tab-view ul li {
+	float: left;
+	width: 100px;
+	height: 22px;
+	border: 1px solid #999;
+	background-color: #999;
+	padding: 3 0 0 0;
+	border-radius: 5px 5px 0 0;
+	text-align: center;
+	padding-top: 3px;
+	margin-right: 2px;
+}
+
+.tab-view div {
+	border: 1px solid #999;
+	text-align: center;
+	margin-top: -1px;
+	width: 516px;
+	height: 300px;
+	line-height: 20px;
+}
+
+.tab-view ul li.selected {
+	background-color: skyblue;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+//filter() : 선택된 요소 기준으로 적용
+//  -> class 가 selected 인 요소
+$('p').filter('.selected').css('color','red');
+
+// not() : 선택된 요소 제외하고 적용
+$('p').not('.selected').css('color','blue');
+
+	$(function() {
+		$('ul li').click(function() {
+			var $li = $(this);
+			alert("click" + $li.val);
+			$li.addClass('selected'); 
+			$().not().attr({
+				'style' : 'display : none'
+			});
+			
+			
+		});
+	});
+</script>
+</head>
+<body>
+	<!-- 
+		[요구 기능]
+		 - css/practice/tabview.html 을 기반으로 작성
+		 - 리스트별로 별도의 내용을 구성하세요
+		 - 상단의 탭 클릭 시 해당 요소의 내용을 보이세요
+		 - (Menu 1 클릭 시 1번 메뉴 입니다. 내용을 보여라)
+	 -->
+	<div class="tab-view">
+		<ul>
+			<li class="selected">Menu 1</li>
+			<li>Menu 2</li>
+			<li>Menu 3</li>
+			<li>Menu 4</li>
+			<li>Menu 5</li>
+		</ul>
+		<div class="menu1">
+			<h2>Menu 1</h2>
+			<p>
+				<a href="#"> 아파치 스파크(Apache Spark)</a>는 매우 큰 데이터 집합을 대상으로 빠르게 처리 작업을 수행하는 한편, 단독으로 또는 다른 분산 컴퓨팅
+				툴과 조율해 여러 컴퓨터로 데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.
+			</p>
+			<p>
+				<a href="#"> 아파치 스파크(Apache Spark)</a>는 매우 큰 데이터 집합을 대상으로 빠르게 처리 작업을 수행하는 한편, 단독으로 또는 다른 분산 컴퓨팅
+				툴과 조율해 여러 컴퓨터로 데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.
+			</p>
+		</div>
+		<div class="menu2" style="display: none;">
+			<h2>Menu 2</h2>
+			<p>
+				<a href="#"> 아파치 스파크(Apache Spark)</a>는 매우 큰 데이터 집합을 대상으로 빠르게 처리 작업을 수행하는 한편, 단독으로 또는 다른 분산 컴퓨팅
+				툴과 조율해 여러 컴퓨터로 데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.
+			</p>
+			<p>
+				<a href="#"> 아파치 스파크(Apache Spark)</a>는 매우 큰 데이터 집합을 대상으로 빠르게 처리 작업을 수행하는 한편, 단독으로 또는 다른 분산 컴퓨팅
+				툴과 조율해 여러 컴퓨터로 데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.
+			</p>
+		</div>
+		<div class="menu3" style="display: none">
+			<h2>Menu 3</h2>
+			<p>
+				<a href="#"> 아파치 스파크(Apache Spark)</a>는 매우 큰 데이터 집합을 대상으로 빠르게 처리 작업을 수행하는 한편, 단독으로 또는 다른 분산 컴퓨팅
+				툴과 조율해 여러 컴퓨터로 데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.
+			</p>
+			<p>
+				<a href="#"> 아파치 스파크(Apache Spark)</a>는 매우 큰 데이터 집합을 대상으로 빠르게 처리 작업을 수행하는 한편, 단독으로 또는 다른 분산 컴퓨팅
+				툴과 조율해 여러 컴퓨터로 데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.
+			</p>
+		</div>
+		<div class="menu4" style="display: none">
+			<h2>Menu 4</h2>
+			<p>
+				<a href="#"> 아파치 스파크(Apache Spark)</a>는 매우 큰 데이터 집합을 대상으로 빠르게 처리 작업을 수행하는 한편, 단독으로 또는 다른 분산 컴퓨팅
+				툴과 조율해 여러 컴퓨터로 데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.
+			</p>
+			<p>
+				<a href="#"> 아파치 스파크(Apache Spark)</a>는 매우 큰 데이터 집합을 대상으로 빠르게 처리 작업을 수행하는 한편, 단독으로 또는 다른 분산 컴퓨팅
+				툴과 조율해 여러 컴퓨터로 데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.
+			</p>
+		</div>
+		<div class="menu5" style="display: none">
+			<h2>Menu 5</h2>
+			<p>
+				<a href="#"> 아파치 스파크(Apache Spark)</a>는 매우 큰 데이터 집합을 대상으로 빠르게 처리 작업을 수행하는 한편, 단독으로 또는 다른 분산 컴퓨팅
+				툴과 조율해 여러 컴퓨터로 데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.
+			</p>
+			<p>
+				<a href="#"> 아파치 스파크(Apache Spark)</a>는 매우 큰 데이터 집합을 대상으로 빠르게 처리 작업을 수행하는 한편, 단독으로 또는 다른 분산 컴퓨팅
+				툴과 조율해 여러 컴퓨터로 데이터 처리 작업을 분산할 수 있는 <strong>데이터 처리 프레임워크</strong>다.
+			</p>
+		</div>
+	</div>
+</body>
+</html>

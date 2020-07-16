@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	// [] : 속성 선택자
+	$(function(){
+// 		$('a').hide();					// a 태그 요소
+// 		$('[target]').hide();			// href 속성을 가진 요소
+// 		$('a[href]').hide();			// a 태그 중 href 속성을 가진 요소
+		$('a[target = "_blank"]').hide(); // a 태그의 target 속성이 _blank인 요소
+		
+	});
+</script>
+</head>
+<body>
+	<a>Naver</a><br>
+	<a href="https://www.github.com">Github</a><br>
+	<a href="http://www.inzent.com" target ="_blank">Inzent</a><br>
+</body>
+</html>

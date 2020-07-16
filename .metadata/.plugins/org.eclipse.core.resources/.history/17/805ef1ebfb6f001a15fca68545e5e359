@@ -1,0 +1,18 @@
+package com.bit.dao;
+
+import java.sql.PreparedStatement;
+
+import com.bit.vo.LoginVO;
+
+public class LoginDAO {
+	private Connection con = null;
+	private PreparedStatement pstmt = null;
+	private 
+	public LoginVO login(LoginVO login) {
+		try {
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

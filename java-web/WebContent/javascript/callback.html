@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+		callback 
+			- 일반적인 호출자와 피호출자의 호출 방향의 '역방향' 호출
+			- 내가 호출할 함수를 전달해서 줄테니, 네가 필요할 때 호출해서 사용해라!
+			
+		동기 입출력과 비동기 입출력 방식의 비교 (시나리오 예시)
+		[요구 기능 사항]
+		1. 프로그램에서 파일 선택
+		2. 파일 업로드 시작
+		3. 파일 업로드가 완료되면 알림 메시지 수신(유저측에서 수신, 시스템 측에선 송신)
+	
+			- 동기 입출력 방식
+				한명이사용하면 다른한명은 사용 못해/ 비동기 : 얘가 하든말든 그냥 사용
+				1. 사용자가 파일 업로드를 요청
+				2. 서버는 사용자가 업로드할 파일에 대한 처리
+				3. 사용자는 서버가 업로드를 완료할 때 까지 대기(blocked)
+				4. 서버는 업로드 처리 완료 후 사용자에게 알림을 송신 (response)
+				5. 대기 중이던 사용자는 서버로부터 완료 메시지를 수신하고 나서야, 
+				      다음 작업을 수행할 수 있게 된다.
+					(*서버가 처리를 끝내기 전까지 사용자는 다른 일을 하지 못한다.)
+			- 비동기 입출력 방식
+				1. 사용자가 파일 업로드를 요청
+				2. 서버는 사용자가 업로드할 파일에 대한 처리과정을 수행
+				3. 사용자는 업로드를 요청만 하고 다른 작업을 계속 수행
+				4. 서버는 업로드 처리 완료 후 사용자에게 알림 송신
+				5. 다른 작업을 수행 중이던 사용자는 파일 업로드의 결과를 수신
+				 	(*서버의 처리가 끝나지 않더라도 다른 작업 수행이 가능하다.)
+				
+	*/
+	/*
+	// 동기식
+	var contents = file.read('abc.txt');
+	// file.read()가 10분이면 10분, 100분이면 100분을 대기한다.
+	showContents(contents);  // 서버가 읽은 파일 정보를 보여주는 함수를 만들었다고 가정.
+	// file.read()가 완료되고, 해당 결과를 보여주기 위해 대기 시간이 필요하다.
+	
+	//showContents(...)가 수행되고 나서 다음 작업이 수행
+	var result = add(10,20); // 다음 작업
+	console.log(result);
+	
+	// 비동기 방식
+	file.read('abc.txt', function(contents){
+		showContents(contents); //file.read()가 완료되면, 호출해라
+	});
+	var result = add(10,20);
+	console.log(result); // showContents(...) 호출 이전에 수행 흐름은 이어간다.
+	*/
+	
+	
+	
+	console.log('start...');
+	setTimeout(function(){
+		console.log('callback function called...');
+	}, 3000); // 3초 후에 익명함수 호출
+	
+	//내가 호출하는 것이 아니라 시스템이 호출한다.
+	console.log('end...');
+	
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

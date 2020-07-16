@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<!-- 
+		이벤트 한정자
+			- 자주 사용되는 기능을 프로퍼티 형태로 간단히 호출!
+			- 손쉽게 여러 이벤트 관련 처리가 가능
+	 -->
+	 <div class="container">
+	 	<h1>Calculator</h1>
+	 	<form class="form-inline">
+	 		<!-- 입력을 숫자로 자동 파싱하는 한정자 (number) -->
+	 		<input v-model.number="a" class="form-control">
+	 		<select v-model="operator" class="form-control">
+	 			<option>+</option>
+	 			<option>-</option>
+	 			<option>*</option>
+	 			<option>/</option>
+	 		</select>
+	 		<input v-model.number="b" class="form-control">
+	 		<button type="submit" @click.prevent="calculate" class="btn btn-primary">계산</button>
+	 		<!-- 
+	 			버튼 클릭 시 submit 동작을 하기 때문에,
+	 			form 동작이 처리된다! (type = "submit") 
+	 			이벤트를 멈추는 preventDefault 활용
+	 		 -->
+	 	</form>
+	 	
+	 	<h2>결과 : {{ a }} {{operator }} {{b}} = {{c}}</h2>
+	 	<pre>{{$data}}</pre>
+	 </div>
+
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+
+	new Vue({
+		el : '.container',
+		data : {
+			a : 1,
+			b : 2,
+			c : null,
+			operator : '+'
+		},
+		methods : {
+			calculate : function(){ //submit 할 때 calculate 동작
+				console.log(event) // 사용자 이벤트 정보 출력
+				//event -> MouseEvent
+// 				event.preventDefault() 
+				//이벤트를 멈추는 preventDefault() 대신 -> 자바스크립트함수
+				//이벤트 한정자 @click.prevent
+		
+				switch(this.operator){
+				case '+' : this.c = this.a + this.b; break;
+				case '-' : this.c = this.a - this.b; break;
+				case '*' : this.c = this.a * this.b; break;
+				case '/' : this.c = this.a / this.b; break;
+				}
+			}
+		}
+		
+	});
+</script>
+</html>

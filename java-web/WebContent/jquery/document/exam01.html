@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function() {
+		setTimeout(function() {
+			// write
+// 			$('#p2').text('<strong>Hello jQuery !!!</strong>');
+			$('#p2').text('&lt;strong&gt;Hello jQuery!!!&lt;/strong&gt;');
+			// 일반 텍스트 형태로 써라.
+			// HTML의 태그나 특수문자가 동작하지 않고 일반 텍스트 원본이 쓰여진다.
+			
+			// read
+			// text() 안에 인자 없는 경우 값을 추출함
+			console.log($('#p3').text());
+			alert($('#p3').text());
+		}, 2000);
+	})
+</script>
+</head>
+<body>
+	<p id="p1">1 &lt; 2 참 입니다. 2 &gt; 1 참 입니다. &amp; &nbsp; ...</p>
+	<p id="p2">Paragraph</p>
+	<p id="p3"><strong>Hello</strong> jQuery</p>
+</body>
+</html>

@@ -1,0 +1,6 @@
+package com.bit.controller;
+
+@Controller
+public class LoginController {
+
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		setTimeout(function(){
+			/*
+				1. 첫번째 요소의 색상을 레드로
+				2. 두번째 요소의 생상을 블루로 변경
+			*/
+			$('li:nth-child(1)').css('color','red');
+			$('li:nth-child(2)').css('color','blue');
+			
+			/*
+				1. 홀수 행 요소 색상 레드 
+				2. 짝수 행 요소 색상 블루 
+				// 요소들의 위치는 인덱스와 같이 0 부터 시작
+			*/
+// 			$('li:nth-child(2n-1)').css('color','red');
+// 			$('li:nth-child(2n)').css('color','blue');
+			$('li:odd').css('color','red');
+			$('li:even').css('color','blue');
+			
+			/*
+				contains(text)	
+					: 요소에 text가 존재한다면 선택
+				hax(tagName)	
+					: 요소에 해당 캐그가 존재한다면 선택
+			*/
+			$('li:contains("텍스트")').css('color','pink');
+			$('li:has(strong)').css('color','skyblue')
+			
+		}, 2000);
+	});
+</script>
+</head>
+<body>
+	<ul>
+		<li> list 1<strong> text text</strong></li>
+		<li> list 2 텍스트 텍스트</li>
+		<li> list 3 text text </li>
+		<li> list 4 text</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.bit">
+ 	<!-- parameterType 속성 생략 가능 -->
+ 	<insert id="insertBoard" parameterType="board" > 
+ 		insert into m_board(title, content)
+ 		values(#{title}, #{content})
+ 		<!-- #{...} BoardVo의 getter 호출, 자동 매핑 -->
+ 	</insert>
+ 	
+ 	<!-- 현재 board.xml 문서에 사용할 SQL 정의 (공통 부분 선언) -->
+ 	<sql id="select">
+ 		select no, title, content 
+ 		from m_board
+ 	</sql>
+
+ 	<select id="selectBoard" resultType="board" parameterType="board">
+ 		<!-- 공통 선언 부분 포함(중복 쿼리 작성을 줄일 수 있다.) -->
+		<include refid="select" /> 	
+ 	</select>
+
+	<select id="selectOneBoard" resultType="board" parameterType="board">
+		<include refid="select"  />
+		where no = #{no}
+	</select>
+ 	
+ 	<select id="selectNos" resultType="board" parameterType="board">
+ 		<include refid="select" />
+ 		where no in 
+ 			<foreach item="bno" open="(" separator="," close=")" collection="nos">
+ 				#{bno}
+ 			</foreach>
+ 			<!--  
+ 				open	: 시작점
+ 				separator : 구분자
+ 				close : 끝점
+ 				
+ 				데이터 집합 nos가 1 2 3 이라면,
+ 				하나씩 순회하면서 1 2 3 데이터를 (1,2,3) 형식으로 바꿈
+ 				전달되는 쿼리는 where in (1,2,3) 
+ 			 -->
+ 	</select>
+ 	
+ 	
+ 	<!-- parameterType 생략 -->
+ 	<update id="updateBoard">
+ 		update m_board set content=#{content}
+ 		where no=#{no}
+ 	</update>
+ 	
+ 	<delete id="deleteBoard">
+ 		delete from m_board
+ 		where no=#{no}
+ 	</delete>
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+* {
+	margin: 0;
+	padding: 0
+}
+
+body {
+	font-family: "맑은 고딕";
+	font-size: 0.75em;
+	color: #333;
+}
+
+h2 {
+	width: 150px;
+	margin: 10px auto
+}
+
+ul {
+	width: 150px;
+	margin: 20px auto 0 auto;
+	list-style-type: none;
+/* 	border-top :1px solid #AAA; */
+}
+li {
+	width: 130px;
+	padding:10px;
+	border-width: 0 1px 1px 1px;
+	border-style: solid;
+	border-colot: #AAA ;
+	background-color : #FFF;
+	font-weight: bold;
+	cursor: pointer;
+}
+li.on { background-color: red; color : #FFFFFF}
+
+</style>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(function() {
+		$('ul li').mouseover(function() {
+			/*
+			      이벤트 핸들러 내에서 this는 HTMLElement 객체!
+			      따라서, jQuery API 사용을 위해 $() 랩핑을 하겠다.
+			 */
+			var $li = $(this);
+// 			$li.css({
+// 				'backgroundColor' : '#FE34CC',
+// 				'color' : '#FFFFFF'
+			$li.addClass('on'); // class 속성 추가
+			}).mouseout(function() {
+				var $li = $(this);
+// 				$li.css({
+// 					'backgroundColor' : '#FFF',
+// 					'color' : '#333'
+// 				});
+				$li.removeClass('on'); // class 속성 삭제
+			});
+		});
+
+</script>
+</head>
+<body>
+	<h2>Menu list</h2>
+	<ul>
+		<li>Menu Item 1</li>
+		<li>Menu Item 2</li>
+		<li>Menu Item 3</li>
+		<li>Menu Item 4</li>
+		<li>Menu Item 5</li>
+	</ul>
+</body>
+</html>

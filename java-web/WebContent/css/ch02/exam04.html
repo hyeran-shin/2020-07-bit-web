@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	body{
+		font-size : 12px;
+		margin : 10px;
+		padding : 10px;
+	}
+
+	/* ul 요소 중 class가 "bullet"인 것에 스타일 적용*/
+	ul.bullet{
+		list-style-type : none;
+		margin : 10px 0 0 10px;
+		padding : 0;
+		border : 1px solid #000;
+		border-radius: 10px;
+		width : 300px;
+	}
+	/* ul 요소 중 class가 "bullet"인 자손 중 li 요소에 스타일 적용*/
+	ul.bullet li{
+		width : 200px;
+		height :20px;
+		margin : 10px 0 0 0;
+		padding : 0 0 0 30px;
+		
+		background-image : url(../images/bullet2.jpg);
+		background-repeat : no-repeat;
+		background-position: 10px center;
+		/* x좌표와 y좌표의 위치 값을 속성으로 지정 */
+		/*
+			x : center, left, right
+			y : center, top, bottom
+		*/
+	}
+</style>
+		
+</head>
+<body>
+	<!-- 리스트의 bullet을 백그라운드로 활용  -->
+	<ul class="bullet">
+		<li>JavaScript</li>
+		<li>Java</li>
+		<li>Python</li>
+		<li>Go</li>
+		<li>CS</li>
+		<li>C++</li>
+	</ul>
+</body>
+</html>

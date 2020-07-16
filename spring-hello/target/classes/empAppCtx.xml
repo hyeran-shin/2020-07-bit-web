@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+	">
+	
+	<!-- 
+		anno.type02 패키지의 @Component 로 지정되어 있는 것들을
+		본 페이지 (empAppCtx.xml) 내부에 Bean 으로 등록하라
+		
+		해당 패키지의 @Component가 붙어 있는 클래스를 읽어들여, Bean으로 등록
+			-> Designer, Programmer, Development
+	 -->
+	 <context:component-scan base-package="anno.type02"/>
+</beans>

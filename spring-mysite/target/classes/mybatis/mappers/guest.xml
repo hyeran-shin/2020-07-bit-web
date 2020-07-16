@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper  namespace="guest">
+	<insert id="insert" parameterType="guestvo">
+		<![CDATA[
+			insert into
+			 guest( writer, content, reg_date )
+			  values ( #{writer}, #{content}, CURRENT_TIMESTAMP )
+		]]>
+	</insert>
+
+	<select id="selectAllList" parameterType="map" resultType="guestvo">
+		<![CDATA[
+				select y.* 
+						from ( select 	x.no, x.writer, x.content, 
+										x.reg_date as regDate, 
+										(@rownum := @rownum + 1) as rn
+								from 	( select b.no, b.writer, b.reg_date, b.content
+											from guest b
+										    order by reg_date desc
+										) as x,
+										( select @rownum := 0 ) as r 
+							   ) as y
+					where (#{page}-1) * #{size}+1 <= rn and rn <= #{page} * #{size}	
+					  
+					  					 
+		]]>
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		<![CDATA[
+			select count(*) from guest
+		]]>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

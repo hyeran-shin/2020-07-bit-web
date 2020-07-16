@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  
+	bean을 자동으로 등록해준다? 
+	xml : 데이터를 표현하기 위한 문서 양식이다.
+	작성한 정보들 가지고 컨테이너가 xml을 보고 등록한 빈에 관한 관리를 하겠다.
+-->
+<beans
+	xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+		
+	<!--  Unit클래스를 각각 unit01, unit02 식별자로  Bean 등록 -->
+	<bean id="unit01" class="basic.Unit"></bean>
+	<bean id="unit02" class="basic.Unit"></bean>
+</beans>
+		

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	var httpRequest = null;
+	
+	// 현재 브라우저의 XMLHttpRequest 객체 가져오기
+	function getXMLHttpRequest(){
+		if(window.XMLHttpRequest){
+			return new XMLHttpRequest();
+		}else{
+			return null;
+		}
+	}
+	
+	// 각 정보들을 모아 요청 보내기
+	function sendRequest(method, url, params, callback){
+		httpRequest.onreadystatechange = callback;
+		
+		httpRequest.open(method, url, true); // 비동기
+		httpRequest.send(params);
+	}
+
+	// readyState의 상태 변화에 따라 호출될 함수
+	function responseMsg(){
+		if(httpRequest.readyState == 4){ // complete
+			if(httpRequest.status == 200){ // ok
+				var msgView = document.getElementById('msg-view');
+				msgView.innerHTML = httpRequest.responseText;
+			}
+		}
+	} 
+	
+	// 버튼 클릭 시 호출될 함수 (요청 함수)
+	function requestMsg() {
+		httpRequest = getXMLHttpRequest();
+		sendRequest('GET','sample.jsp',null,responseMsg);
+		// 전송 방식 : get, 경로 : sample.jsp, 파라미터 : null(get) 
+		// 콜백함수 : responseMsg(응답처리)
+	}
+	
+</script>
+</head>
+<body>
+	<h1>서버에서 받은 메시지</h1>
+	<div id="msg-view"></div>
+	<br>
+	<input type="button" value="서버에 자료 요청" onclick="requestMsg()">
+</body>
+</html>
+
+
+
+
+

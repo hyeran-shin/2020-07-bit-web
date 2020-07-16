@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	p.txt01{
+		font-family: "맑은 고딕";
+		font-size: 24px;
+		line-height: 28px;
+	}
+	p.txt02{
+		font-family: "맑은 고딕";
+		font-size: 1.75em;
+		color : #FF6633;
+		line-height: 1.2em;
+	}
+	p.txt03{
+		font-family: "맑은 고딕"; 
+		font-size: 0.75em;
+		color : #3366FF;
+		line-height: 14px;
+	}
+	
+	
+</style>
+</head>
+<body>
+
+	<!--  
+		내용에 & 특수문자 사용 시 경고
+		HAml에서의 특수문자를 표현하기 위한 방법 제공
+		& 기호 -> 숫자표현(&#38;), 문자표현(&amp;)
+		
+		HTML 특수문자 -> 유니코드 특수 문자
+			웹 표현 시 특수 문자를 활용한 표현이 권장될 수 있지만,
+			해당 내용(문자열)을 다른 플랫폼으로 가져갔을 시 특수문자 그대로 표현될 수 있다.
+			*web 입장에서는 & 출력되지만, app 입장에서는 &amp; 그대로 출력될 수 있다.
+		
+	 -->
+<!-- 	<p class="txt01">txt01 & txt01 경고, &amp; 로 사용</p> -->
+	<p class="txt02">txt02</p>
+	<p class="txt03">txt03</p>
+</body>
+</html>

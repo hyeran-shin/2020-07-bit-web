@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function outer(){
+		var cnt = 0; // outer의 내부 변수
+		return { //object 리턴, { }
+			increase : function(){
+				return ++cnt; // outer 함수의 cnt에 접근, 클로저 발생! , 하위영역에서 상위 스코프 영역에 접근을 해서 클로저 발생
+			},
+			decrease : function(){
+				return --cnt;
+			}
+		};
+	}
+			
+	var counter = outer();
+	// counter는 increase와 decrease 속성을 갖는 개체를 담고 있다.
+	// 해당 객체의 멤버(프로퍼티) 접근으로 함수를 호출.
+	console.log(counter.increase()); // 1
+	console.log(counter.increase()); // 2
+	console.log(counter.decrease()); // 1
+	console.log(counter['decrease']()); // 0
+	//counter의 스코프로 cnt 변수가 생성되니,
+	//증가와 감소 동작 시 유지되는 동일 cnt을 사용하게 된다.
+	
+	var counter2 = outer();
+	console.log('counter2 : ' + counter2.increase());
+	// counter와 별도의 스코프 생성 (counter와 counter2는 서로 다른 객체)
+	// 새롭게 outer() 함수를 호출함에 따라 새로운 스코프 생성
+</script>
+</head>
+<body>
+
+
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+   <!-- 
+      exam08.html (bus) 예제를 기반으로, '좋아요' 버튼을 만들어 버튼을 누르면,
+      좋아하는 리스트를 출력(추가)하고, 다시 '좋아요' 버튼을 누르면, 취소되고 리스트에서 삭제하는 기능을 작성하세요.
+      (필요에 따라 활성/비활성 여부도 추가!)
+    -->
+   <!-- vote 컴포넌트 -->
+   <template id="vote">
+      <div class="text-center col-lg-4">
+          <p style="font-size:20px;">총 투표수</p>
+          <p style="font-size: 80px;">{{ totalcnt }}</p>
+       </div>
+   </template>
+   
+      <!-- artistList 컴포넌트 -->
+   <template id="artistlist">
+      <div class="text-center col-lg-4">
+          <p style="font-size:20px;">artistlist</p>
+                <h2>연예인 목록</h2>
+               <ul class="list-group">
+                  <li class="list-group-item" v-for="(art, idx) in artists">
+                      <p>
+                         <span class="name">
+                            <em >이름 : </em>
+                             <em>{{art.name}}</em>
+                         
+                         </span>
+                         <span class="count">
+                            <em >투표수 : </em>
+                             <em>{{art.count}}</em>
+                         </span>
+                     </p>
+                           
+                      <button class="btn btn-default" @click="doLike(idx)">좋아요</button>
+                  </li>
+               </ul>
+     
+       </div>
+   </template>
+   
+      <!-- artistSearch 컴포넌트 -->
+   <template id="artistsearch">
+      <div class="text-center col-lg-4">
+         <div class="form-group">
+            <label for="queryName">이름 & 그룹을 검색하세요.</label>
+            <input v-model="queryName" class="form-control">
+         </div>
+         <h3>이름검색 결과입니다.</h3>
+         <ul class="list-group">
+            <li v-for="item in searchName" class="list-group-item">
+               {{item.name}} 그룹명 : {{item.groupname}}" 회사명 : {{item.agency}} 투표수 : {{item.count}}
+                           
+                           
+            </li>
+         </ul>
+       </div>
+   </template>
+   
+      <!-- candidate 컴포넌트 -->
+   <template id="candidate">
+      <div class="text-center col-lg-4">
+          <p style="font-size:20px;">candidate</p>
+                <h2>후보 목록</h2>
+               <ul class="list-group">
+                  <li class="list-group-item" v-for="(art, idx) in sortedArtist.slice(0,4)">
+                      <p>
+                         <span>
+                            <strong>{{idx+1}} 등 </strong>
+                         </span>
+                         <span class="name">
+                            <em >이름 : </em>
+                             <em>{{art.name}}</em>
+                         
+                         </span>
+                         <span class="group-name">
+                            <em >그룹명 : </em>
+                             <em>{{art.groupname}}</em>
+                            
+                         </span>
+                         <span class="agency">
+                            <em >회사명 : </em>
+                             <em>{{art.agency}}</em>
+                         </span>
+                         <span class="count">
+                            <em >투표수 : </em>
+                             <em>{{art.count}}</em>
+                         </span>
+                     </p>
+
+                  </li>
+               </ul>
+     
+       </div>
+   </template>
+   
+      <!-- voteStatus 컴포넌트 -->
+   <template id="votestatus">
+<div class="text-center col-lg-4">
+          <p style="font-size:20px;">votestatus</p>
+                <h2>1등 목록</h2>
+               <ul class="list-group">
+                  <li class="list-group-item" v-for="(art, idx) in sortedArtist.slice(0,1)">
+                  
+                     "현재 {{idx+1}}위는 {{art.groupname}}그룹의 {{art.name}} 입니다!" 
+                  </li>
+               </ul>
+     
+       </div>
+   </template>
+   
+   
+   <!-- B 컴포넌트 -->
+   <div class="container text-center">
+      <p style="font-size:50px;">연예인 투표함</p>
+      <div class="row">
+         <vote :totalcnt="totalcnt"></vote>
+         <artistlist :artists="artists"></artistlist>
+         <artistsearch :artists="artists"></artistsearch>
+         <candidate :artists="artists"></candidate>
+         <votestatus :artists="artists"></votestatus>
+      </div>
+      <br>
+   
+      <br/><br/>
+
+      
+      <pre style="text-align:left">{{$data}}</pre>
+   </div>
+   
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+   var bus = new Vue();
+   
+   // vote Component
+   Vue.component('vote',{
+      template : '#vote',
+      props : ['totalcnt'],
+      mounted() {
+         // props으로 받으면 자신의 데이터와 마찬가지로 this로 사용할 수 있게 된다.
+       },
+      data : function(){
+         return {foodLikes : 0} // 좋아요 수는 0 반환
+      },
+      methods : {
+
+      },
+      // A Component 생성 후, bus 인스턴스에 reset 이벤트 바인딩
+      created(){
+      }
+   })
+   
+      // artistlist Component
+   Vue.component('artistlist',{
+      template : '#artistlist',
+      props : ['artists'],
+      mounted() {
+         
+           // props으로 받으면 자신의 데이터와 마찬가지로 this로 사용할 수 있게 된다.
+
+         },
+      data : function(){
+         return {foodLikes : 0} // 좋아요 수는 0 반환
+      },
+      methods : {
+         doLike : function(idx){
+            bus.$emit('test',idx);
+         }
+      },
+      // A Component 생성 후, bus 인스턴스에 reset 이벤트 바인딩
+      created(){
+      }
+   })
+
+   
+         // artistsearch Component
+   Vue.component('artistsearch',{
+      template : '#artistsearch',
+      props : ['artists'],
+      mounted() {
+         // props으로 받으면 자신의 데이터와 마찬가지로 this로 사용할 수 있게 된다.
+
+       },
+       
+      data : function(){
+         return {foodLikes : 0,
+             query : '', // 검색 시, 사용할 query 필드
+             queryName : ''
+             } // 좋아요 수는 0 반환
+      },
+      methods : {
+          catsBy : function(name){
+             return this.artists.filter(function(art){
+                return art.name === name;
+             })      
+          },
+          typing : function(event){
+             this.query = event.target.value;
+             // 요소의 value를 가져와 직접 query 데이터에 대입!
+             // 한글 입력에 문제가 있으니, v-model 바인딩을 하지 말고, 직접 변화시키겠다! -> computed 발동.
+             // v-model : 양방향 바인딩을 위한 디렉티브
+             //   *단방향 바인딩만 활용하겠다. (브라우저 -> 화면)
+             //    *화면 -> 브라우저 작업을 직접 수행!
+          }
+       },
+       computed : {
+           search : function(){
+              var query = this.query;
+              return this.artists.filter(function(art){
+                 return art.speech.includes(query); /* || cat.name.includes(query); */
+                 // includes : 문자열에 query 포함 여부를 반환
+              })
+           },
+           searchName : function(){
+              var queryName = this.queryName;
+              return this.artists.filter(function(art){
+                 return art.name.includes(queryName) || art.agency.includes(queryName);
+              })
+           }
+        }, // computed
+      // A Component 생성 후, bus 인스턴스에 reset 이벤트 바인딩
+      created(){
+      }
+   })
+   
+         // candidate Component
+   Vue.component('candidate',{
+      template : '#candidate',
+      props : ['artists'],
+      data : function(){
+          return {candiList : this.artists.slice()
+              } // 좋아요 수는 0 반환
+       },
+//       mounted() {
+//            // props으로 받으면 자신의 데이터와 마찬가지로 this로 사용할 수 있게 된다.
+//            this.candiList.sort(function (a, b) {
+//         if (a.count < b.count) return 1
+//         if (a.count > b.count) return -1
+//         return 0
+//       })
+//          },
+      methods : {
+      },
+      computed: {
+           // 좋아요가 많은 순서대로 정렬한 목록을 반환한다.
+           // 또한 sort는 원래의 데이터의 순서를 다시 작성하기 때문에 복사를 하는 것이 좋을지도
+           sortedArtist: function() {
+             return this.candiList.slice(0).sort(function (a, b) {
+               if (a.count < b.count) return 1
+               if (a.count > b.count) return -1
+               return 0
+             });
+           }
+         },
+      // A Component 생성 후, bus 인스턴스에 reset 이벤트 바인딩
+      created(){
+      }
+   })
+   
+      
+         // votestatus Component
+   Vue.component('votestatus',{
+      template : '#votestatus',
+      props : ['artists'],
+      data : function(){
+          return {candiList : this.artists.slice()
+              } // 좋아요 수는 0 반환
+       },
+      mounted() {
+           // props으로 받으면 자신의 데이터와 마찬가지로 this로 사용할 수 있게 된다.
+           this.candiList.sort(function (a, b) {
+        if (a.count < b.count) return 1
+        if (a.count > b.count) return -1
+        return 0
+      })
+         },
+      methods : {
+
+      },
+      computed: {
+           // 좋아요가 많은 순서대로 정렬한 목록을 반환한다.
+           // 또한 sort는 원래의 데이터의 순서를 다시 작성하기 때문에 복사를 하는 것이 좋을지도
+           sortedArtist: function() {
+             return this.candiList.slice(0).sort(function (a, b) {
+               if (a.count < b.count) return 1
+               if (a.count > b.count) return -1
+               return 0
+             });
+           }
+         },
+      // A Component 생성 후, bus 인스턴스에 reset 이벤트 바인딩
+      created(){
+      }
+   })
+   
+   
+   
+   
+   
+   // B Component
+   new Vue({
+      el : '.container',
+      data : {
+         totalcnt : 0,
+         artists : [
+                  {
+                     name : '박명수',
+                     groupname : '무한도전',
+                     agency : 'SM',
+                     count : 0,
+                  },
+                  {
+                      name : '장성규',
+                      groupname : '워크맨',
+                      agency : 'JYP',
+                      count : 0,
+                  },
+                  {
+                       name : '이수혁',
+                       groupname : '모델',
+                       agency : 'SM',
+                       count : 0,
+                  },
+                  {
+                        name : '은지원',
+                        groupname : '잭스키스',
+                        agency : 'JYP',
+                        count : 0,
+                  },
+                  {
+                         name : '황광희',
+                         groupname : '가수',
+                         agency : 'SM',
+                         count : 0,
+                  },
+                  {
+                          name : '이용진',
+                          groupname : '개구맨',
+                          agency : 'JYP',
+                          count : 0,
+                  },
+                  {
+                           name : '하승진',
+                           groupname : '농구선수',
+                           agency : 'SM',
+                           count : 0,
+                  },
+                  {
+                            name : '장혁',
+                            groupname : '모델',
+                            agency : 'JYP',
+                            count : 0,
+                  }
+                    
+          ]
+         
+      }, //data
+      methods : {
+         test : function(idx) {
+          if(this.totalcnt > 100 ) {
+             return alert("더이상은 투표 못함");
+          }else {
+              this.totalcnt++;
+                  this.artists[idx].count++;
+          }
+          
+         }
+      }, //methods
+      // B Component가 생성 후~!
+      created(){ 
+         bus.$on('test',this.test);
+      }
+   })
+</script>
+</html>

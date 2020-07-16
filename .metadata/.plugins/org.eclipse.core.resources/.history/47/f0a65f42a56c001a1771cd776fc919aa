@@ -1,0 +1,5 @@
+package com.bit.framework.annotation;
+
+public @interface Controller {
+	
+}

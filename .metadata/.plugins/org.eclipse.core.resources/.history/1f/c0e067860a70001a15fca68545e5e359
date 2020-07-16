@@ -1,0 +1,78 @@
+package com.bit.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bit.util.ConnectionPool;
+import com.bit.vo.BoardVO;
+
+public class BoardDAO {
+	private Connection con = null;
+	private PreparedStatement pstmt = null;
+	private StringBuilder sql = new StringBuilder();
+
+	// 전체 조회
+	public List<BoardVO> selectAllBoard() {
+		List<BoardVO> list = new ArrayList<>();
+		try {
+			sql.delete(0, sql.length());
+			con = ConnectionPool.getConnection();
+			sql.append("  SELECT * FROM board ORDER BY no DESC  ");
+			pstmt = con.prepareStatement(sql.toString());
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				BoardVO board = new BoardVO();
+				board.setNo(rs.getInt("no"));
+				board.setTitle(rs.getString("title"));
+				board.setWriter(rs.getString("writer"));
+				board.setContent(rs.getString("content"));
+				board.setReg_date(rs.getString("reg_date"));
+				board.setView_cnt(rs.getInt("view_cnt"));
+
+				list.add(board);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			ConnectionPool.close(con);
+		}
+		return list;
+	}
+
+	public List<BoardVO> selectOneBoard(String boardNo) {
+		List<BoardVO> list = new ArrayList<>();
+		try {
+			con = ConnectionPool.getConnection();
+			sql.delete(0, sql.length());
+			sql.append("  SELECT * FROM board   ");
+			sql.append("  WHERE no=?   ");
+
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			ConnectionPool.close(con);
+		}
+
+		return list;
+	}
+}

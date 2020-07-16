@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		Vue.js
+			- 사용자 인터페이스를 개발하기 위한 프레임워크 (User Interface)
+			- Driective와 Component을 지원하고, Angular나 React보다 가볍다.
+			- 원하는 화면을 쉽게 개발할 수 있는 여러가지 라이브러리 제공(관련 API)
+			
+			[사용 방법] 
+			1. vuejs.org 사이트에서 다운로드
+				- jQuery처럼 <script>로 .js 파일 연결
+				- 개발용과 배포용 2가지 버전 -> 개발용으로!
+			2. CDN
+			 	- Vue에서 제공하는 공식 CDN 존재
+			 	- 최신 버전을 위해,
+			 		<script src="https://unpkg.com/vue/dist/vue.js"></script>를 활용
+	 -->
+	 <div id="app">
+	 	<h1>Hello Vue</h1>
+	 </div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '#app' //el 속성 : Vue에서 DOM 요소를 지정하는 속성
+	})
+	// body 태그가 끝나고 Vue의 CDN을 이용해 라이브러리를 불러온다.
+	// CDN(Contents Delivery Network)
+	// 지리적 물리적으로 떨어져 있는 사용자에게  컨텐츠 제공자의 컨텐츠를 더 빠르게 제공할 수 있는 기술
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

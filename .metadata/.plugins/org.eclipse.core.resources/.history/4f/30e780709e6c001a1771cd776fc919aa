@@ -1,0 +1,13 @@
+package com.bit.framework;
+
+import java.util.Map;
+
+// 역할 : 요청한 URL에 대한 정보를 Controller 단으로 넘겨주는 역할
+public class HandlerMapping {
+
+	private Map<String, CtrlAndMethod> mappings;
+	
+	HandlerMapping(String url){
+		
+	}
+}

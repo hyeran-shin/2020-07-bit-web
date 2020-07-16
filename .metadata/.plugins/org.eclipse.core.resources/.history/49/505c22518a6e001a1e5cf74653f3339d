@@ -1,0 +1,32 @@
+package com.bit.framework;
+
+import java.lang.reflect.Method;
+
+import com.bit.framework.annotation.RequsetMapping;
+
+public class HandlerMapping {
+
+	public HandlerMapping(String urlCtrlName) throws Exception{
+
+		String[] controllers = urlCtrlName.split("\\|");
+
+		for (String controller : controllers) {
+			controller = controller.trim();
+			Class<?> clz = Class.forName(controller);
+			Object target = clz.newInstance();
+			Method[] methods = clz.getMethods();
+			
+			for(Method method : methods) {
+				RequsetMapping reqAnno = method.getAnnotation(RequsetMapping.class);
+
+				if(reqAnno == null) {
+					continue; 
+				}
+				
+				String uri = reqAnno.value(); //@RequsetMapping("~~~")에서 ~~~
+				CtrlAndMethod cam = 
+			}
+
+		}
+	}
+}

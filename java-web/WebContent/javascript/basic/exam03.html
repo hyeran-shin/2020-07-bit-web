@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+
+	/*
+		변수와 데이터 타입
+			자료형(Data Type)
+			boolean		: true, false
+			number		: 정수와 실수 모두 표현(수치형 자료형, Numeric)
+				[대표 상징 값]
+				NaN 				: 숫자가 아니다. (not a number)
+				Number.MAX_VALUE	: 양수 무한대
+				Number.MIN_VALUE	: 음수 무한대
+			string		: 문자열, '' or "" 로 표현, 둘 다 가능.
+			null		: 데이터 없음을 의미하는 null 키워드가 들어가 있는 경우
+			undefined	: 정의되지 않은 경우, 초기화되지 않은 경우
+			function	: 함수 (함수, 객체 생성, ...)
+			object		: 객체
+	*/
+	
+	
+	//var 유연한 변수
+	var r=10;
+	var pi = 3.14159254
+// 	const pi = 3.14159254; // 상수, 확정된 수
+	//const(Constant) : 상수화 키워드
+	// ES6버전 이후부터 지원하는 변수 선언 키워드
+	//  -> const, let (Scope 관련)
+	console.log(2*pi*r);
+	pi = 3.14;
+	console.log(2*pi*r); //오차 존재
+	
+	
+	// 동일한 이름으로 변수 선언이 가능 -> 에러가 발생하지 않는다.
+	var hobby="coding";
+	var hobby="sleep";
+	console.log(hobby); // 마지막 선언된 변수만 들어감.
+	
+	// 무한대 표현
+	console.log(10000000000000000000000000000);
+	console.log(Number.MAX_VALUE);
+	console.log(Number.MIN_VALUE);
+	
+	// typeof 연산자
+	//  : 해당 변수의 타입 정보를 반환
+	var n = 10;
+	
+	console.log(n);
+	console.log(typeof n);				//number
+	console.log(typeof 3.14);			//number
+	console.log(typeof 'A');			//string
+	console.log(typeof "Hello");		//string
+	console.log(typeof n2);				//undefined
+	console.log(typeof []); 			//배열 인덱스 연산자, object
+	console.log(typeof {}); 			//블록스코프, object
+	console.log(typeof function(){}); 	//function
+	console.log(typeof null);			//object, null 객체로 나옴
+	
+	/*
+		null		: 변수는 있으나, 해당 변수가 참조하는 객체가 없는 경우.
+			-> 없음을 의미 (null 키워드)
+		undefined	: 애초에 참조하는 변수가 없을 경우, 초기화 되지 않은 경우
+	*/
+	
+	var value;
+	var value2=null;
+// 	value=10; // 선언이 없어도 value라는 이름이 언급되면, 브라우저 메모리에 변수를 할당.
+	console.log(value); //value 변수를 접근하여 데이터를 반환
+	// 애초에 선언되지 않았는데, 해당 값을 사용하려는 경우 -> Error 발생
+	console.log(value2);
+	console.log(typeof value); //vluae 변수의 타입 정보를 반환
+	// 애초에 선언되지 않았어도, 변수를 찾을 수 없는 경우 -> undefined로 반환해쥬ㅜㅁ
+	
+	/*
+		지역 변수 (Local Variable)		: 해당 영역 내에서만 접근 가능한 변수
+		전역 변수 (Global Variable)	: 모든 영역에서 접근 가능한 변수
+		
+		변수 키워드 선언에 따른 지역과 전역의 차이
+			var 		: 기본적으로 전역 변수 (단, function 내에서는 지역 변수의 역할을 가지고 있다.)
+			let			: 모든 영역 내에서 지역 변수
+			const		: 모든 영역 내에서 지역 변수
+			(default)	: 전역 변수, 아무것도 쓰지 않은 경우
+	*/
+	var a = 10;
+	if(a>0){
+		console.log("a : " + a); // 내부에서 외부 접근 -> 가능 
+		var b = 20;
+	}
+	console.log("b : " +b); //외부에서 내부 접근 -> 가능
+	
+	function foo(){ // 함수 선언
+		console.log("a : " + a); // 내부에서 외부 접근 -> 가능
+		var c = 30;
+		d = 40; //(default) : 키워드를 생략한 경우
+	}
+// 	console.log(foo()); // 함수 호출 return 값 없어서 undefined 나옴
+	foo();
+// 	console.log("c : " + c); // 외부에서 내부 접근 -> function 내부의 var는 불가능
+	console.log("d : " + d); // 외부에서 내부 접근 (default 선언)
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

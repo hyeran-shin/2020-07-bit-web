@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!--
+		Prob 1 
+		
+		[요구 사항]
+		입력 양식을 두 개 만들어 하나는 성별 (female, male)을 입력 받고, 
+		다른 하나는 이름을 입력 받도록 한다.
+		
+		성별을 입력 받는 입력란에,
+		female이 입력되면,
+			'Hello, Miss. {{ name }}' 을 출력
+		mail이 입력되면,
+			'Hello, Mr. {{ name }}' 을 출력
+		해당 문자열이 아니거나 입력되지 않았다면,
+			'성별이 입력되지 않았거나, female 또는 male이 아닙니다.' 출력
+		[Hint]
+		 v-if ="..." -> !, ==, ===, &&, || 등의 연산자가 적용
+		 {{ }} 내부에도 동일하게 연산자 사용 가능
+			 
+	 -->
+	 <div class="container">
+		 이름 : <input type="text" v-model="name"> <br>
+		 성별 : <input type="text" v-model="gender">
+		 
+		<h2 v-if="gender === 'female' || gender === 'male'">
+			Hello, {{ gender === 'female'? 'Miss' : 'Mr'}}.{{ name }}
+		</h2>
+		<h2 v-else>성별이 입력되지 않았거나, female 또는 male이 아닙니다.</h2>
+	 </div>
+	 
+	 
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '.container',
+		data : { name : '',	gender : ''	}
+	});
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+

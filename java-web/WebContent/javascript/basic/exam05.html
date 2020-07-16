@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+	
+		[조건문]
+		if ~ else, if ~ else if ~ else, ...
+		switch ~ case
+	*/
+	
+	var date = new Date(); //Date date = new Date();
+	var hour = date.getHours(); //String hour = date.getHours();
+	
+	// if ~ else
+	if(hour < 12) { console.log('오전 입니다.')}
+	else{console.log('오후 입니다.')}
+	
+	/*
+		자바스크립트는 세미콜론(;) 생략이 가능하다.
+		단, 기본적으로 세미콜론 사용을 권장! ( 명령 구문의 구분자)
+		
+		ASI (Automatic Semicolon Insertion)
+		 - 세미콜론 생략 시 자동 삽입!
+		 - 인터프리터(해석기)의 판단에 의해 자동으로 붙여진다.
+		 - 단, ASI 기능이 어떻게 동작하는지 정확한 파악이 어렵다.
+	*/
+	
+	// swtich ~ case
+// 	var num = Number(prompt('정수를 입력하세요.')); //Number타입으로 강제 형 변환
+	var num = prompt('정수를 입력하세요.'); //Number타입으로 강제 형 변환
+	/*
+		prompt() 입력은 기본적으로 문자열 입력! -> string
+			문자열 입력 후 수치 연산 시 자동 형 변환 수헹. (num % 2) 가능
+			number 타입으로 강제 형 변환 후 활용도 가능.
+			
+		수치 연산이 불가능한 또는, number 타입으로 자동 형 변환이 불가능하다면
+		수치 연산이 정상 동작하지 않는다.
+			-> NaN 반환
+			-> *그냥 동작하지 않고, 넘어가는 것 처럼 보일 수 있다.
+		 'a' (string -> number) 자동 형 변환이 불가능하니, 반환 결과는 NaN
+		 NaN : 숫자가 아님을 나타내는 상징 값,
+		 	-> 수치 연산이 불가능.
+	*/
+	console.log(typeof num);
+	console.log(num);
+	console.log(num%2);
+	
+	switch(num % 2){
+		case 0 : alert('짝수'); break; // 명령 행 구분을 위해 세미콜론 삽입
+		case 1 : alert('홀수')
+			break
+	}
+	
+	// 증감 연산자
+	var n = 3;
+	console.log(n++); //3
+	console.log(n++); //4
+	console.log(n++); //5
+	
+	// 조건 연산자 (삼항 연산자)
+	(n>10) ? console.log('10보다 큽니다.') : console.log('10보다 작습니다.');
+	
+	/*
+		SCE (Short Circuit Evaluation)
+		 - (A 수식) && (B 수식), (A 수식) || (B 수식), ...
+		 - 논리 연산에서 A 수식의 결과가 논리 연산의 결과로 결정되어진다면,
+		   B수식은 수행하지 않는다.
+	*/
+	
+	true || console.log('true...') // 출력 X
+	false || console.log('false...') // 출력 O
+	
+	// 홀수 짝수 판단
+	var n = 3;
+	(n % 2 == 0) && console.log('짝수 입니다.');
+	(n % 2 == 0) || console.log('홀수 입니다.');
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+

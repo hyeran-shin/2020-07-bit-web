@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<member></member>
+		<member></member>
+		<member></member>
+	</div>
+	
+	<!--  Vue 컴포넌트 선언 - template 태그 방식  -->
+	<template id="member-template">
+		<h1>Component Template...</h1>
+	</template>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	// Vue 컴포넌트 등록
+	Vue.component('member',{
+		template : '#member-template' //id 로 연결
+	})
+	/*
+		template -> tamplate 오타 발생 시
+		User 입장에서는 단순 오타로 보이지만,
+		Vue 엔진 입장에서는 해당 속성이 없는 것처럼 보인다.
+			-> 전달된 자바 객체 중 template 프로퍼티를 찾는 동작만!
+		Vue 엔진이 해당 템플릿을 인식할 수 없다.
+			*Vue 엔진이 mount(인식)할 수 없다. 안된다.
+			*mount : Vue 엔진이 인식할 수 있도록 정의, 등록, ...
+			
+		컴파일러 기반과 인터프리터 기반의 실행 방식에 따른 오류 표현이 다르다.
+			1. 컴파일러 언어는 키워드(단어) 기준으로 번역을 시도하기에, 
+			      문법 에러(Syntax error)로 명확히 오류를 표현해준다.
+			2. 인터프리터(해석기)는 미리 컴파일 된 기준을 잡아놓고 비교 수행을 하기에,
+			      기준과 다르게 코드가 로드되면 문법 에러가 아니라, 정의되지 않은 것으로 인식된다.
+			      또는, 인식을 할 수 없다. 등등 ... 
+			
+	*/
+		
+	new Vue({
+		el : '.container'
+	})
+</script>
+</html>

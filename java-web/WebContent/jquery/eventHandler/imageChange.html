@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		$('button').click(function(){
+			var src = $(this).attr('src');
+			var title = $(this).attr('title');
+			var url=['images/cat01.jpg',
+					 'images/cat02.jpg',
+					 'images/cat03.jpg',
+					 'images/cat04.jpg',
+					 'images/dog01.jpg',
+					 'images/dog02.jpg',
+					 'images/dog03.jpg',
+					 'images/dog04.jpg',
+					 ];
+			
+			for(var i = 0; i < url.length ; i++){
+				$('img').attr({
+					'src': url[i],
+					'title': (i+1)+'번 고양이'
+					});
+			}
+			
+		});
+	});
+</script>
+</head>
+<body>
+	<!--	 
+		[요구 기능]
+		1. 이미지 바꾸기
+			1단계 : 버튼 클릭 시 이미지 변경 (A->B 한번)
+			2단계 : 버튼 클릭 시 다음 이미지로 계속 변경 (반복)
+			3단계 : 버튼 클릭 시 랜덤 이미지로 계속 변경 (반복)
+			...
+			
+		2. 다음의 각 이미지 별로 title 속성 정의, 마우스 올렸을 때 나오는거띄움
+			cat01 ~ 04 ->1~4번 고양이
+			dog01 ~ 04 ->1~4번 강아지
+ 	-->
+
+	<button>이미지 변경</button>
+	<p>
+		<img onclick="" src="images/cat01.jpg" alt="1번 고양이 없음" title="1번 고양이" style="width: 400px; height: 300px;">
+	</p>
+</body>
+</html>

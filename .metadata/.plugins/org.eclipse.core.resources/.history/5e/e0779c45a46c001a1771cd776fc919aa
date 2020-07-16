@@ -1,0 +1,6 @@
+package com.bit.framework.annotation;
+
+// 사용자 정의 어노테이션 (Annotation)
+public @interface RequestMapping {
+
+}

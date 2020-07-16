@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		DOM (Document Object Model)
+		 - 문서를 구성하는 객체 모델
+		 - HTML 문서에서의 <html>, <head>, <body>, ... 태그 형식들
+		 - 자바스크립트에서 문서를 제어하기 위한 객체
+		 
+		 <head></head>에 삽입
+		 	- 문서 객체를 구성하기 전 상태, 렌더링 전 (Rendering)
+		 	- 초기화 목적, 설정 목적의 스크립트 작성 
+		 	
+		 <body></body>에 삽입
+		 	- 문서 객체를 구성한 후 상태, 렌더링 후
+		 	- 요소(내용)들을 변경하기 위한 스크립트 작성 
+	 -->
+	<div id = "div1" > Click div1</div>
+	<div id = "div2" > Click div2</div>
+	<div id = "div3" > Click div3</div>
+	
+	<script>
+		var length = 4;
+		/*
+			addEventListener()
+				- 특정 이벤트에 대한 익명 함수를 전달하여,
+				    해당 이벤트 발생 시 익명함수를 호출
+				- JavaScript Event Binding
+		*/
+		
+		// i : global scope
+		//  -> 4까지 증가하면서 이벤트를 모두 등록 후, 
+		//		콜백으로 인한 함수호출로 출력한다면 결과는 4
+		for(var i =1;i<length;i++){
+			//getElementById(id) : 아이디를 통해  HTML의 객체를 가져오는 역할
+			// document 는 이미 html에 있는 dom 객체를 가져오는 것이다.
+			document.getElementById('div'+i) // 문자열(string) 연산, 'div'+1 -> 'div1'
+					.addEventListener('click' , function(){ // 익명함수라 호출 안함.
+						console.log('Clicked div #' + i);
+					}, false);
+		}
+	</script>
+</body>
+</html>

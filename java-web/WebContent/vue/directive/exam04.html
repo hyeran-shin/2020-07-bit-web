@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		members 배열에서 요소를 하나씩 꺼내 출력(렌더링)
+			-> 자바 스크립트 객체(JSON)
+	 -->
+	 
+	 <div class="container">
+	 	<h2>v-for directive 리스트 순회</h2>
+	 	<ul class="list-group">
+	 		<li v-for="member in members" class="list-group-item">
+	 			{{ member }}
+	 		</li>
+	 	</ul>
+	 	<pre>{{ $data}}</pre>
+	 </div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		el : '.container',
+		data : {
+			members : [
+				'Cafe',
+				'Latte',
+				'Coffee'
+			]}
+	})
+		
+</script>
+</html>
+
+
+
+
+
+
+

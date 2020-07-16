@@ -1,0 +1,35 @@
+package com.bit.framework;
+
+import java.util.Map;
+
+/*
+ * Model 	: 유저에게 보여줄 Data (DB로부터 꺼내온 정보), 화면에 뿌려주겠다, JSP로 전달할 데이터, 렌더링 : 유저에게 보여줄 데이터를 띄워주는 작ㅇ업을 렌더링이라ㅗㄱ 한다.
+ * View		: 유저에게 보여줄 Page 정보를 저장. 
+*/
+public class ModelAndView {
+	private Map<String, Object> model;
+	private String view;
+	
+	public ModelAndView() {
+		model = new HashMap<>();
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
